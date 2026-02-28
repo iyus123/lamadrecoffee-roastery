@@ -22,7 +22,7 @@
       --accent2:#7bd7c9;
       --shadow: 0 26px 90px rgba(0,0,0,.50);
       --r:22px;
-      --max: 1120px;
+      --max:1120px;
     }
     [data-theme="light"]{
       --bg:#f6f7fb;
@@ -43,59 +43,166 @@
       color:var(--text);
     }
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 14px}
 
-    /* ===== TOP BAR (simple) ===== */
-    .orderTop{
-      position:sticky;top:0;z-index:20;
-      display:flex;gap:12px;align-items:center;
-      padding:12px 14px;
+    /* ====== FIX HP: anti geser / overflow ====== */
+    html,body{ overflow-x:hidden; max-width:100%; }
+    *{ max-width:100%; }
+
+    /* stabilkan viewport mobile (anti loncat address bar) */
+    @supports (height: 100dvh){ body{ min-height:100dvh; } }
+    @supports not (height: 100dvh){ body{ min-height:100vh; } }
+
+    .wrap{
+      width:100%;
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 18px;
+    }
+    @media (min-width: 1200px){
+      .wrap{ max-width:1280px; padding:0 24px; }
+    }
+    @media (min-width: 1500px){
+      .wrap{ max-width:1400px; }
+    }
+
+    /* grain halus biar tetap premium */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+      opacity:.06;
+      z-index:-1;
+    }
+    [data-theme="light"] body::before{opacity:.035;}
+
+    /* ===== NAV ===== */
+    .nav{
+      position:sticky; top:0; z-index:50;
       border-bottom:1px solid var(--line);
-      background:rgba(10,12,18,.72);
       backdrop-filter: blur(12px);
+      background:linear-gradient(to bottom, rgba(10,12,18,.82), rgba(10,12,18,.30));
     }
-    [data-theme="light"] .orderTop{background:rgba(255,255,255,.86)}
-    .backBtn{
-      width:42px;height:42px;border-radius:16px;
-      border:1px solid var(--line);
-      background:var(--card);
-      display:flex;align-items:center;justify-content:center;
-      font-weight:900;
-      cursor:pointer;
-      user-select:none;
+    [data-theme="light"] .nav{
+      background:linear-gradient(to bottom, rgba(255,255,255,.88), rgba(255,255,255,.56));
     }
-    .orderTitle{min-width:0}
-    .orderTitle b{display:block;font-size:14px;letter-spacing:-.01em}
-    .orderTitle span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+    .navin{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center;min-width:0}
+    .logoImg{
+      width:46px;height:46px;border-radius:18px;
+      object-fit:cover;border:1px solid var(--line);
+      box-shadow:0 18px 45px rgba(215,181,111,.18);
+      flex:0 0 46px;background:#000;
+    }
+    .brandTxt{min-width:0}
+    .brand h1{
+      margin:0;font-size:15px;line-height:1.12;
+      letter-spacing:-.02em;font-weight:900;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      text-transform:uppercase;
+    }
+    .brand p{
+      margin:2px 0 0 0;color:var(--muted);
+      font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
 
-    .topActions{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
     .btn{
+      padding:10px 14px;border-radius:14px;
       border:1px solid var(--line);
       background:var(--card);
       color:var(--text);
-      padding:10px 12px;
-      border-radius:16px;
-      font-weight:900;
+      font-weight:800;font-size:13px;
       cursor:pointer;
-      transition:.15s ease;
-      display:inline-flex;align-items:center;gap:8px;
+      transition:.18s ease;
       user-select:none;
-      font-size:13px;
-      white-space:nowrap;
+      display:inline-flex;align-items:center;gap:8px;
     }
     .btn:hover{transform:translateY(-1px)}
     .btn:active{transform:translateY(0) scale(.98)}
+    .btn.primary{
+      border-color:rgba(215,181,111,.55);
+      background:linear-gradient(135deg, rgba(215,181,111,.98), rgba(123,215,201,.55));
+      color:#0b0c10;
+      box-shadow:0 16px 40px rgba(215,181,111,.18);
+    }
 
-    /* ===== MAIN LAYOUT ===== */
-    .pagePad{padding:16px 0 96px;} /* supaya ga ketutup bottom bar */
+    .desktopOnly{display:flex}
+    .hamb{
+      display:none;
+      width:44px;height:44px;border-radius:16px;
+      border:1px solid var(--line);
+      background:var(--card);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:900;font-size:18px;
+      transition:.18s ease;
+    }
+    .hamb:hover{transform:translateY(-1px)}
+    .hamb:active{transform:translateY(0) scale(.98)}
+
+    .mobileMenu{
+      display:none;
+      border-top:1px solid var(--line);
+      background:linear-gradient(to bottom, rgba(10,12,18,.82), rgba(10,12,18,.50));
+      backdrop-filter: blur(12px);
+    }
+    [data-theme="light"] .mobileMenu{
+      background:linear-gradient(to bottom, rgba(255,255,255,.88), rgba(255,255,255,.70));
+    }
+    .mobileMenu .btn{justify-content:flex-start}
+    .mobileMenu .full{
+      width:100%;
+      border-radius:0;
+      border-left:0;border-right:0;border-top:0;
+      padding:14px 18px;
+    }
+
+    @media (max-width: 720px){
+      .brand p{display:none;}
+      .desktopOnly{display:none;}
+      .hamb{display:inline-flex;align-items:center;justify-content:center;}
+      .mobileMenu.open{display:block;}
+    }
+
+    /* ===== PAGE ===== */
+    .hero{
+      position:relative;
+      padding:22px 0 12px;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-70px;
+      background:
+        radial-gradient(900px 520px at 20% 10%, rgba(215,181,111,.16), transparent 60%),
+        radial-gradient(900px 520px at 85% 20%, rgba(123,215,201,.12), transparent 60%);
+      pointer-events:none;
+    }
+    .pageTitle{
+      margin:0;
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:-.03em;
+      line-height:1.05;
+    }
+    .subtitle{
+      margin:8px 0 0 0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:13.5px;
+      max-width:70ch;
+    }
 
     .grid{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:12px;
-      align-items:start;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      padding:14px 0 120px; /* ruang untuk bottomBar */
+      position:relative;
     }
-    @media(max-width: 980px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 980px){
+      .grid{ grid-template-columns:1fr; padding-bottom:160px; }
+    }
 
     .panel{
       border:1px solid var(--line);
@@ -104,583 +211,453 @@
       padding:14px;
       box-shadow: var(--shadow);
     }
-    [data-theme="light"] .panel{box-shadow: 0 18px 70px rgba(16,20,30,.10)}
-    .secTitle{margin:0 0 10px 0;font-size:14px}
-    .muted{color:var(--muted);font-size:12.6px;line-height:1.6;margin:0}
+    [data-theme="light"] .panel{box-shadow:0 18px 60px rgba(16,20,30,.09)}
 
-    .searchRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .input{
-      flex:1;min-width:220px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      border-radius:16px;
-      padding:12px 12px;
-      font-weight:700;
-      outline:none;
-    }
-    [data-theme="light"] .input{background:rgba(0,0,0,.03)}
-    .pill{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--muted);
-      padding:10px 12px;
-      border-radius:999px;
-      cursor:pointer;
-      font-weight:900;
-      font-size:12px;
-      user-select:none;
-      transition:.15s ease;
-    }
-    [data-theme="light"] .pill{background:rgba(0,0,0,.03)}
-    .pill.active{color:var(--text); border-color: rgba(215,181,111,.55); background:rgba(215,181,111,.12)}
+    .secTitle{margin:0 0 10px 0;font-size:15px}
+    .muted{color:var(--muted);font-size:12.8px;line-height:1.65;margin:0 0 10px}
 
-    /* ===== MENU LIST ===== */
-    .menuList{display:grid;gap:10px;margin-top:12px}
+    /* menu list */
+    .menuGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 720px){
+      .menuGrid{grid-template-columns:1fr;}
+    }
     .item{
       border:1px solid var(--line);
       background:rgba(255,255,255,.04);
       border-radius:18px;
       padding:12px;
       display:flex;
-      gap:12px;
-      align-items:center;
+      flex-direction:column;
+      gap:10px;
+      min-width:0;
     }
     [data-theme="light"] .item{background:rgba(0,0,0,.03)}
-    .thumb{
-      width:64px;height:64px;border-radius:16px;
-      border:1px solid var(--line);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(215,181,111,.85), rgba(123,215,201,.25), rgba(255,255,255,.06));
-      flex:0 0 64px;
-      overflow:hidden;
-      display:flex;align-items:center;justify-content:center;
-      font-weight:900;
-      color:#0b0c10;
-    }
-    .info{min-width:0;flex:1}
-    .name{margin:0;font-weight:900;font-size:13.4px;letter-spacing:-.01em}
-    .meta{margin:5px 0 0 0;color:var(--muted);font-size:12.3px;line-height:1.4}
-    .price{margin-top:6px;font-weight:900}
-    .addBtn{
-      border:1px solid rgba(215,181,111,.55);
-      background:linear-gradient(135deg, rgba(215,181,111,.98), rgba(123,215,201,.55));
-      color:#0b0c10;
-      border-radius:16px;
-      padding:10px 12px;
-      cursor:pointer;
-      font-weight:900;
-      white-space:nowrap;
-      user-select:none;
-      transition:.15s ease;
-    }
-    .addBtn:hover{transform:translateY(-1px)}
-    .addBtn:active{transform:translateY(0) scale(.98)}
+    .topRow{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+    .name{font-weight:900;font-size:13.5px;line-height:1.25}
+    .price{font-weight:900;font-size:13px;color:var(--text);white-space:nowrap}
+    .desc{color:var(--muted);font-size:12.3px;line-height:1.55}
 
-    /* ===== CART ===== */
-    .cartHead{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
-    .cartHead .muted{max-width:58ch}
-
-    .cartList{display:grid;gap:10px;margin-top:12px}
-    .cartRow{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      border-radius:18px;
-      padding:12px;
-      display:flex;gap:12px;align-items:center;
+    .qtyRow{
+      display:flex;gap:10px;align-items:center;justify-content:space-between;
+      margin-top:auto;
     }
-    [data-theme="light"] .cartRow{background:rgba(0,0,0,.03)}
-    .cartRow .info{flex:1}
     .qty{
-      display:flex;gap:8px;align-items:center;
+      display:flex;align-items:center;gap:8px;
       border:1px solid var(--line);
-      background:rgba(0,0,0,.10);
-      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
       padding:8px 10px;
-      user-select:none;
     }
     [data-theme="light"] .qty{background:rgba(0,0,0,.03)}
-    .qBtn{
-      width:30px;height:30px;border-radius:12px;
+    .qbtn{
+      width:28px;height:28px;border-radius:10px;
       border:1px solid var(--line);
       background:var(--card);
       color:var(--text);
       cursor:pointer;
       font-weight:900;
-      display:flex;align-items:center;justify-content:center;
+      display:inline-flex;align-items:center;justify-content:center;
+      transition:.18s ease;
     }
-    .qNum{min-width:18px;text-align:center;font-weight:900}
-    .rowSum{font-weight:900;white-space:nowrap}
+    .qbtn:active{transform:scale(.96)}
+    .qval{min-width:18px;text-align:center;font-weight:900}
 
-    .summary{
-      margin-top:12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      border-radius:18px;
-      padding:12px;
-      display:grid;
-      gap:10px;
-    }
-    [data-theme="light"] .summary{background:rgba(0,0,0,.03)}
-    .sumLine{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--muted);font-size:12.6px}
-    .sumLine b{color:var(--text);font-size:13px}
-    .sumBig{display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .sumBig b{font-size:15px}
-
-    .formRow{display:grid;gap:10px;margin-top:12px}
-    textarea.input{min-height:90px;resize:vertical}
-
-    /* ===== BOTTOM BAR ===== */
-    .bottomBar{
-      position:fixed;left:0;right:0;bottom:0;z-index:30;
-      padding:10px 12px;
-      border-top:1px solid var(--line);
-      background:rgba(10,12,18,.82);
-      backdrop-filter: blur(12px);
-      display:flex;gap:10px;align-items:center;
-    }
-    [data-theme="light"] .bottomBar{background:rgba(255,255,255,.90)}
-    .bbBtn{
-      border:1px solid var(--line);
-      background:var(--card);
-      color:var(--text);
-      padding:12px 14px;
-      border-radius:16px;
-      font-weight:900;
-      cursor:pointer;
-      user-select:none;
-    }
-    .bbBtn.primary{
-      background:linear-gradient(135deg, rgba(215,181,111,.98), rgba(123,215,201,.55));
-      color:#0b0c10;
-      border-color:rgba(215,181,111,.55);
-    }
-    .bbTotal{
-      flex:1;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      border-radius:16px;
-      padding:10px 12px;
-      min-width: 120px;
-    }
-    [data-theme="light"] .bbTotal{background:rgba(0,0,0,.03)}
-    .bbTotal span{display:block;font-size:11px;color:var(--muted)}
-    .bbTotal b{display:block;margin-top:2px;font-size:13px}
-
-    /* ===== tiny toast ===== */
-    .toast{
-      position:fixed;left:12px;bottom:92px;z-index:40;
+    /* cart */
+    .cartList{display:grid;gap:10px;margin-top:8px}
+    .cartRow{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
       padding:10px 12px;border-radius:16px;
       border:1px solid var(--line);
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(10px);
-      color:var(--text);
-      font-size:12.5px;
-      opacity:0;transform:translateY(10px);
-      transition:.18s ease;
-      pointer-events:none;
+      background:rgba(255,255,255,.03);
     }
-    [data-theme="light"] .toast{background:rgba(255,255,255,.85); color:var(--text)}
-    .toast.show{opacity:1;transform:translateY(0)}
+    [data-theme="light"] .cartRow{background:rgba(0,0,0,.03)}
+    .cartRow b{display:block;font-size:13px}
+    .cartRow small{color:var(--muted);display:block;margin-top:3px;font-size:12px}
+    .cartRight{white-space:nowrap;font-weight:900}
+
+    .totalBox{
+      margin-top:12px;
+      padding:12px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.12);
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      font-weight:900;
+    }
+    [data-theme="light"] .totalBox{background:rgba(0,0,0,.03)}
+    .totalBox span{color:var(--muted);font-weight:800;font-size:12.8px}
+
+    /* form */
+    .form{display:grid;gap:10px;margin-top:12px}
+    .input{
+      width:100%;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:12px 12px;
+      color:var(--text);
+      outline:none;
+      font-weight:700;
+      font-size:16px; /* penting iPhone: anti auto-zoom + anti shift */
+    }
+    [data-theme="light"] .input{background:rgba(0,0,0,.03)}
+    textarea.input{min-height:90px;resize:vertical}
+
+    /* bottom bar */
+    .bottomBar{
+      position:fixed;
+      left:0;right:0;bottom:0;
+      z-index:60;
+      border-top:1px solid var(--line);
+      background:linear-gradient(to top, rgba(10,12,18,.92), rgba(10,12,18,.55));
+      backdrop-filter: blur(12px);
+      padding:10px 0;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+      will-change: transform;
+      transition: transform .22s ease;
+    }
+    [data-theme="light"] .bottomBar{
+      background:linear-gradient(to top, rgba(255,255,255,.92), rgba(255,255,255,.70));
+    }
+    .barIn{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      flex-wrap:wrap;
+    }
+    .barLeft{
+      display:flex;flex-direction:column;gap:2px;
+      min-width:0;
+    }
+    .barLeft b{font-size:14px}
+    .barLeft small{color:var(--muted)}
+    .barBtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .barBtns .btn{white-space:nowrap}
+
+    /* Saat keyboard muncul: sembunyikan bottom bar biar gak goyang */
+    body.kbOpen .bottomBar{ transform: translateY(120%); }
+
+    .note{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12.4px;
+      line-height:1.6;
+    }
   </style>
 </head>
 
 <body>
-  <!-- TOP BAR -->
-  <header class="orderTop">
-    <a class="backBtn" href="index.html" aria-label="Kembali">←</a>
-    <div class="orderTitle">
-      <b>Order/Menu</b>
-      <span>Pilih menu → cek total → kirim ke WhatsApp</span>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="wrap navin">
+      <div class="brand">
+        <img class="logoImg" src="logo-lamadre.png" alt="La Madre Logo">
+        <div class="brandTxt">
+          <h1>LA MADRE COFFEE &amp; ROASTERY</h1>
+          <p>Order/Menu</p>
+        </div>
+      </div>
+
+      <div class="right desktopOnly">
+        <button class="btn" id="themeBtn" type="button">🌓 Mode</button>
+        <a class="btn" href="index.html">🏠 Home</a>
+        <a class="btn primary" href="#cart">🧾 Ringkasan</a>
+      </div>
+
+      <button class="hamb" id="hambBtn" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
     </div>
 
-    <div class="topActions">
-      <button class="btn" id="themeBtn" type="button">🌓 Mode</button>
+    <div class="mobileMenu" id="mobileMenu">
+      <button class="btn full" id="themeBtnM" type="button">🌓 Mode Gelap/Terang</button>
+      <a class="btn full" href="index.html">🏠 Home</a>
+      <a class="btn primary full" href="#cart">🧾 Ringkasan</a>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <h2 class="pageTitle">Order/Menu</h2>
+      <p class="subtitle">
+        Pilih menu, tentukan jumlah, lalu klik <b>“Buat Pesanan”</b>. Pesanan akan otomatis terkirim ke WhatsApp.
+      </p>
+
+      <div class="grid">
+        <!-- MENU -->
+        <section class="panel">
+          <h3 class="secTitle">Menu Pilihan</h3>
+          <p class="muted">Klik + / − untuk menambah/mengurangi pesanan.</p>
+
+          <div class="menuGrid" id="menuGrid"></div>
+
+          <p class="note">
+            *Harga & menu bisa kamu edit di bagian <b>const MENU</b> pada script.
+          </p>
+        </section>
+
+        <!-- CART -->
+        <section class="panel" id="cart">
+          <h3 class="secTitle">Pesanan Kamu</h3>
+          <p class="muted">Ringkasan item yang sudah kamu pilih.</p>
+
+          <div class="cartList" id="cartList"></div>
+
+          <div class="totalBox">
+            <span>Total</span>
+            <div id="totalText">Rp 0</div>
+          </div>
+
+          <div class="form">
+            <input class="input" id="custName" type="text" placeholder="Nama pemesan (wajib)" />
+            <textarea class="input" id="custNote" placeholder="Catatan (opsional)"></textarea>
+          </div>
+
+          <p class="note">
+            Setelah klik “Buat Pesanan”, WhatsApp akan terbuka dengan detail item + jumlah + total.
+          </p>
+        </section>
+      </div>
     </div>
   </header>
 
-  <main class="wrap pagePad">
-    <div class="grid">
-      <!-- LEFT: MENU -->
-      <section class="panel">
-        <h2 class="secTitle">Daftar Menu</h2>
-        <p class="muted">Klik <b>Tambah</b> untuk memasukkan menu ke pesanan. Kamu bisa cari dan filter kategori.</p>
+  <div class="bottomBar" id="bottomBar">
+    <div class="wrap barIn">
+      <div class="barLeft">
+        <b id="barTotal">Total: Rp 0</b>
+        <small id="barCount">0 item dipilih</small>
+      </div>
 
-        <div class="searchRow">
-          <input class="input" id="searchInput" placeholder="Cari menu... (contoh: latte / chicken / matcha)" />
-          <button class="pill active" data-filter="all" type="button">Semua</button>
-          <button class="pill" data-filter="coffee" type="button">Coffee</button>
-          <button class="pill" data-filter="noncoffee" type="button">Non Coffee</button>
-          <button class="pill" data-filter="food" type="button">Food</button>
-        </div>
-
-        <div class="menuList" id="menuList"></div>
-      </section>
-
-      <!-- RIGHT: CART -->
-      <aside class="panel">
-        <div class="cartHead">
-          <div>
-            <h2 class="secTitle" style="margin:0 0 6px 0">Pesanan Kamu</h2>
-            <p class="muted">Pastikan nama + catatan sudah benar. Saat kirim WA, detail item + total akan ikut.</p>
-          </div>
-          <button class="btn" id="resetBtnTop" type="button">🧹 Reset</button>
-        </div>
-
-        <div class="cartList" id="cartList"></div>
-
-        <div class="summary">
-          <div class="sumLine"><span>Jumlah item</span><b id="itemsText">0</b></div>
-          <div class="sumBig"><span style="color:var(--muted);font-weight:900">Total</span><b id="totalTextSide">Rp 0</b></div>
-        </div>
-
-        <div class="formRow">
-          <input class="input" id="nameInput" placeholder="Nama pemesan (wajib)" />
-          <textarea class="input" id="noteInput" placeholder="Catatan (opsional)&#10;Contoh: tanpa gula / less ice / duduk outdoor / dll"></textarea>
-        </div>
-
-        <p class="muted" style="margin-top:12px">
-          Tips: Untuk hari ramai, gunakan tombol <b>Reservasi</b> di halaman utama.
-        </p>
-      </aside>
+      <div class="barBtns">
+        <button class="btn" id="resetBtn" type="button">↺ Reset</button>
+        <a class="btn" href="index.html">← Kembali</a>
+        <button class="btn primary" id="orderBtn" type="button">📩 Buat Pesanan</button>
+      </div>
     </div>
-  </main>
-
-  <!-- BOTTOM BAR -->
-  <div class="bottomBar">
-    <button class="bbBtn" id="resetBtn" type="button">Reset</button>
-
-    <div class="bbTotal">
-      <span>Total</span>
-      <b id="totalText">Rp 0</b>
-    </div>
-
-    <button class="bbBtn primary" id="sendBtn" type="button">Kirim WA</button>
   </div>
 
-  <div class="toast" id="toast">Tersimpan</div>
-
   <script>
-    // =========================
-    // CONFIG
-    // =========================
-    const WA_NUMBER = "6281398686801"; // ganti jika perlu
-    const THEME_KEY = "theme_lamadre"; // sama dengan index
-    const CART_KEY  = "cart_lamadre_v1";
-
-    // =========================
-    // THEME (sync with index)
-    // =========================
+    // ===== Mobile Menu Toggle
     (function(){
-      const btn = document.getElementById("themeBtn");
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved === "light") document.documentElement.setAttribute("data-theme","light");
+      const hambBtn = document.getElementById("hambBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      if(!hambBtn || !mobileMenu) return;
 
-      btn.addEventListener("click", ()=>{
-        const isLight = document.documentElement.getAttribute("data-theme")==="light";
-        if(isLight){
-          document.documentElement.removeAttribute("data-theme");
-          localStorage.setItem(THEME_KEY,"dark");
-        }else{
-          document.documentElement.setAttribute("data-theme","light");
-          localStorage.setItem(THEME_KEY,"light");
+      hambBtn.addEventListener("click", ()=>{
+        const open = mobileMenu.classList.toggle("open");
+        hambBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        hambBtn.textContent = open ? "✕" : "☰";
+      });
+
+      mobileMenu.addEventListener("click", (e)=>{
+        if(e.target.tagName === "A"){
+          mobileMenu.classList.remove("open");
+          hambBtn.setAttribute("aria-expanded","false");
+          hambBtn.textContent = "☰";
         }
       });
     })();
 
-    // =========================
-    // MENU DATA (edit freely)
-    // =========================
-    // Catatan: kamu bisa ganti nama/harga sesuai PDF nanti.
-    // Thumbnail: sementara pakai huruf (L) (C) dll supaya ringan.
+    // ===== Theme (same key as index) sync Desktop & Mobile
+    (function(){
+      const key = "theme_lamadre";
+      const btnD = document.getElementById("themeBtn");
+      const btnM = document.getElementById("themeBtnM");
+
+      function applySaved(){
+        const saved = localStorage.getItem(key);
+        if(saved === "light") document.documentElement.setAttribute("data-theme","light");
+        else document.documentElement.removeAttribute("data-theme");
+      }
+      function toggle(){
+        const isLight = document.documentElement.getAttribute("data-theme")==="light";
+        if(isLight){
+          document.documentElement.removeAttribute("data-theme");
+          localStorage.setItem(key,"dark");
+        }else{
+          document.documentElement.setAttribute("data-theme","light");
+          localStorage.setItem(key,"light");
+        }
+      }
+      applySaved();
+      if(btnD) btnD.addEventListener("click", toggle);
+      if(btnM) btnM.addEventListener("click", toggle);
+    })();
+
+    // ===== MENU DATA (edit di sini)
     const MENU = [
-      // Coffee
-      { id:"espresso", name:"Espresso", price:20000, cat:"coffee", tag:"Coffee", thumb:"☕" },
-      { id:"americano", name:"Americano", price:22000, cat:"coffee", tag:"Coffee", thumb:"☕" },
-      { id:"cappuccino", name:"Cappuccino", price:28000, cat:"coffee", tag:"Coffee", thumb:"☕" },
-      { id:"latte", name:"Cafe Latte", price:30000, cat:"coffee", tag:"Coffee", thumb:"☕" },
-      { id:"caramel_latte", name:"Caramel Latte", price:33000, cat:"coffee", tag:"Coffee", thumb:"☕" },
-      { id:"aren_latte", name:"Aren Latte", price:32000, cat:"coffee", tag:"Best Seller", thumb:"⭐" },
-
-      // Non Coffee
-      { id:"matcha", name:"Matcha Latte", price:30000, cat:"noncoffee", tag:"Non Coffee", thumb:"🍵" },
-      { id:"choco", name:"Chocolate Signature", price:28000, cat:"noncoffee", tag:"Non Coffee", thumb:"🍫" },
-      { id:"redvelvet", name:"Red Velvet Latte", price:30000, cat:"noncoffee", tag:"Non Coffee", thumb:"🧁" },
-      { id:"thaitea", name:"Thai Tea", price:25000, cat:"noncoffee", tag:"Non Coffee", thumb:"🧋" },
-
-      // Food
-      { id:"nasgor", name:"Nasi Goreng La Madre", price:35000, cat:"food", tag:"Food", thumb:"🍛" },
-      { id:"katsu", name:"Chicken Katsu Rice Bowl", price:32000, cat:"food", tag:"Food", thumb:"🍗" },
-      { id:"aglio", name:"Spaghetti Aglio Olio", price:34000, cat:"food", tag:"Food", thumb:"🍝" },
-      { id:"fries", name:"French Fries", price:22000, cat:"food", tag:"Snack", thumb:"🍟" },
-      { id:"mixplatter", name:"Mix Platter", price:45000, cat:"food", tag:"Snack", thumb:"🥨" }
+      { id:"espresso", name:"Espresso", price:20000, desc:"Single shot, bold & clean." },
+      { id:"americano", name:"Americano", price:25000, desc:"Long black, light & smooth." },
+      { id:"cafelatte", name:"Cafe Latte", price:32000, desc:"Creamy milk & espresso." },
+      { id:"butterscotch", name:"Butterscotch Latte", price:36000, desc:"Sweet, creamy, crowd favorite." },
+      { id:"matcha", name:"Matcha Latte", price:32000, desc:"Earthy, creamy matcha." },
+      { id:"fries", name:"French Fries", price:25000, desc:"Crispy fries, perfect snack." },
+      { id:"toast", name:"Bread Toast", price:28000, desc:"Toasted bread with topping." },
+      { id:"grilledchicken", name:"Grilled Chicken Rice", price:45000, desc:"Comfort food for lunch/dinner." },
     ];
 
-    // =========================
-    // STATE
-    // =========================
-    let filter = "all";
-    let query = "";
-    let cart = loadCart(); // {id: qty}
+    // ===== Helpers
+    const rupiah = (n)=> "Rp " + (n||0).toLocaleString("id-ID");
+    const WA_NUMBER = "6281398686801";
 
-    const elMenuList = document.getElementById("menuList");
-    const elCartList = document.getElementById("cartList");
-    const elSearch   = document.getElementById("searchInput");
-    const elItems    = document.getElementById("itemsText");
-    const elTotalSide= document.getElementById("totalTextSide");
-    const elTotal    = document.getElementById("totalText");
-    const elName     = document.getElementById("nameInput");
-    const elNote     = document.getElementById("noteInput");
+    // ===== State
+    const cart = new Map(); // id -> qty
 
-    const toast = document.getElementById("toast");
-    let toastTimer;
+    // ===== Render Menu
+    const menuGrid = document.getElementById("menuGrid");
+    const cartList = document.getElementById("cartList");
+    const totalText = document.getElementById("totalText");
+    const barTotal = document.getElementById("barTotal");
+    const barCount = document.getElementById("barCount");
 
-    function showToast(msg){
-      toast.textContent = msg;
-      toast.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=>toast.classList.remove("show"), 1200);
-    }
-
-    function formatRupiah(n){
-      const s = Math.round(n).toString();
-      let out = "";
-      for(let i=0;i<s.length;i++){
-        const idx = s.length - 1 - i;
-        out = s[idx] + out;
-        if(i%3===2 && idx!==0) out = "." + out;
-      }
-      return "Rp " + out;
-    }
-
-    function loadCart(){
-      try{
-        const raw = localStorage.getItem(CART_KEY);
-        if(!raw) return {};
-        const obj = JSON.parse(raw);
-        if(typeof obj !== "object" || obj === null) return {};
-        return obj;
-      }catch(e){
-        return {};
-      }
-    }
-    function saveCart(){
-      localStorage.setItem(CART_KEY, JSON.stringify(cart));
-    }
-
-    function getItemById(id){
-      return MENU.find(m => m.id === id);
-    }
-
-    function cartTotal(){
-      let total = 0;
-      for(const id in cart){
-        const item = getItemById(id);
-        if(!item) continue;
-        total += item.price * cart[id];
-      }
-      return total;
-    }
-
-    function cartCount(){
-      let c = 0;
-      for(const id in cart) c += cart[id];
-      return c;
-    }
-
-    // =========================
-    // RENDER MENU
-    // =========================
     function renderMenu(){
-      const q = query.trim().toLowerCase();
-      const list = MENU.filter(m=>{
-        const okFilter = (filter === "all") || (m.cat === filter);
-        const okSearch = !q || m.name.toLowerCase().includes(q) || (m.tag||"").toLowerCase().includes(q);
-        return okFilter && okSearch;
-      });
+      menuGrid.innerHTML = "";
+      MENU.forEach(m=>{
+        const qty = cart.get(m.id) || 0;
 
-      elMenuList.innerHTML = "";
-      if(list.length === 0){
-        elMenuList.innerHTML = `<p class="muted">Menu tidak ditemukan. Coba kata kunci lain.</p>`;
-        return;
-      }
-
-      list.forEach(m=>{
-        const row = document.createElement("div");
-        row.className = "item";
-        row.innerHTML = `
-          <div class="thumb" aria-hidden="true">${m.thumb || "☕"}</div>
-          <div class="info">
-            <p class="name">${m.name}</p>
-            <p class="meta">${m.tag || ""}</p>
-            <div class="price">${formatRupiah(m.price)}</div>
+        const el = document.createElement("div");
+        el.className = "item";
+        el.innerHTML = `
+          <div class="topRow">
+            <div style="min-width:0">
+              <div class="name">${m.name}</div>
+              <div class="desc">${m.desc || ""}</div>
+            </div>
+            <div class="price">${rupiah(m.price)}</div>
           </div>
-          <button class="addBtn" type="button">Tambah</button>
+
+          <div class="qtyRow">
+            <div class="qty">
+              <button class="qbtn" data-act="minus" data-id="${m.id}" type="button">−</button>
+              <div class="qval" id="q_${m.id}">${qty}</div>
+              <button class="qbtn" data-act="plus" data-id="${m.id}" type="button">+</button>
+            </div>
+            <button class="btn" data-act="add" data-id="${m.id}" type="button">Tambah</button>
+          </div>
         `;
-        row.querySelector(".addBtn").addEventListener("click", ()=>{
-          cart[m.id] = (cart[m.id] || 0) + 1;
-          saveCart();
-          renderCart();
-          renderTotals();
-          showToast("Ditambahkan ✅");
-        });
-        elMenuList.appendChild(row);
+        menuGrid.appendChild(el);
       });
     }
 
-    // =========================
-    // RENDER CART
-    // =========================
     function renderCart(){
-      const ids = Object.keys(cart).filter(id => cart[id] > 0 && getItemById(id));
-      elCartList.innerHTML = "";
+      const items = [];
+      let total = 0;
+      let count = 0;
 
-      if(ids.length === 0){
-        elCartList.innerHTML = `<p class="muted">Belum ada pesanan. Tambahkan menu di sebelah kiri.</p>`;
-        return;
-      }
+      cartList.innerHTML = "";
 
-      ids.forEach(id=>{
-        const item = getItemById(id);
-        const qty = cart[id];
+      MENU.forEach(m=>{
+        const qty = cart.get(m.id) || 0;
+        if(qty <= 0) return;
+        const sub = qty * m.price;
+
+        items.push({name:m.name, qty, price:m.price, sub});
+        total += sub;
+        count += qty;
 
         const row = document.createElement("div");
         row.className = "cartRow";
         row.innerHTML = `
-          <div class="thumb" aria-hidden="true">${item.thumb || "☕"}</div>
-          <div class="info">
-            <p class="name">${item.name}</p>
-            <p class="meta">${formatRupiah(item.price)} / item</p>
+          <div>
+            <b>${m.name} <small>x${qty}</small></b>
+            <small>${rupiah(m.price)} / item</small>
           </div>
-          <div class="qty">
-            <button class="qBtn" type="button" aria-label="Kurangi">−</button>
-            <div class="qNum">${qty}</div>
-            <button class="qBtn" type="button" aria-label="Tambah">+</button>
-          </div>
-          <div class="rowSum">${formatRupiah(item.price * qty)}</div>
+          <div class="cartRight">${rupiah(sub)}</div>
         `;
-
-        const [minusBtn, plusBtn] = row.querySelectorAll(".qBtn");
-        minusBtn.addEventListener("click", ()=>{
-          cart[id] = Math.max(0, (cart[id]||0) - 1);
-          if(cart[id] === 0) delete cart[id];
-          saveCart();
-          renderCart();
-          renderTotals();
-        });
-        plusBtn.addEventListener("click", ()=>{
-          cart[id] = (cart[id]||0) + 1;
-          saveCart();
-          renderCart();
-          renderTotals();
-        });
-
-        elCartList.appendChild(row);
+        cartList.appendChild(row);
       });
+
+      if(items.length === 0){
+        const empty = document.createElement("div");
+        empty.className = "muted";
+        empty.textContent = "Belum ada pesanan. Silakan pilih menu di sebelah kiri.";
+        cartList.appendChild(empty);
+      }
+
+      totalText.textContent = rupiah(total);
+      barTotal.textContent = "Total: " + rupiah(total);
+      barCount.textContent = `${count} item dipilih`;
+
+      // update qty labels
+      MENU.forEach(m=>{
+        const q = cart.get(m.id) || 0;
+        const qEl = document.getElementById("q_"+m.id);
+        if(qEl) qEl.textContent = q;
+      });
+
+      return {items, total, count};
     }
 
-    function renderTotals(){
-      const count = cartCount();
-      const total = cartTotal();
-      elItems.textContent = count.toString();
-      elTotalSide.textContent = formatRupiah(total);
-      elTotal.textContent = formatRupiah(total);
-    }
-
-    // =========================
-    // FILTER & SEARCH
-    // =========================
-    document.querySelectorAll(".pill").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        document.querySelectorAll(".pill").forEach(b=>b.classList.remove("active"));
-        btn.classList.add("active");
-        filter = btn.getAttribute("data-filter") || "all";
-        renderMenu();
-      });
-    });
-    elSearch.addEventListener("input", ()=>{
-      query = elSearch.value || "";
-      renderMenu();
-    });
-
-    // =========================
-    // RESET
-    // =========================
-    function resetAll(){
-      cart = {};
-      saveCart();
+    function setQty(id, nextQty){
+      const qty = Math.max(0, nextQty);
+      if(qty === 0) cart.delete(id);
+      else cart.set(id, qty);
       renderCart();
-      renderTotals();
-      showToast("Reset ✅");
-    }
-    document.getElementById("resetBtn").addEventListener("click", resetAll);
-    document.getElementById("resetBtnTop").addEventListener("click", resetAll);
-
-    // =========================
-    // SEND WA
-    // =========================
-    function buildOrderMessage(){
-      const name = (elName.value || "").trim();
-      const note = (elNote.value || "").trim();
-
-      const ids = Object.keys(cart).filter(id => cart[id] > 0 && getItemById(id));
-      const total = cartTotal();
-
-      const lines = [];
-      lines.push("Halo La Madre Coffee & Roastery, saya mau order:");
-      lines.push("");
-      lines.push(`Nama: ${name}`);
-      if(note) lines.push(`Catatan: ${note}`);
-      lines.push("");
-      lines.push("Detail Pesanan:");
-
-      ids.forEach((id, idx)=>{
-        const item = getItemById(id);
-        const qty = cart[id];
-        const sum = item.price * qty;
-        lines.push(`${idx+1}. ${item.name} x${qty} = ${formatRupiah(sum)}`);
-      });
-
-      lines.push("");
-      lines.push(`Total: ${formatRupiah(total)}`);
-      lines.push("");
-      lines.push("Terima kasih 🙏");
-
-      return lines.join("\n");
     }
 
-    function sendWA(){
-      const name = (elName.value || "").trim();
-      const ids = Object.keys(cart).filter(id => cart[id] > 0 && getItemById(id));
-      const total = cartTotal();
+    // ===== Click handlers
+    menuGrid.addEventListener("click", (e)=>{
+      const btn = e.target.closest("[data-act]");
+      if(!btn) return;
+      const act = btn.getAttribute("data-act");
+      const id = btn.getAttribute("data-id");
+      const current = cart.get(id) || 0;
+
+      if(act === "plus") setQty(id, current + 1);
+      if(act === "minus") setQty(id, current - 1);
+      if(act === "add") setQty(id, current + 1);
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", ()=>{
+      cart.clear();
+      renderMenu();
+      renderCart();
+      document.getElementById("custName").value = "";
+      document.getElementById("custNote").value = "";
+    });
+
+    // ===== WA order message
+    document.getElementById("orderBtn").addEventListener("click", ()=>{
+      const name = document.getElementById("custName").value.trim();
+      const note = document.getElementById("custNote").value.trim();
+
+      const {items, total, count} = renderCart();
 
       if(!name){
-        showToast("Isi nama dulu ✍️");
-        elName.focus();
+        alert("Nama pemesan wajib diisi ya 🙂");
+        document.getElementById("custName").focus();
         return;
       }
-      if(ids.length === 0){
-        showToast("Pilih menu dulu 🍽️");
-        return;
-      }
-      if(total <= 0){
-        showToast("Total masih 0");
+      if(count === 0){
+        alert("Pesanan masih kosong. Silakan pilih menu dulu 🙂");
         return;
       }
 
-      const msg = buildOrderMessage();
-      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-      window.open(url, "_blank", "noreferrer");
-    }
+      let msg = `Halo La Madre Coffee & Roastery,%0A%0ASaya ingin order:%0A`;
+      items.forEach((it, idx)=>{
+        msg += `${idx+1}. ${it.name} x${it.qty} (${rupiah(it.sub)})%0A`;
+      });
+      msg += `%0A*Total:* ${rupiah(total)}%0A`;
+      msg += `*Nama:* ${name}%0A`;
+      if(note) msg += `*Catatan:* ${note}%0A`;
+      msg += `%0ATerima kasih 🙏`;
 
-    document.getElementById("sendBtn").addEventListener("click", sendWA);
+      const url = `https://wa.me/${WA_NUMBER}?text=${msg}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
 
-    // =========================
-    // INIT
-    // =========================
+    // ===== Render first
     renderMenu();
     renderCart();
-    renderTotals();
+
+    // ===== Keyboard fix: saat fokus input, sembunyikan bottom bar (anti goyang)
+    (function(){
+      const inputs = document.querySelectorAll("input, textarea, select");
+      inputs.forEach(el=>{
+        el.addEventListener("focus", ()=> document.body.classList.add("kbOpen"));
+        el.addEventListener("blur",  ()=> document.body.classList.remove("kbOpen"));
+      });
+    })();
   </script>
 </body>
 </html>
