@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Order/Menu • La Madre Coffee & Roastery</title>
+  <title>Order/Menu — La Madre Coffee & Roastery</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,11 @@
       --accent2:#7bd7c9;
       --shadow: 0 26px 90px rgba(0,0,0,.50);
       --r:22px;
-      --max:1120px;
+      --max: 1120px;
+
+      --chipBg: rgba(255,255,255,.04);
+      --selectBg: rgba(255,255,255,.06);
+      --selectText: var(--text);
     }
     [data-theme="light"]{
       --bg:#f6f7fb;
@@ -33,6 +37,10 @@
       --card:rgba(0,0,0,.04);
       --glass:rgba(255,255,255,.65);
       --shadow: 0 18px 70px rgba(16,20,30,.12);
+
+      --chipBg: rgba(0,0,0,.03);
+      --selectBg: rgba(0,0,0,.04);
+      --selectText: #151a24;
     }
 
     *{box-sizing:border-box}
@@ -41,16 +49,10 @@
       font-family:"Plus Jakarta Sans",system-ui,Segoe UI,Arial,sans-serif;
       background:linear-gradient(180deg,var(--bg),var(--bg2));
       color:var(--text);
+      overflow-x:hidden; /* cegah “geser” horizontal */
+      scrollbar-gutter: stable; /* stabil di desktop */
     }
     a{color:inherit;text-decoration:none}
-
-    /* ====== FIX HP: anti geser / overflow ====== */
-    html,body{ overflow-x:hidden; max-width:100%; }
-    *{ max-width:100%; }
-
-    /* stabilkan viewport mobile (anti loncat address bar) */
-    @supports (height: 100dvh){ body{ min-height:100dvh; } }
-    @supports not (height: 100dvh){ body{ min-height:100vh; } }
 
     .wrap{
       width:100%;
@@ -59,16 +61,17 @@
       padding:0 18px;
     }
     @media (min-width: 1200px){
-      .wrap{ max-width:1280px; padding:0 24px; }
+      .wrap{ max-width: 1280px; padding: 0 24px; }
     }
     @media (min-width: 1500px){
-      .wrap{ max-width:1400px; }
+      .wrap{ max-width: 1400px; }
     }
 
-    /* grain halus biar tetap premium */
+    /* grain tipis */
     body::before{
       content:"";
-      position:fixed; inset:0;
+      position:fixed;
+      inset:0;
       pointer-events:none;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
       opacity:.06;
@@ -76,9 +79,9 @@
     }
     [data-theme="light"] body::before{opacity:.035;}
 
-    /* ===== NAV ===== */
+    /* NAV */
     .nav{
-      position:sticky; top:0; z-index:50;
+      position:sticky;top:0;z-index:50;
       border-bottom:1px solid var(--line);
       backdrop-filter: blur(12px);
       background:linear-gradient(to bottom, rgba(10,12,18,.82), rgba(10,12,18,.30));
@@ -88,22 +91,29 @@
     }
     .navin{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
     .brand{display:flex;gap:12px;align-items:center;min-width:0}
-    .logoImg{
-      width:46px;height:46px;border-radius:18px;
-      object-fit:cover;border:1px solid var(--line);
-      box-shadow:0 18px 45px rgba(215,181,111,.18);
-      flex:0 0 46px;background:#000;
-    }
     .brandTxt{min-width:0}
+    .logoImg{
+      width:46px;height:46px;
+      border-radius:18px;
+      object-fit:cover;
+      border:1px solid var(--line);
+      box-shadow:0 18px 45px rgba(215,181,111,.18);
+      flex:0 0 46px;
+      background:#000;
+    }
     .brand h1{
-      margin:0;font-size:15px;line-height:1.12;
-      letter-spacing:-.02em;font-weight:900;
+      margin:0;
+      font-size:16px;
+      line-height:1.12;
+      letter-spacing:-.02em;
+      font-weight:900;
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
       text-transform:uppercase;
     }
     .brand p{
       margin:2px 0 0 0;color:var(--muted);
-      font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      font-size:12px;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis
     }
 
     .right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
@@ -119,23 +129,29 @@
       display:inline-flex;align-items:center;gap:8px;
     }
     .btn:hover{transform:translateY(-1px)}
-    .btn:active{transform:translateY(0) scale(.98)}
     .btn.primary{
       border-color:rgba(215,181,111,.55);
       background:linear-gradient(135deg, rgba(215,181,111,.98), rgba(123,215,201,.55));
       color:#0b0c10;
       box-shadow:0 16px 40px rgba(215,181,111,.18);
     }
-
+    .btn.danger{
+      border-color:rgba(255,80,120,.45);
+      background:linear-gradient(135deg, rgba(255,80,120,.18), rgba(255,255,255,.03));
+    }
+    .btn:active{transform:translateY(0px) scale(.98)}
     .desktopOnly{display:flex}
+
     .hamb{
       display:none;
-      width:44px;height:44px;border-radius:16px;
+      width:44px;height:44px;
+      border-radius:16px;
       border:1px solid var(--line);
       background:var(--card);
       color:var(--text);
       cursor:pointer;
-      font-weight:900;font-size:18px;
+      font-weight:900;
+      font-size:18px;
       transition:.18s ease;
     }
     .hamb:hover{transform:translateY(-1px)}
@@ -154,196 +170,430 @@
     .mobileMenu .full{
       width:100%;
       border-radius:0;
-      border-left:0;border-right:0;border-top:0;
+      border-left:0;border-right:0;
+      border-top:0;
       padding:14px 18px;
     }
-
     @media (max-width: 720px){
       .brand p{display:none;}
+      .brand h1{font-size:14px;}
       .desktopOnly{display:none;}
       .hamb{display:inline-flex;align-items:center;justify-content:center;}
       .mobileMenu.open{display:block;}
     }
 
-    /* ===== PAGE ===== */
-    .hero{
+    /* MAIN */
+    .page{
+      padding:22px 0 28px;
       position:relative;
-      padding:22px 0 12px;
     }
-    .hero::before{
+    .page::before{
       content:"";
-      position:absolute; inset:-70px;
+      position:absolute;inset:-120px;
       background:
-        radial-gradient(900px 520px at 20% 10%, rgba(215,181,111,.16), transparent 60%),
-        radial-gradient(900px 520px at 85% 20%, rgba(123,215,201,.12), transparent 60%);
+        radial-gradient(1000px 620px at 18% 12%, rgba(215,181,111,.14), transparent 60%),
+        radial-gradient(900px 600px at 85% 10%, rgba(123,215,201,.12), transparent 60%);
       pointer-events:none;
+      z-index:-1;
     }
-    .pageTitle{
+    .headRow{
+      display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .headRow h2{
       margin:0;
-      font-size:28px;
-      font-weight:900;
-      letter-spacing:-.03em;
-      line-height:1.05;
+      font-size:22px;
+      letter-spacing:-.02em;
     }
-    .subtitle{
-      margin:8px 0 0 0;
+    .headRow p{
+      margin:6px 0 0;
       color:var(--muted);
-      line-height:1.7;
-      font-size:13.5px;
-      max-width:70ch;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:14px;
-      padding:14px 0 120px; /* ruang untuk bottomBar */
-      position:relative;
-    }
-    @media (max-width: 980px){
-      .grid{ grid-template-columns:1fr; padding-bottom:160px; }
+      font-size:13.2px;
+      line-height:1.6;
+      max-width: 80ch;
     }
 
     .panel{
       border:1px solid var(--line);
       background:var(--card);
       border-radius:var(--r);
-      padding:14px;
+      padding:16px;
       box-shadow: var(--shadow);
     }
-    [data-theme="light"] .panel{box-shadow:0 18px 60px rgba(16,20,30,.09)}
+    [data-theme="light"] .panel{ box-shadow: var(--shadow); }
 
-    .secTitle{margin:0 0 10px 0;font-size:15px}
-    .muted{color:var(--muted);font-size:12.8px;line-height:1.65;margin:0 0 10px}
+    /* FILTERS */
+    .filters{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+      align-items:center;
+    }
+    .search{
+      flex:1;
+      min-width: 220px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:10px 12px;
+    }
+    [data-theme="light"] .search{ background: rgba(0,0,0,.03); }
+    .search input{
+      width:100%;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      font-weight:700;
+      font-size:13px;
+    }
+    .search input::placeholder{ color: var(--muted); font-weight:700; }
 
-    /* menu list */
+    .select{
+      min-width: 200px;
+      border:1px solid var(--line);
+      background: var(--selectBg);
+      color: var(--selectText);
+      border-radius:16px;
+      padding:10px 12px;
+      font-weight:900;
+      font-size:13px;
+      outline:none;
+      appearance:none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+        linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) calc(50% - 3px),
+        calc(100% - 12px) calc(50% - 3px);
+      background-size:6px 6px;
+      background-repeat:no-repeat;
+    }
+    .select option{
+      background: var(--bg2);
+      color: var(--text);
+      font-weight:800;
+    }
+    [data-theme="light"] .select option{
+      background: #ffffff;
+      color: #151a24;
+    }
+
+    /* GRID LAYOUT */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      margin-top:14px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* MENU LIST */
     .menuGrid{
       display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
     }
     @media (max-width: 720px){
-      .menuGrid{grid-template-columns:1fr;}
+      .menuGrid{ grid-template-columns: 1fr; }
     }
+
     .item{
       border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
       border-radius:18px;
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      display:flex;
+      gap:12px;
       padding:12px;
+      align-items:stretch;
+      min-width:0;
+    }
+    [data-theme="light"] .item{ background: rgba(0,0,0,.03); }
+
+    .thumb{
+      width:92px;
+      aspect-ratio: 1 / 1;
+      border-radius:16px;
+      background:#111;
+      border:1px solid var(--line);
+      overflow:hidden;
+      flex:0 0 92px;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .meta{
+      flex:1;
+      min-width:0;
       display:flex;
       flex-direction:column;
+      justify-content:space-between;
       gap:10px;
-      min-width:0;
     }
-    [data-theme="light"] .item{background:rgba(0,0,0,.03)}
-    .topRow{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
-    .name{font-weight:900;font-size:13.5px;line-height:1.25}
-    .price{font-weight:900;font-size:13px;color:var(--text);white-space:nowrap}
-    .desc{color:var(--muted);font-size:12.3px;line-height:1.55}
-
-    .qtyRow{
-      display:flex;gap:10px;align-items:center;justify-content:space-between;
-      margin-top:auto;
-    }
-    .qty{
-      display:flex;align-items:center;gap:8px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:14px;
-      padding:8px 10px;
-    }
-    [data-theme="light"] .qty{background:rgba(0,0,0,.03)}
-    .qbtn{
-      width:28px;height:28px;border-radius:10px;
-      border:1px solid var(--line);
-      background:var(--card);
-      color:var(--text);
-      cursor:pointer;
+    .metaTop{ min-width:0; }
+    .meta h3{
+      margin:0;
+      font-size:14px;
       font-weight:900;
-      display:inline-flex;align-items:center;justify-content:center;
-      transition:.18s ease;
+      letter-spacing:-.01em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-    .qbtn:active{transform:scale(.96)}
-    .qval{min-width:18px;text-align:center;font-weight:900}
-
-    /* cart */
-    .cartList{display:grid;gap:10px;margin-top:8px}
-    .cartRow{
-      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
-      padding:10px 12px;border-radius:16px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
+    .meta small{
+      display:block;
+      margin-top:6px;
+      color:var(--muted);
+      font-weight:800;
+      font-size:12px;
+      line-height:1.4;
     }
-    [data-theme="light"] .cartRow{background:rgba(0,0,0,.03)}
-    .cartRow b{display:block;font-size:13px}
-    .cartRow small{color:var(--muted);display:block;margin-top:3px;font-size:12px}
-    .cartRight{white-space:nowrap;font-weight:900}
-
-    .totalBox{
-      margin-top:12px;
-      padding:12px;
-      border-radius:18px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.12);
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      font-weight:900;
-    }
-    [data-theme="light"] .totalBox{background:rgba(0,0,0,.03)}
-    .totalBox span{color:var(--muted);font-weight:800;font-size:12.8px}
-
-    /* form */
-    .form{display:grid;gap:10px;margin-top:12px}
-    .input{
-      width:100%;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      padding:12px 12px;
-      color:var(--text);
-      outline:none;
-      font-weight:700;
-      font-size:16px; /* penting iPhone: anti auto-zoom + anti shift */
-    }
-    [data-theme="light"] .input{background:rgba(0,0,0,.03)}
-    textarea.input{min-height:90px;resize:vertical}
-
-    /* bottom bar */
-    .bottomBar{
-      position:fixed;
-      left:0;right:0;bottom:0;
-      z-index:60;
-      border-top:1px solid var(--line);
-      background:linear-gradient(to top, rgba(10,12,18,.92), rgba(10,12,18,.55));
-      backdrop-filter: blur(12px);
-      padding:10px 0;
-      padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-      will-change: transform;
-      transition: transform .22s ease;
-    }
-    [data-theme="light"] .bottomBar{
-      background:linear-gradient(to top, rgba(255,255,255,.92), rgba(255,255,255,.70));
-    }
-    .barIn{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
+    .priceRow{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
       flex-wrap:wrap;
     }
-    .barLeft{
-      display:flex;flex-direction:column;gap:2px;
+    .price{
+      font-weight:1000;
+      letter-spacing:-.01em;
+      color: var(--text);
+      font-size:13.5px;
+    }
+    .tag{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: var(--chipBg);
+      color: var(--muted);
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .qty{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .qbtn{
+      width:34px;height:34px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: var(--glass);
+      color: var(--text);
+      cursor:pointer;
+      font-weight:1000;
+      transition:.18s ease;
+    }
+    [data-theme="light"] .qbtn{ background: rgba(255,255,255,.65); }
+    .qbtn:hover{ transform: translateY(-1px); }
+    .qbtn:active{ transform: translateY(0) scale(.98); }
+
+    .qval{
+      min-width: 22px;
+      text-align:center;
+      font-weight:1000;
+      color: var(--text);
+    }
+
+    /* CART */
+    .cart{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background: rgba(255,255,255,.03);
+      padding:14px;
+      min-width:0;
+
+      /* penting: jangan sticky di mobile biar tidak “geser” */
+      position: relative;
+    }
+    [data-theme="light"] .cart{ background: rgba(0,0,0,.03); }
+
+    @media (min-width: 981px){
+      .cart{
+        position: sticky;
+        top: 86px; /* di bawah navbar */
+      }
+    }
+
+    .cart h3{
+      margin:0 0 10px;
+      font-size:15px;
+      font-weight:1000;
+      letter-spacing:-.01em;
+    }
+
+    .cartList{
+      display:grid;
+      gap:10px;
+      margin:10px 0;
+    }
+    .cartItem{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:10px 12px;
+      background: rgba(255,255,255,.02);
+    }
+    [data-theme="light"] .cartItem{ background: rgba(255,255,255,.55); }
+    .ciName{
       min-width:0;
     }
-    .barLeft b{font-size:14px}
-    .barLeft small{color:var(--muted)}
-    .barBtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .barBtns .btn{white-space:nowrap}
+    .ciName b{
+      display:block;
+      font-size:13px;
+      font-weight:1000;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .ciName small{
+      display:block;
+      margin-top:4px;
+      color: var(--muted);
+      font-weight:900;
+      font-size:12px;
+    }
+    .ciTotal{
+      font-weight:1000;
+      white-space:nowrap;
+      font-size:13px;
+    }
 
-    /* Saat keyboard muncul: sembunyikan bottom bar biar gak goyang */
-    body.kbOpen .bottomBar{ transform: translateY(120%); }
+    .line{
+      height:1px;
+      background: var(--line);
+      margin:12px 0;
+    }
 
-    .note{
+    .field{
+      display:grid;
+      gap:8px;
       margin-top:10px;
-      color:var(--muted);
-      font-size:12.4px;
+    }
+    .field label{
+      color: var(--muted);
+      font-size:12px;
+      font-weight:900;
+    }
+    .input, .textarea{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:11px 12px;
+      color: var(--text);
+      font-weight:800;
+      font-size:13px;
+      outline:none;
+      width:100%;
+    }
+    [data-theme="light"] .input, [data-theme="light"] .textarea{
+      background: rgba(0,0,0,.03);
+    }
+    .textarea{ min-height: 84px; resize: vertical; }
+
+    .sumRow{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-top:10px;
+      font-weight:1000;
+    }
+    .sumRow span{ color: var(--muted); font-weight:900; }
+    .sumRow b{ font-size:16px; }
+
+    .cartBtns{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .hint{
+      margin-top:10px;
+      color: var(--muted);
+      font-size:12px;
       line-height:1.6;
+      font-weight:800;
+    }
+
+    /* PAYMENT */
+    .payBox{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:12px;
+      background: rgba(0,0,0,.10);
+    }
+    [data-theme="light"] .payBox{ background: rgba(0,0,0,.03); }
+    .payGrid{
+      display:grid;
+      gap:10px;
+    }
+    .qrisWrap{
+      display:none;
+      gap:10px;
+      align-items:start;
+      grid-template-columns: 120px 1fr;
+    }
+    @media (max-width:720px){
+      .qrisWrap{ grid-template-columns: 1fr; }
+    }
+    .qrisImg{
+      width:120px;
+      aspect-ratio: 1 / 1;
+      border-radius:16px;
+      border:1px solid var(--line);
+      overflow:hidden;
+      background:#111;
+    }
+    .qrisImg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* PRINT (STRUK) */
+    .printArea{ display:none; }
+    @media print{
+      body{ background:#fff !important; color:#000 !important; }
+      .nav, .page, .mobileMenu{ display:none !important; }
+      .printArea{
+        display:block !important;
+        padding:24px;
+        font-family: ui-sans-serif, system-ui, Arial;
+      }
+      .printCard{
+        border:1px solid #ddd;
+        padding:18px;
+        border-radius:14px;
+        max-width: 520px;
+      }
+      .printCard h2{ margin:0 0 6px; font-size:18px; }
+      .printCard p{ margin:0 0 10px; color:#444; font-size:12px; }
+      .pRow{ display:flex; justify-content:space-between; gap:10px; font-size:12px; margin:6px 0; }
+      .pRow b{ font-weight:900; }
+      .pLine{ height:1px; background:#eee; margin:10px 0; }
+      .pSmall{ font-size:11px; color:#444; margin-top:10px; }
     }
   </style>
 </head>
@@ -356,114 +606,192 @@
         <img class="logoImg" src="logo-lamadre.png" alt="La Madre Logo">
         <div class="brandTxt">
           <h1>LA MADRE COFFEE &amp; ROASTERY</h1>
-          <p>Order/Menu</p>
+          <p>Order/Menu • Karawang</p>
         </div>
       </div>
 
+      <!-- Desktop actions -->
       <div class="right desktopOnly">
         <button class="btn" id="themeBtn" type="button">🌓 Mode</button>
         <a class="btn" href="index.html">🏠 Home</a>
-        <a class="btn primary" href="#cart">🧾 Ringkasan</a>
+        <button class="btn danger" id="resetBtnTop" type="button">♻ Reset</button>
+        <a class="btn" id="reserveBtn" target="_blank" rel="noreferrer">📅 Reservasi</a>
+        <a class="btn primary" href="https://wa.me/6281398686801" target="_blank" rel="noreferrer">💬 Chat WhatsApp</a>
       </div>
 
+      <!-- Mobile: hamburger -->
       <button class="hamb" id="hambBtn" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
     </div>
 
+    <!-- Mobile dropdown menu -->
     <div class="mobileMenu" id="mobileMenu">
       <button class="btn full" id="themeBtnM" type="button">🌓 Mode Gelap/Terang</button>
       <a class="btn full" href="index.html">🏠 Home</a>
-      <a class="btn primary full" href="#cart">🧾 Ringkasan</a>
+      <button class="btn danger full" id="resetBtnM" type="button">♻ Reset Pesanan</button>
+      <a class="btn full" id="reserveBtnM" target="_blank" rel="noreferrer">📅 Reservasi</a>
+      <a class="btn primary full" href="https://wa.me/6281398686801" target="_blank" rel="noreferrer">💬 Chat WhatsApp</a>
     </div>
   </div>
 
-  <header class="hero">
+  <main class="page">
     <div class="wrap">
-      <h2 class="pageTitle">Order/Menu</h2>
-      <p class="subtitle">
-        Pilih menu, tentukan jumlah, lalu klik <b>“Buat Pesanan”</b>. Pesanan akan otomatis terkirim ke WhatsApp.
-      </p>
-
-      <div class="grid">
-        <!-- MENU -->
-        <section class="panel">
-          <h3 class="secTitle">Menu Pilihan</h3>
-          <p class="muted">Klik + / − untuk menambah/mengurangi pesanan.</p>
-
-          <div class="menuGrid" id="menuGrid"></div>
-
-          <p class="note">
-            *Harga & menu bisa kamu edit di bagian <b>const MENU</b> pada script.
+      <div class="headRow">
+        <div>
+          <h2>Order/Menu</h2>
+          <p>
+            Pilih menu → cek keranjang → pilih metode bayar → klik <b>Buat Pesanan</b> untuk kirim ke WhatsApp.
+            Kamu juga bisa <b>Unduh Struk (PDF)</b> (Save as PDF).
           </p>
-        </section>
+        </div>
+      </div>
 
-        <!-- CART -->
-        <section class="panel" id="cart">
-          <h3 class="secTitle">Pesanan Kamu</h3>
-          <p class="muted">Ringkasan item yang sudah kamu pilih.</p>
-
-          <div class="cartList" id="cartList"></div>
-
-          <div class="totalBox">
-            <span>Total</span>
-            <div id="totalText">Rp 0</div>
+      <div class="panel">
+        <!-- FILTERS -->
+        <div class="filters">
+          <div class="search" aria-label="Cari menu">
+            🔎
+            <input id="searchInput" type="text" placeholder="Cari menu… (contoh: latte, chicken, toast)" />
           </div>
 
-          <div class="form">
-            <input class="input" id="custName" type="text" placeholder="Nama pemesan (wajib)" />
-            <textarea class="input" id="custNote" placeholder="Catatan (opsional)"></textarea>
-          </div>
+          <select class="select" id="catSelect" aria-label="Filter kategori">
+            <option value="ALL">Semua Kategori</option>
+          </select>
+        </div>
 
-          <p class="note">
-            Setelah klik “Buat Pesanan”, WhatsApp akan terbuka dengan detail item + jumlah + total.
-          </p>
-        </section>
+        <div class="grid">
+          <!-- LEFT: MENU -->
+          <section>
+            <div class="menuGrid" id="menuGrid" aria-label="Daftar menu"></div>
+            <div class="hint">
+              * Foto menu bisa kamu ganti per item di data menu (bagian <b>MENU</b> di script).  
+              Untuk sementara aku isi foto “placeholder” yang aman & rapi.
+            </div>
+          </section>
+
+          <!-- RIGHT: CART -->
+          <aside class="cart" aria-label="Keranjang">
+            <h3>Keranjang</h3>
+
+            <div class="cartList" id="cartList"></div>
+
+            <div class="line"></div>
+
+            <div class="sumRow">
+              <span>Total</span>
+              <b id="totalTxt">Rp 0</b>
+            </div>
+
+            <div class="field">
+              <label for="custName">Nama</label>
+              <input class="input" id="custName" type="text" placeholder="Contoh: Andi" autocomplete="name">
+            </div>
+
+            <div class="field">
+              <label for="tableNo">No. Meja (opsional)</label>
+              <input class="input" id="tableNo" type="text" placeholder="Contoh: 7">
+            </div>
+
+            <div class="field">
+              <label for="note">Catatan (opsional)</label>
+              <textarea class="textarea" id="note" placeholder="Contoh: less sugar, tanpa es, no pedas..."></textarea>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="payBox">
+              <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;">
+                <b style="font-size:13px;letter-spacing:-.01em;">Metode Pembayaran</b>
+                <span style="color:var(--muted);font-size:12px;font-weight:900;">(QRIS semi-manual)</span>
+              </div>
+
+              <div class="payGrid" style="margin-top:10px;">
+                <select class="select" id="payMethod" aria-label="Metode pembayaran">
+                  <option value="CASH">Bayar di Tempat (Cash)</option>
+                  <option value="QRIS">QRIS (Scan QR)</option>
+                  <option value="TRANSFER">Transfer (Konfirmasi via WA)</option>
+                </select>
+
+                <div class="qrisWrap" id="qrisWrap" style="display:none;">
+                  <div class="qrisImg">
+                    <!-- Ganti qris.png dengan QRIS asli kamu -->
+                    <img src="qris.png" alt="QRIS La Madre" onerror="this.style.display='none'; this.parentElement.style.display='none';">
+                  </div>
+                  <div>
+                    <div style="color:var(--muted);font-size:12px;line-height:1.6;font-weight:900;">
+                      Scan QRIS di samping (atau siapkan file <b>qris.png</b>). Setelah bayar, isi info berikut agar mudah dicek.
+                    </div>
+
+                    <div class="field">
+                      <label for="payName">Nama Pembayar (opsional)</label>
+                      <input class="input" id="payName" type="text" placeholder="Contoh: Andi / A.N. Rekening">
+                    </div>
+
+                    <div class="field">
+                      <label for="payRef">No. Referensi / Catatan Pembayaran (opsional)</label>
+                      <input class="input" id="payRef" type="text" placeholder="Contoh: REF123 / jam transfer / bank">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cartBtns">
+              <button class="btn primary" id="waBtn" type="button">✅ Buat Pesanan (WhatsApp)</button>
+              <button class="btn" id="printBtn" type="button">🧾 Unduh Struk (PDF)</button>
+              <button class="btn danger" id="resetBtn" type="button">♻ Reset Pesanan</button>
+            </div>
+
+            <div class="hint" id="hintBox">
+              Setelah klik <b>Unduh Struk</b>, pilih printer: <b>Save as PDF</b>.
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
-  </header>
+  </main>
 
-  <div class="bottomBar" id="bottomBar">
-    <div class="wrap barIn">
-      <div class="barLeft">
-        <b id="barTotal">Total: Rp 0</b>
-        <small id="barCount">0 item dipilih</small>
-      </div>
-
-      <div class="barBtns">
-        <button class="btn" id="resetBtn" type="button">↺ Reset</button>
-        <a class="btn" href="index.html">← Kembali</a>
-        <button class="btn primary" id="orderBtn" type="button">📩 Buat Pesanan</button>
+  <!-- PRINT AREA -->
+  <div class="printArea" id="printArea">
+    <div class="printCard">
+      <h2>La Madre Coffee &amp; Roastery</h2>
+      <p>Order Receipt / Struk Pesanan</p>
+      <div class="pRow"><span>Tanggal</span><b id="pDate">-</b></div>
+      <div class="pRow"><span>Nama</span><b id="pName">-</b></div>
+      <div class="pRow"><span>No. Meja</span><b id="pTable">-</b></div>
+      <div class="pLine"></div>
+      <div id="pItems"></div>
+      <div class="pLine"></div>
+      <div class="pRow"><span>Total</span><b id="pTotal">Rp 0</b></div>
+      <div class="pRow"><span>Pembayaran</span><b id="pPay">-</b></div>
+      <div class="pLine"></div>
+      <div class="pSmall" id="pNote"></div>
+      <div class="pSmall" style="margin-top:12px;">
+        Terima kasih. Please come and take your time here. Enjoy!
       </div>
     </div>
   </div>
 
   <script>
-    // ===== Mobile Menu Toggle
+    /* =========================
+       CONFIG
+    ========================= */
+    const WA_NUMBER = "6281398686801";
+
+    // Reservasi link
     (function(){
-      const hambBtn = document.getElementById("hambBtn");
-      const mobileMenu = document.getElementById("mobileMenu");
-      if(!hambBtn || !mobileMenu) return;
-
-      hambBtn.addEventListener("click", ()=>{
-        const open = mobileMenu.classList.toggle("open");
-        hambBtn.setAttribute("aria-expanded", open ? "true" : "false");
-        hambBtn.textContent = open ? "✕" : "☰";
-      });
-
-      mobileMenu.addEventListener("click", (e)=>{
-        if(e.target.tagName === "A"){
-          mobileMenu.classList.remove("open");
-          hambBtn.setAttribute("aria-expanded","false");
-          hambBtn.textContent = "☰";
-        }
-      });
+      const msg = "Halo La Madre Coffee & Roastery, saya ingin reservasi. Mohon info ketersediaan tempat ya. Terima kasih.";
+      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+      const d = document.getElementById("reserveBtn");
+      const m = document.getElementById("reserveBtnM");
+      if(d) d.href = url;
+      if(m) m.href = url;
     })();
 
-    // ===== Theme (same key as index) sync Desktop & Mobile
+    // Theme sync (sama seperti index)
     (function(){
       const key = "theme_lamadre";
       const btnD = document.getElementById("themeBtn");
       const btnM = document.getElementById("themeBtnM");
-
       function applySaved(){
         const saved = localStorage.getItem(key);
         if(saved === "light") document.documentElement.setAttribute("data-theme","light");
@@ -484,180 +812,363 @@
       if(btnM) btnM.addEventListener("click", toggle);
     })();
 
-    // ===== MENU DATA (edit di sini)
+    // Mobile menu toggle
+    (function(){
+      const hambBtn = document.getElementById("hambBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      if(!hambBtn || !mobileMenu) return;
+
+      hambBtn.addEventListener("click", ()=>{
+        const open = mobileMenu.classList.toggle("open");
+        hambBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        hambBtn.textContent = open ? "✕" : "☰";
+      });
+
+      // close when click link
+      mobileMenu.addEventListener("click", (e)=>{
+        if(e.target.tagName === "A" || e.target.tagName === "BUTTON"){
+          mobileMenu.classList.remove("open");
+          hambBtn.setAttribute("aria-expanded","false");
+          hambBtn.textContent = "☰";
+        }
+      });
+    })();
+
+    /* =========================
+       MENU DATA (EDIT DI SINI)
+       Kamu bisa ganti nama, harga, kategori, dan foto per item.
+       price = angka rupiah (contoh 38000)
+    ========================= */
     const MENU = [
-      { id:"espresso", name:"Espresso", price:20000, desc:"Single shot, bold & clean." },
-      { id:"americano", name:"Americano", price:25000, desc:"Long black, light & smooth." },
-      { id:"cafelatte", name:"Cafe Latte", price:32000, desc:"Creamy milk & espresso." },
-      { id:"butterscotch", name:"Butterscotch Latte", price:36000, desc:"Sweet, creamy, crowd favorite." },
-      { id:"matcha", name:"Matcha Latte", price:32000, desc:"Earthy, creamy matcha." },
-      { id:"fries", name:"French Fries", price:25000, desc:"Crispy fries, perfect snack." },
-      { id:"toast", name:"Bread Toast", price:28000, desc:"Toasted bread with topping." },
-      { id:"grilledchicken", name:"Grilled Chicken Rice", price:45000, desc:"Comfort food for lunch/dinner." },
+      // ===== Contoh (silakan ganti sesuai PDF kamu) =====
+      { id:"m1",  name:"Espresso",              price:25000, cat:"Coffee",  note:"Single shot", img:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80" },
+      { id:"m2",  name:"Americano",             price:28000, cat:"Coffee",  note:"Hot / Ice",   img:"https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=800&q=80" },
+      { id:"m3",  name:"Cafe Latte",            price:35000, cat:"Coffee",  note:"Creamy",      img:"https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" },
+      { id:"m4",  name:"Butterscotch Latte",    price:38000, cat:"Signature", note:"Customer fav", img:"https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=800&q=80" },
+      { id:"m5",  name:"Matcha Latte",          price:35000, cat:"Non Coffee", note:"Hot / Ice", img:"https://images.unsplash.com/photo-1528826194825-81b8a7f2c4a6?auto=format&fit=crop&w=800&q=80" },
+      { id:"m6",  name:"Strawberry (Non Coffee)", price:32000, cat:"Non Coffee", note:"Fresh",  img:"https://images.unsplash.com/photo-1497534446932-c925b458314e?auto=format&fit=crop&w=800&q=80" },
+
+      { id:"f1",  name:"Bread Toast",           price:28000, cat:"Snack",   note:"Toasty",      img:"https://images.unsplash.com/photo-1548940740-204726a19be3?auto=format&fit=crop&w=800&q=80" },
+      { id:"f2",  name:"French Fries",          price:25000, cat:"Snack",   note:"Crispy",      img:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=80" },
+      { id:"f3",  name:"Chicken Katsu Rice Bowl", price:48000, cat:"Main Course", note:"Comfort food", img:"https://images.unsplash.com/photo-1604908176997-125f25cc500f?auto=format&fit=crop&w=800&q=80" },
+      { id:"f4",  name:"Grilled Chicken Rice",  price:55000, cat:"Main Course", note:"Proper meals", img:"https://images.unsplash.com/photo-1604909053522-6f76e76510a5?auto=format&fit=crop&w=800&q=80" },
     ];
 
-    // ===== Helpers
-    const rupiah = (n)=> "Rp " + (n||0).toLocaleString("id-ID");
-    const WA_NUMBER = "6281398686801";
-
-    // ===== State
+    /* =========================
+       STATE
+    ========================= */
     const cart = new Map(); // id -> qty
 
-    // ===== Render Menu
-    const menuGrid = document.getElementById("menuGrid");
-    const cartList = document.getElementById("cartList");
-    const totalText = document.getElementById("totalText");
-    const barTotal = document.getElementById("barTotal");
-    const barCount = document.getElementById("barCount");
+    const elMenuGrid  = document.getElementById("menuGrid");
+    const elCartList  = document.getElementById("cartList");
+    const elTotalTxt  = document.getElementById("totalTxt");
+    const elSearch    = document.getElementById("searchInput");
+    const elCatSelect = document.getElementById("catSelect");
+
+    const elCustName  = document.getElementById("custName");
+    const elTableNo   = document.getElementById("tableNo");
+    const elNote      = document.getElementById("note");
+
+    const elPayMethod = document.getElementById("payMethod");
+    const elQrisWrap  = document.getElementById("qrisWrap");
+    const elPayName   = document.getElementById("payName");
+    const elPayRef    = document.getElementById("payRef");
+
+    /* =========================
+       HELPERS
+    ========================= */
+    const rupiah = (n) => "Rp " + (n||0).toLocaleString("id-ID");
+    const byId = (id)=> MENU.find(x=>x.id===id);
+
+    function getCategories(){
+      const set = new Set(MENU.map(m=>m.cat));
+      return Array.from(set).sort((a,b)=>a.localeCompare(b));
+    }
+
+    function normalize(s){
+      return (s||"").toLowerCase().trim();
+    }
+
+    function calcTotal(){
+      let total = 0;
+      for(const [id, qty] of cart.entries()){
+        const m = byId(id);
+        if(m) total += m.price * qty;
+      }
+      return total;
+    }
+
+    /* =========================
+       RENDER
+    ========================= */
+    function renderCategories(){
+      const cats = getCategories();
+      elCatSelect.innerHTML = `<option value="ALL">Semua Kategori</option>` +
+        cats.map(c=>`<option value="${encodeURIComponent(c)}">${c}</option>`).join("");
+    }
+
+    function currentFilters(){
+      const q = normalize(elSearch.value);
+      const catVal = elCatSelect.value;
+      const cat = (catVal==="ALL") ? "ALL" : decodeURIComponent(catVal);
+      return { q, cat };
+    }
+
+    function filteredMenu(){
+      const { q, cat } = currentFilters();
+      return MENU.filter(m=>{
+        const okCat = (cat==="ALL") ? true : m.cat === cat;
+        const okQ = q ? (normalize(m.name).includes(q) || normalize(m.cat).includes(q) || normalize(m.note).includes(q)) : true;
+        return okCat && okQ;
+      });
+    }
 
     function renderMenu(){
-      menuGrid.innerHTML = "";
-      MENU.forEach(m=>{
-        const qty = cart.get(m.id) || 0;
+      const list = filteredMenu();
 
-        const el = document.createElement("div");
-        el.className = "item";
-        el.innerHTML = `
-          <div class="topRow">
-            <div style="min-width:0">
-              <div class="name">${m.name}</div>
-              <div class="desc">${m.desc || ""}</div>
-            </div>
-            <div class="price">${rupiah(m.price)}</div>
-          </div>
-
-          <div class="qtyRow">
-            <div class="qty">
-              <button class="qbtn" data-act="minus" data-id="${m.id}" type="button">−</button>
-              <div class="qval" id="q_${m.id}">${qty}</div>
-              <button class="qbtn" data-act="plus" data-id="${m.id}" type="button">+</button>
-            </div>
-            <button class="btn" data-act="add" data-id="${m.id}" type="button">Tambah</button>
+      if(list.length === 0){
+        elMenuGrid.innerHTML = `
+          <div style="grid-column:1/-1;border:1px solid var(--line);border-radius:18px;padding:14px;color:var(--muted);font-weight:900;">
+            Tidak ada menu yang cocok.
           </div>
         `;
-        menuGrid.appendChild(el);
-      });
+        return;
+      }
+
+      elMenuGrid.innerHTML = list.map(m=>{
+        const qty = cart.get(m.id) || 0;
+        return `
+          <article class="item" data-id="${m.id}">
+            <div class="thumb">
+              <img src="${m.img}" alt="${m.name}" loading="lazy">
+            </div>
+
+            <div class="meta">
+              <div class="metaTop">
+                <h3 title="${m.name}">${m.name}</h3>
+                <small>${m.note || m.cat}</small>
+              </div>
+
+              <div class="priceRow">
+                <div>
+                  <div class="price">${rupiah(m.price)}</div>
+                  <div class="tag"># ${m.cat}</div>
+                </div>
+
+                <div class="qty" aria-label="Kontrol jumlah">
+                  <button class="qbtn" data-act="minus" type="button">−</button>
+                  <div class="qval" data-qty>${qty}</div>
+                  <button class="qbtn" data-act="plus" type="button">+</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
     }
 
     function renderCart(){
-      const items = [];
-      let total = 0;
-      let count = 0;
+      const entries = Array.from(cart.entries()).filter(([_,q])=>q>0);
 
-      cartList.innerHTML = "";
-
-      MENU.forEach(m=>{
-        const qty = cart.get(m.id) || 0;
-        if(qty <= 0) return;
-        const sub = qty * m.price;
-
-        items.push({name:m.name, qty, price:m.price, sub});
-        total += sub;
-        count += qty;
-
-        const row = document.createElement("div");
-        row.className = "cartRow";
-        row.innerHTML = `
-          <div>
-            <b>${m.name} <small>x${qty}</small></b>
-            <small>${rupiah(m.price)} / item</small>
+      if(entries.length === 0){
+        elCartList.innerHTML = `
+          <div style="border:1px dashed var(--line);border-radius:16px;padding:12px;color:var(--muted);font-weight:900;">
+            Keranjang masih kosong. Tambahkan menu dulu ya 🙂
           </div>
-          <div class="cartRight">${rupiah(sub)}</div>
         `;
-        cartList.appendChild(row);
-      });
-
-      if(items.length === 0){
-        const empty = document.createElement("div");
-        empty.className = "muted";
-        empty.textContent = "Belum ada pesanan. Silakan pilih menu di sebelah kiri.";
-        cartList.appendChild(empty);
+      }else{
+        elCartList.innerHTML = entries.map(([id, qty])=>{
+          const m = byId(id);
+          const line = m.price * qty;
+          return `
+            <div class="cartItem">
+              <div class="ciName">
+                <b title="${m.name}">${m.name}</b>
+                <small>${qty} x ${rupiah(m.price)}</small>
+              </div>
+              <div class="ciTotal">${rupiah(line)}</div>
+            </div>
+          `;
+        }).join("");
       }
 
-      totalText.textContent = rupiah(total);
-      barTotal.textContent = "Total: " + rupiah(total);
-      barCount.textContent = `${count} item dipilih`;
-
-      // update qty labels
-      MENU.forEach(m=>{
-        const q = cart.get(m.id) || 0;
-        const qEl = document.getElementById("q_"+m.id);
-        if(qEl) qEl.textContent = q;
-      });
-
-      return {items, total, count};
+      elTotalTxt.textContent = rupiah(calcTotal());
     }
 
-    function setQty(id, nextQty){
-      const qty = Math.max(0, nextQty);
-      if(qty === 0) cart.delete(id);
-      else cart.set(id, qty);
-      renderCart();
-    }
-
-    // ===== Click handlers
-    menuGrid.addEventListener("click", (e)=>{
-      const btn = e.target.closest("[data-act]");
-      if(!btn) return;
-      const act = btn.getAttribute("data-act");
-      const id = btn.getAttribute("data-id");
-      const current = cart.get(id) || 0;
-
-      if(act === "plus") setQty(id, current + 1);
-      if(act === "minus") setQty(id, current - 1);
-      if(act === "add") setQty(id, current + 1);
-    });
-
-    document.getElementById("resetBtn").addEventListener("click", ()=>{
-      cart.clear();
+    function renderAll(){
+      renderCategories();
       renderMenu();
       renderCart();
-      document.getElementById("custName").value = "";
-      document.getElementById("custNote").value = "";
+    }
+
+    /* =========================
+       EVENTS
+    ========================= */
+    elMenuGrid.addEventListener("click", (e)=>{
+      const btn = e.target.closest("button.qbtn");
+      if(!btn) return;
+      const item = e.target.closest(".item");
+      if(!item) return;
+
+      const id = item.getAttribute("data-id");
+      const act = btn.getAttribute("data-act");
+      const cur = cart.get(id) || 0;
+
+      if(act === "plus") cart.set(id, cur + 1);
+      if(act === "minus") cart.set(id, Math.max(0, cur - 1));
+
+      // update qty text inside card (biar smooth, tanpa rerender penuh)
+      const qEl = item.querySelector("[data-qty]");
+      if(qEl) qEl.textContent = cart.get(id) || 0;
+
+      renderCart();
     });
 
-    // ===== WA order message
-    document.getElementById("orderBtn").addEventListener("click", ()=>{
-      const name = document.getElementById("custName").value.trim();
-      const note = document.getElementById("custNote").value.trim();
+    elSearch.addEventListener("input", ()=> renderMenu());
+    elCatSelect.addEventListener("change", ()=> renderMenu());
 
-      const {items, total, count} = renderCart();
+    // Payment method toggle
+    elPayMethod.addEventListener("change", ()=>{
+      const val = elPayMethod.value;
+      if(val === "QRIS"){
+        elQrisWrap.style.display = "grid";
+      }else{
+        elQrisWrap.style.display = "none";
+      }
+    });
 
-      if(!name){
-        alert("Nama pemesan wajib diisi ya 🙂");
-        document.getElementById("custName").focus();
+    // Reset
+    function resetAll(){
+      cart.clear();
+      elCustName.value = "";
+      elTableNo.value = "";
+      elNote.value = "";
+      elPayMethod.value = "CASH";
+      elPayName.value = "";
+      elPayRef.value = "";
+      elQrisWrap.style.display = "none";
+      renderMenu();
+      renderCart();
+    }
+
+    document.getElementById("resetBtn").addEventListener("click", resetAll);
+    document.getElementById("resetBtnTop").addEventListener("click", resetAll);
+    document.getElementById("resetBtnM").addEventListener("click", resetAll);
+
+    // WhatsApp order
+    document.getElementById("waBtn").addEventListener("click", ()=>{
+      const entries = Array.from(cart.entries()).filter(([_,q])=>q>0);
+      if(entries.length === 0){
+        alert("Keranjang masih kosong. Pilih menu dulu ya 🙂");
         return;
       }
-      if(count === 0){
-        alert("Pesanan masih kosong. Silakan pilih menu dulu 🙂");
-        return;
-      }
 
-      let msg = `Halo La Madre Coffee & Roastery,%0A%0ASaya ingin order:%0A`;
-      items.forEach((it, idx)=>{
-        msg += `${idx+1}. ${it.name} x${it.qty} (${rupiah(it.sub)})%0A`;
+      const total = calcTotal();
+      const name = (elCustName.value || "").trim();
+      const table = (elTableNo.value || "").trim();
+      const note = (elNote.value || "").trim();
+
+      const payMethod = elPayMethod.value;
+      const payName = (elPayName.value || "").trim();
+      const payRef  = (elPayRef.value || "").trim();
+
+      const lines = [];
+      lines.push("Halo La Madre Coffee & Roastery, saya ingin order:");
+      lines.push("");
+
+      entries.forEach(([id, qty], idx)=>{
+        const m = byId(id);
+        const lineTotal = m.price * qty;
+        lines.push(`${idx+1}. ${m.name} — ${qty} x ${rupiah(m.price)} = ${rupiah(lineTotal)}`);
       });
-      msg += `%0A*Total:* ${rupiah(total)}%0A`;
-      msg += `*Nama:* ${name}%0A`;
-      if(note) msg += `*Catatan:* ${note}%0A`;
-      msg += `%0ATerima kasih 🙏`;
 
-      const url = `https://wa.me/${WA_NUMBER}?text=${msg}`;
+      lines.push("");
+      lines.push(`TOTAL: ${rupiah(total)}`);
+
+      if(name) lines.push(`Nama: ${name}`);
+      if(table) lines.push(`No. Meja: ${table}`);
+      if(note) lines.push(`Catatan: ${note}`);
+
+      lines.push("");
+      if(payMethod === "CASH"){
+        lines.push("Metode Bayar: Cash (bayar di tempat)");
+      }else if(payMethod === "TRANSFER"){
+        lines.push("Metode Bayar: Transfer (mohon konfirmasi)");
+        if(payName) lines.push(`Nama Pembayar: ${payName}`);
+        if(payRef)  lines.push(`Ref/Catatan Bayar: ${payRef}`);
+      }else if(payMethod === "QRIS"){
+        lines.push("Metode Bayar: QRIS (semi-manual)");
+        lines.push("Status: Sudah scan / akan bayar via QRIS");
+        if(payName) lines.push(`Nama Pembayar: ${payName}`);
+        if(payRef)  lines.push(`Ref/Catatan Bayar: ${payRef}`);
+      }
+
+      const msg = lines.join("\n");
+      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
       window.open(url, "_blank", "noopener,noreferrer");
     });
 
-    // ===== Render first
-    renderMenu();
-    renderCart();
+    // Print / Save as PDF
+    document.getElementById("printBtn").addEventListener("click", ()=>{
+      const entries = Array.from(cart.entries()).filter(([_,q])=>q>0);
+      if(entries.length === 0){
+        alert("Keranjang masih kosong. Tidak ada struk yang bisa dibuat 🙂");
+        return;
+      }
 
-    // ===== Keyboard fix: saat fokus input, sembunyikan bottom bar (anti goyang)
-    (function(){
-      const inputs = document.querySelectorAll("input, textarea, select");
-      inputs.forEach(el=>{
-        el.addEventListener("focus", ()=> document.body.classList.add("kbOpen"));
-        el.addEventListener("blur",  ()=> document.body.classList.remove("kbOpen"));
-      });
-    })();
+      const total = calcTotal();
+      const name = (elCustName.value || "-").trim() || "-";
+      const table = (elTableNo.value || "-").trim() || "-";
+      const note = (elNote.value || "").trim();
+
+      const payMethod = elPayMethod.value;
+      const payName = (elPayName.value || "").trim();
+      const payRef  = (elPayRef.value || "").trim();
+
+      const payTxt = (() => {
+        if(payMethod==="CASH") return "Cash (bayar di tempat)";
+        if(payMethod==="TRANSFER"){
+          let t = "Transfer (konfirmasi)";
+          if(payName) t += ` | ${payName}`;
+          if(payRef)  t += ` | ${payRef}`;
+          return t;
+        }
+        if(payMethod==="QRIS"){
+          let t = "QRIS (semi-manual)";
+          if(payName) t += ` | ${payName}`;
+          if(payRef)  t += ` | ${payRef}`;
+          return t;
+        }
+        return "-";
+      })();
+
+      // fill print
+      const now = new Date();
+      document.getElementById("pDate").textContent = now.toLocaleString("id-ID");
+      document.getElementById("pName").textContent = name;
+      document.getElementById("pTable").textContent = table;
+      document.getElementById("pTotal").textContent = rupiah(total);
+      document.getElementById("pPay").textContent = payTxt;
+
+      const itemsHtml = entries.map(([id, qty])=>{
+        const m = byId(id);
+        const lt = m.price * qty;
+        return `
+          <div class="pRow">
+            <span>${m.name} (${qty}x)</span>
+            <b>${rupiah(lt)}</b>
+          </div>
+        `;
+      }).join("");
+      document.getElementById("pItems").innerHTML = itemsHtml;
+
+      document.getElementById("pNote").textContent = note ? ("Catatan: " + note) : "Catatan: -";
+
+      window.print(); // user pilih “Save as PDF”
+    });
+
+    // Initial render
+    renderAll();
   </script>
 </body>
 </html>
