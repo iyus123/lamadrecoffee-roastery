@@ -3,490 +3,684 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Order • La Madre Coffee & Roastery</title>
+  <title>Order/Menu • La Madre Coffee & Roastery</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#0b0c0f;
+      --bg:#0b0c10;
       --bg2:#0f121a;
-      --card:rgba(255,255,255,.06);
-      --text:#e9ecf1;
-      --muted:#aeb6c4;
+      --text:#eef2f7;
+      --muted:#aab3c2;
       --line:rgba(255,255,255,.10);
-      --accent:#d6b26e;
+      --card:rgba(255,255,255,.06);
+      --glass:rgba(0,0,0,.25);
+      --accent:#d7b56f;
       --accent2:#7bd7c9;
-      --shadow: 0 22px 70px rgba(0,0,0,.45);
-      --r: 18px;
-      --max: 1180px;
+      --shadow: 0 26px 90px rgba(0,0,0,.50);
+      --r:22px;
+      --max: 1120px;
     }
     [data-theme="light"]{
       --bg:#f6f7fb;
       --bg2:#ffffff;
-      --card:rgba(0,0,0,.04);
-      --text:#131722;
-      --muted:#5b6576;
+      --text:#151a24;
+      --muted:#5d6778;
       --line:rgba(0,0,0,.10);
-      --shadow: 0 22px 70px rgba(15,18,26,.10);
+      --card:rgba(0,0,0,.04);
+      --glass:rgba(255,255,255,.65);
+      --shadow: 0 18px 70px rgba(16,20,30,.12);
     }
+
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:"Plus Jakarta Sans",system-ui,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text)}
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-
-    .top{
-      position:sticky;top:0;z-index:10;
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
-      background:linear-gradient(to bottom, rgba(10,10,14,.80), rgba(10,10,14,.25));
-    }
-    [data-theme="light"] .top{
-      background:linear-gradient(to bottom, rgba(255,255,255,.85), rgba(255,255,255,.55));
-    }
-
-    .topin{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
-    .brand{display:flex;gap:10px;align-items:center;min-width:0}
-    .logo{
-      width:34px;height:34px;border-radius:12px;
-      background: radial-gradient(circle at 30% 30%, rgba(214,178,110,.9), rgba(123,215,201,.25), rgba(255,255,255,.05));
-      border:1px solid var(--line);
-    }
-    .brand h1{margin:0;font-size:14px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .brand p{margin:2px 0 0 0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-    .btn{
-      padding:10px 14px;border-radius:12px;
-      border:1px solid var(--line);
-      background: var(--card);
+    html,body{
+      margin:0;padding:0;
+      font-family:"Plus Jakarta Sans",system-ui,Segoe UI,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg),var(--bg2));
       color:var(--text);
-      font-weight:800;
-      font-size:13px;
-      transition:.2s ease;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 14px}
+
+    /* ===== TOP BAR (simple) ===== */
+    .orderTop{
+      position:sticky;top:0;z-index:20;
+      display:flex;gap:12px;align-items:center;
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      background:rgba(10,12,18,.72);
+      backdrop-filter: blur(12px);
+    }
+    [data-theme="light"] .orderTop{background:rgba(255,255,255,.86)}
+    .backBtn{
+      width:42px;height:42px;border-radius:16px;
+      border:1px solid var(--line);
+      background:var(--card);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:900;
       cursor:pointer;
       user-select:none;
     }
-    .btn:hover{transform:translateY(-1px)}
-    .btn.primary{
-      border-color:rgba(214,178,110,.55);
-      background:linear-gradient(135deg, rgba(214,178,110,.95), rgba(123,215,201,.55));
-      color:#0b0c0f;
-      box-shadow:0 16px 40px rgba(214,178,110,.18);
+    .orderTitle{min-width:0}
+    .orderTitle b{display:block;font-size:14px;letter-spacing:-.01em}
+    .orderTitle span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+
+    .topActions{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .btn{
+      border:1px solid var(--line);
+      background:var(--card);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:16px;
+      font-weight:900;
+      cursor:pointer;
+      transition:.15s ease;
+      display:inline-flex;align-items:center;gap:8px;
+      user-select:none;
+      font-size:13px;
+      white-space:nowrap;
     }
-    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0) scale(.98)}
 
-    main{padding:18px 0 28px}
-    .head{display:flex;flex-wrap:wrap;gap:10px;align-items:end;justify-content:space-between;margin:8px 0 14px}
-    .head h2{margin:0;font-size:20px}
-    .head p{margin:0;color:var(--muted);font-size:13px;line-height:1.4}
+    /* ===== MAIN LAYOUT ===== */
+    .pagePad{padding:16px 0 96px;} /* supaya ga ketutup bottom bar */
 
-    .layout{
+    .grid{
       display:grid;
-      grid-template-columns: 1.4fr .6fr;
+      grid-template-columns: 1.1fr .9fr;
       gap:12px;
       align-items:start;
     }
-    @media (max-width: 980px){.layout{grid-template-columns:1fr}}
+    @media(max-width: 980px){.grid{grid-template-columns:1fr}}
 
-    .card{
+    .panel{
       border:1px solid var(--line);
       background:var(--card);
       border-radius:var(--r);
-      box-shadow:var(--shadow);
-      overflow:hidden;
+      padding:14px;
+      box-shadow: var(--shadow);
     }
-    .controls{padding:14px}
-    .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+    [data-theme="light"] .panel{box-shadow: 0 18px 70px rgba(16,20,30,.10)}
+    .secTitle{margin:0 0 10px 0;font-size:14px}
+    .muted{color:var(--muted);font-size:12.6px;line-height:1.6;margin:0}
 
-    .search{
+    .searchRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .input{
       flex:1;min-width:220px;
-      display:flex;gap:10px;align-items:center;
       border:1px solid var(--line);
-      background:rgba(0,0,0,.10);
-      padding:10px 12px;border-radius:14px;
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:16px;
+      padding:12px 12px;
+      font-weight:700;
+      outline:none;
     }
-    [data-theme="light"] .search{background:rgba(0,0,0,.03)}
-    .search input{
-      width:100%;
-      border:0;outline:none;
-      background:transparent;color:var(--text);
-      font-size:13px;
-    }
-
+    [data-theme="light"] .input{background:rgba(0,0,0,.03)}
     .pill{
-      padding:8px 10px;border-radius:999px;
       border:1px solid var(--line);
-      background:rgba(0,0,0,.10);
+      background:rgba(255,255,255,.03);
       color:var(--muted);
-      font-size:12px;
+      padding:10px 12px;
+      border-radius:999px;
       cursor:pointer;
+      font-weight:900;
+      font-size:12px;
       user-select:none;
       transition:.15s ease;
     }
     [data-theme="light"] .pill{background:rgba(0,0,0,.03)}
-    .pill.active{color:var(--text);border-color:rgba(214,178,110,.55);background:rgba(214,178,110,.12)}
+    .pill.active{color:var(--text); border-color: rgba(215,181,111,.55); background:rgba(215,181,111,.12)}
 
-    .grid{
-      display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:14px;
-    }
-    @media (max-width: 780px){.grid{grid-template-columns:1fr}}
-
-    .item{display:flex;gap:12px;padding:12px;border-radius:16px;border:1px solid var(--line);background:rgba(0,0,0,.10)}
-    [data-theme="light"] .item{background:rgba(0,0,0,.03)}
-    .thumb{
-      width:96px;height:96px;border-radius:16px;flex:0 0 96px;
-      background:#111;
-      border:1px solid var(--line);
-      background-size:cover;background-position:center;
-    }
-    .meta{flex:1;min-width:0}
-    .meta h3{margin:0;font-size:14px}
-    .meta p{margin:6px 0 0 0;color:var(--muted);font-size:12.5px;line-height:1.35}
-    .price{margin-top:8px;font-weight:900;font-size:13px}
-    .actions{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
-    .qty{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:6px 10px;border-radius:12px;
+    /* ===== MENU LIST ===== */
+    .menuList{display:grid;gap:10px;margin-top:12px}
+    .item{
       border:1px solid var(--line);
       background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:12px;
+      display:flex;
+      gap:12px;
+      align-items:center;
     }
-    .qty button{
-      width:26px;height:26px;border-radius:10px;border:0;cursor:pointer;
-      background:rgba(255,255,255,.10);color:var(--text);font-weight:900;
+    [data-theme="light"] .item{background:rgba(0,0,0,.03)}
+    .thumb{
+      width:64px;height:64px;border-radius:16px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(215,181,111,.85), rgba(123,215,201,.25), rgba(255,255,255,.06));
+      flex:0 0 64px;
+      overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:900;
+      color:#0b0c10;
     }
-    [data-theme="light"] .qty button{background:rgba(0,0,0,.06)}
-    .qty span{min-width:18px;text-align:center;font-weight:900}
-    .miniBtn{
-      padding:8px 10px;border-radius:12px;border:1px solid var(--line);
-      background:rgba(255,255,255,.04);cursor:pointer;font-weight:900;font-size:12px
+    .info{min-width:0;flex:1}
+    .name{margin:0;font-weight:900;font-size:13.4px;letter-spacing:-.01em}
+    .meta{margin:5px 0 0 0;color:var(--muted);font-size:12.3px;line-height:1.4}
+    .price{margin-top:6px;font-weight:900}
+    .addBtn{
+      border:1px solid rgba(215,181,111,.55);
+      background:linear-gradient(135deg, rgba(215,181,111,.98), rgba(123,215,201,.55));
+      color:#0b0c10;
+      border-radius:16px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-weight:900;
+      white-space:nowrap;
+      user-select:none;
+      transition:.15s ease;
     }
-    .miniBtn:hover{background:rgba(255,255,255,.08)}
-    .tag{font-size:11px;color:var(--muted);padding:4px 8px;border:1px solid var(--line);border-radius:999px;background:rgba(0,0,0,.10)}
-    [data-theme="light"] .tag{background:rgba(0,0,0,.03)}
+    .addBtn:hover{transform:translateY(-1px)}
+    .addBtn:active{transform:translateY(0) scale(.98)}
 
-    .cart{position:sticky;top:74px}
-    @media (max-width: 980px){.cart{position:static}}
+    /* ===== CART ===== */
+    .cartHead{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+    .cartHead .muted{max-width:58ch}
 
-    .cartin{padding:14px}
-    .cart h3{margin:0 0 8px 0;font-size:15px}
-    .cartSmall{color:var(--muted);font-size:12.5px;line-height:1.5;margin:0 0 10px 0}
-    .cartList{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-
+    .cartList{display:grid;gap:10px;margin-top:12px}
     .cartRow{
-      display:flex;gap:10px;align-items:flex-start;justify-content:space-between;
-      padding:10px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.10)
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:12px;
+      display:flex;gap:12px;align-items:center;
     }
     [data-theme="light"] .cartRow{background:rgba(0,0,0,.03)}
-    .cartRow b{font-size:12.5px}
-    .cartRow span{display:block;color:var(--muted);font-size:12px;margin-top:4px}
-    .totals{
-      margin-top:10px;padding-top:10px;border-top:1px solid var(--line);
-      display:flex;align-items:center;justify-content:space-between;gap:10px
-    }
-    .totals b{font-size:13px}
-    .totals strong{font-size:16px}
-
-    .field{margin-top:10px;display:flex;flex-direction:column;gap:8px}
-    .field input,.field textarea{
-      width:100%;
-      border-radius:14px;border:1px solid var(--line);
+    .cartRow .info{flex:1}
+    .qty{
+      display:flex;gap:8px;align-items:center;
+      border:1px solid var(--line);
       background:rgba(0,0,0,.10);
-      color:var(--text);
-      padding:10px 12px;
-      outline:none;
-      font-size:13px;
+      border-radius:16px;
+      padding:8px 10px;
+      user-select:none;
     }
-    [data-theme="light"] .field input,[data-theme="light"] .field textarea{background:rgba(0,0,0,.03)}
-    .field textarea{min-height:90px;resize:vertical}
+    [data-theme="light"] .qty{background:rgba(0,0,0,.03)}
+    .qBtn{
+      width:30px;height:30px;border-radius:12px;
+      border:1px solid var(--line);
+      background:var(--card);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:900;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .qNum{min-width:18px;text-align:center;font-weight:900}
+    .rowSum{font-weight:900;white-space:nowrap}
 
-    .bar{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-    .note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.5}
+    .summary{
+      margin-top:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:12px;
+      display:grid;
+      gap:10px;
+    }
+    [data-theme="light"] .summary{background:rgba(0,0,0,.03)}
+    .sumLine{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--muted);font-size:12.6px}
+    .sumLine b{color:var(--text);font-size:13px}
+    .sumBig{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .sumBig b{font-size:15px}
+
+    .formRow{display:grid;gap:10px;margin-top:12px}
+    textarea.input{min-height:90px;resize:vertical}
+
+    /* ===== BOTTOM BAR ===== */
+    .bottomBar{
+      position:fixed;left:0;right:0;bottom:0;z-index:30;
+      padding:10px 12px;
+      border-top:1px solid var(--line);
+      background:rgba(10,12,18,.82);
+      backdrop-filter: blur(12px);
+      display:flex;gap:10px;align-items:center;
+    }
+    [data-theme="light"] .bottomBar{background:rgba(255,255,255,.90)}
+    .bbBtn{
+      border:1px solid var(--line);
+      background:var(--card);
+      color:var(--text);
+      padding:12px 14px;
+      border-radius:16px;
+      font-weight:900;
+      cursor:pointer;
+      user-select:none;
+    }
+    .bbBtn.primary{
+      background:linear-gradient(135deg, rgba(215,181,111,.98), rgba(123,215,201,.55));
+      color:#0b0c10;
+      border-color:rgba(215,181,111,.55);
+    }
+    .bbTotal{
+      flex:1;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      border-radius:16px;
+      padding:10px 12px;
+      min-width: 120px;
+    }
+    [data-theme="light"] .bbTotal{background:rgba(0,0,0,.03)}
+    .bbTotal span{display:block;font-size:11px;color:var(--muted)}
+    .bbTotal b{display:block;margin-top:2px;font-size:13px}
+
+    /* ===== tiny toast ===== */
+    .toast{
+      position:fixed;left:12px;bottom:92px;z-index:40;
+      padding:10px 12px;border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      color:var(--text);
+      font-size:12.5px;
+      opacity:0;transform:translateY(10px);
+      transition:.18s ease;
+      pointer-events:none;
+    }
+    [data-theme="light"] .toast{background:rgba(255,255,255,.85); color:var(--text)}
+    .toast.show{opacity:1;transform:translateY(0)}
   </style>
 </head>
 
 <body>
-  <div class="top">
-    <div class="wrap topin">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div style="min-width:0">
-          <h1>Order • La Madre</h1>
-          <p>Tambah menu → total otomatis → kirim WhatsApp</p>
-        </div>
-      </div>
-      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
-        <button class="btn" id="themeBtn" type="button">🌓 Mode</button>
-        <a class="btn" href="index.html">← Kembali</a>
-        <button class="btn" id="clearBtn" type="button">Reset</button>
-      </div>
-    </div>
-  </div>
-
-  <main class="wrap">
-    <div class="head">
-      <div>
-        <h2>Pilih menu favoritmu</h2>
-        <p>Tekan + untuk masuk pesanan. Total akan terhitung otomatis.</p>
-      </div>
-      <a class="btn primary" href="#checkout">Checkout</a>
+  <!-- TOP BAR -->
+  <header class="orderTop">
+    <a class="backBtn" href="index.html" aria-label="Kembali">←</a>
+    <div class="orderTitle">
+      <b>Order/Menu</b>
+      <span>Pilih menu → cek total → kirim ke WhatsApp</span>
     </div>
 
-    <div class="layout">
-      <section class="card">
-        <div class="controls">
-          <div class="row">
-            <div class="search">
-              🔎 <input id="q" placeholder="Cari: latte, fried rice, wings, matcha..." />
-            </div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
-              <span class="pill active" data-cat="all">Semua</span>
-              <span class="pill" data-cat="Rice & Main">Rice & Main</span>
-              <span class="pill" data-cat="Noodle & Pasta">Noodle & Pasta</span>
-              <span class="pill" data-cat="Light Bites">Light Bites</span>
-              <span class="pill" data-cat="Coffee">Coffee</span>
-              <span class="pill" data-cat="Non Coffee">Non Coffee</span>
-              <span class="pill" data-cat="Signature">Signature</span>
-            </div>
-          </div>
+    <div class="topActions">
+      <button class="btn" id="themeBtn" type="button">🌓 Mode</button>
+    </div>
+  </header>
+
+  <main class="wrap pagePad">
+    <div class="grid">
+      <!-- LEFT: MENU -->
+      <section class="panel">
+        <h2 class="secTitle">Daftar Menu</h2>
+        <p class="muted">Klik <b>Tambah</b> untuk memasukkan menu ke pesanan. Kamu bisa cari dan filter kategori.</p>
+
+        <div class="searchRow">
+          <input class="input" id="searchInput" placeholder="Cari menu... (contoh: latte / chicken / matcha)" />
+          <button class="pill active" data-filter="all" type="button">Semua</button>
+          <button class="pill" data-filter="coffee" type="button">Coffee</button>
+          <button class="pill" data-filter="noncoffee" type="button">Non Coffee</button>
+          <button class="pill" data-filter="food" type="button">Food</button>
         </div>
-        <div class="grid" id="grid"></div>
+
+        <div class="menuList" id="menuList"></div>
       </section>
 
-      <aside class="card cart" id="checkout">
-        <div class="cartin">
-          <h3>Pesanan kamu</h3>
-          <p class="cartSmall">Nama + total + list akan otomatis ikut ke WhatsApp.</p>
-
-          <div class="cartList" id="cartList"></div>
-
-          <div class="totals">
-            <b>Total</b>
-            <strong id="total">Rp0</strong>
+      <!-- RIGHT: CART -->
+      <aside class="panel">
+        <div class="cartHead">
+          <div>
+            <h2 class="secTitle" style="margin:0 0 6px 0">Pesanan Kamu</h2>
+            <p class="muted">Pastikan nama + catatan sudah benar. Saat kirim WA, detail item + total akan ikut.</p>
           </div>
-
-          <div class="field">
-            <input id="nama" placeholder="Nama (opsional)" />
-            <textarea id="catatan" placeholder="Catatan (opsional)"></textarea>
-          </div>
-
-          <div class="bar">
-            <button class="btn primary" id="waBtn" type="button" disabled>Buat Pesanan (WhatsApp)</button>
-            <button class="btn" id="copyBtn" type="button">Copy Ringkasan</button>
-          </div>
-
-          <div class="note">
-            Ubah nomor WhatsApp tujuan di variabel <b>WA_NUMBER</b>.
-          </div>
+          <button class="btn" id="resetBtnTop" type="button">🧹 Reset</button>
         </div>
+
+        <div class="cartList" id="cartList"></div>
+
+        <div class="summary">
+          <div class="sumLine"><span>Jumlah item</span><b id="itemsText">0</b></div>
+          <div class="sumBig"><span style="color:var(--muted);font-weight:900">Total</span><b id="totalTextSide">Rp 0</b></div>
+        </div>
+
+        <div class="formRow">
+          <input class="input" id="nameInput" placeholder="Nama pemesan (wajib)" />
+          <textarea class="input" id="noteInput" placeholder="Catatan (opsional)&#10;Contoh: tanpa gula / less ice / duduk outdoor / dll"></textarea>
+        </div>
+
+        <p class="muted" style="margin-top:12px">
+          Tips: Untuk hari ramai, gunakan tombol <b>Reservasi</b> di halaman utama.
+        </p>
       </aside>
     </div>
   </main>
 
+  <!-- BOTTOM BAR -->
+  <div class="bottomBar">
+    <button class="bbBtn" id="resetBtn" type="button">Reset</button>
+
+    <div class="bbTotal">
+      <span>Total</span>
+      <b id="totalText">Rp 0</b>
+    </div>
+
+    <button class="bbBtn primary" id="sendBtn" type="button">Kirim WA</button>
+  </div>
+
+  <div class="toast" id="toast">Tersimpan</div>
+
   <script>
-    // ===== Theme (shared with index)
+    // =========================
+    // CONFIG
+    // =========================
+    const WA_NUMBER = "6281398686801"; // ganti jika perlu
+    const THEME_KEY = "theme_lamadre"; // sama dengan index
+    const CART_KEY  = "cart_lamadre_v1";
+
+    // =========================
+    // THEME (sync with index)
+    // =========================
     (function(){
-      const key = "theme_lamadre";
       const btn = document.getElementById("themeBtn");
-      const saved = localStorage.getItem(key);
+      const saved = localStorage.getItem(THEME_KEY);
       if(saved === "light") document.documentElement.setAttribute("data-theme","light");
 
       btn.addEventListener("click", ()=>{
         const isLight = document.documentElement.getAttribute("data-theme")==="light";
         if(isLight){
           document.documentElement.removeAttribute("data-theme");
-          localStorage.setItem(key,"dark");
+          localStorage.setItem(THEME_KEY,"dark");
         }else{
           document.documentElement.setAttribute("data-theme","light");
-          localStorage.setItem(key,"light");
+          localStorage.setItem(THEME_KEY,"light");
         }
       });
     })();
 
-    // ===== CONFIG
-    const WA_NUMBER = "6281398686801"; // ganti kalau perlu
+    // =========================
+    // MENU DATA (edit freely)
+    // =========================
+    // Catatan: kamu bisa ganti nama/harga sesuai PDF nanti.
+    // Thumbnail: sementara pakai huruf (L) (C) dll supaya ringan.
+    const MENU = [
+      // Coffee
+      { id:"espresso", name:"Espresso", price:20000, cat:"coffee", tag:"Coffee", thumb:"☕" },
+      { id:"americano", name:"Americano", price:22000, cat:"coffee", tag:"Coffee", thumb:"☕" },
+      { id:"cappuccino", name:"Cappuccino", price:28000, cat:"coffee", tag:"Coffee", thumb:"☕" },
+      { id:"latte", name:"Cafe Latte", price:30000, cat:"coffee", tag:"Coffee", thumb:"☕" },
+      { id:"caramel_latte", name:"Caramel Latte", price:33000, cat:"coffee", tag:"Coffee", thumb:"☕" },
+      { id:"aren_latte", name:"Aren Latte", price:32000, cat:"coffee", tag:"Best Seller", thumb:"⭐" },
 
-    const rupiah = (n) => "Rp" + n.toLocaleString("id-ID");
+      // Non Coffee
+      { id:"matcha", name:"Matcha Latte", price:30000, cat:"noncoffee", tag:"Non Coffee", thumb:"🍵" },
+      { id:"choco", name:"Chocolate Signature", price:28000, cat:"noncoffee", tag:"Non Coffee", thumb:"🍫" },
+      { id:"redvelvet", name:"Red Velvet Latte", price:30000, cat:"noncoffee", tag:"Non Coffee", thumb:"🧁" },
+      { id:"thaitea", name:"Thai Tea", price:25000, cat:"noncoffee", tag:"Non Coffee", thumb:"🧋" },
 
-    // ===== MENU (pakai data yang sudah kamu punya sebelumnya)
-    // NOTE: Ini versi ringkas; gunakan MENU dari file kamu sebelumnya agar lengkap.
-    // Kalau kamu sudah punya MENU panjang, PASTE MENU lama di sini.
-    const MENU = window.MENU_DATA || [
-      {id:"espresso", name:"Espresso", price:25000, cat:"Coffee", desc:"Single shot.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
-      {id:"cappuccino", name:"Cappuccino", price:35000, cat:"Coffee", desc:"Balanced.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
-      {id:"french_fries", name:"French Fries", price:25000, cat:"Light Bites", desc:"Crispy fries.", image:"https://images.unsplash.com/photo-1518013431117-eb1465fa5752?auto=format&fit=crop&w=800&q=80"},
-      {id:"kampoeng_fried_rice", name:"Kampoeng Fried Rice", price:40000, cat:"Rice & Main", desc:"Indonesian fried rice.", image:"https://images.unsplash.com/photo-1604909052743-94e838986d24?auto=format&fit=crop&w=800&q=80"},
-      {id:"matcha_cold", name:"Matcha (Cold)", price:37000, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1515825838458-f2b19e1c7d34?auto=format&fit=crop&w=800&q=80"},
-      {id:"sig_leonardo", name:"Signature: Leonardo da Vinci", price:40000, cat:"Signature", desc:"Coffee mocktail.", image:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80"},
+      // Food
+      { id:"nasgor", name:"Nasi Goreng La Madre", price:35000, cat:"food", tag:"Food", thumb:"🍛" },
+      { id:"katsu", name:"Chicken Katsu Rice Bowl", price:32000, cat:"food", tag:"Food", thumb:"🍗" },
+      { id:"aglio", name:"Spaghetti Aglio Olio", price:34000, cat:"food", tag:"Food", thumb:"🍝" },
+      { id:"fries", name:"French Fries", price:22000, cat:"food", tag:"Snack", thumb:"🍟" },
+      { id:"mixplatter", name:"Mix Platter", price:45000, cat:"food", tag:"Snack", thumb:"🥨" }
     ];
 
-    // ===== STATE
-    const cart = new Map();
-    let activeCat = "all";
+    // =========================
+    // STATE
+    // =========================
+    let filter = "all";
+    let query = "";
+    let cart = loadCart(); // {id: qty}
 
-    // ===== DOM
-    const grid = document.getElementById("grid");
-    const q = document.getElementById("q");
-    const pills = Array.from(document.querySelectorAll(".pill"));
-    const cartList = document.getElementById("cartList");
-    const totalEl = document.getElementById("total");
-    const waBtn = document.getElementById("waBtn");
-    const copyBtn = document.getElementById("copyBtn");
-    const clearBtn = document.getElementById("clearBtn");
-    const namaEl = document.getElementById("nama");
-    const catatanEl = document.getElementById("catatan");
+    const elMenuList = document.getElementById("menuList");
+    const elCartList = document.getElementById("cartList");
+    const elSearch   = document.getElementById("searchInput");
+    const elItems    = document.getElementById("itemsText");
+    const elTotalSide= document.getElementById("totalTextSide");
+    const elTotal    = document.getElementById("totalText");
+    const elName     = document.getElementById("nameInput");
+    const elNote     = document.getElementById("noteInput");
 
-    function escapeHtml(s){
-      return (s||"").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+    const toast = document.getElementById("toast");
+    let toastTimer;
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=>toast.classList.remove("show"), 1200);
     }
 
-    function getFiltered(){
-      const term = (q.value || "").trim().toLowerCase();
-      return MENU.filter(m=>{
-        const okCat = (activeCat === "all") ? true : (m.cat === activeCat);
-        const okTerm = !term ? true : (m.name.toLowerCase().includes(term) || (m.desc||"").toLowerCase().includes(term));
-        return okCat && okTerm;
-      });
-    }
-
-    function renderMenu(){
-      const items = getFiltered();
-      grid.innerHTML = items.map(m=>{
-        const qty = cart.get(m.id) || 0;
-        return `
-          <div class="item">
-            <div class="thumb" style="background-image:url('${m.image}')"></div>
-            <div class="meta">
-              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-                <h3 style="flex:1;min-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(m.name)}</h3>
-                <span class="tag">${escapeHtml(m.cat)}</span>
-              </div>
-              <p>${escapeHtml(m.desc || "")}</p>
-              <div class="price">${rupiah(m.price)}</div>
-              <div class="actions">
-                <div class="qty">
-                  <button type="button" onclick="dec('${m.id}')">−</button>
-                  <span id="q_${m.id}">${qty}</span>
-                  <button type="button" onclick="inc('${m.id}')">+</button>
-                </div>
-                <button class="miniBtn" type="button" onclick="addOne('${m.id}')">Masukkan</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join("");
-    }
-
-    function renderCart(){
-      const rows = Array.from(cart.entries())
-        .filter(([,qty])=>qty>0)
-        .map(([id,qty])=>{
-          const m = MENU.find(x=>x.id===id);
-          const sub = m.price * qty;
-          return {m,qty,sub};
-        });
-
-      if(rows.length===0){
-        cartList.innerHTML = `<div class="note">Belum ada item. Pilih menu di sebelah kiri.</div>`;
-      } else {
-        cartList.innerHTML = rows.map(r=>`
-          <div class="cartRow">
-            <div style="min-width:0">
-              <b style="display:block;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(r.m.name)}</b>
-              <span>${r.qty} x ${rupiah(r.m.price)} = <b>${rupiah(r.sub)}</b></span>
-            </div>
-            <div style="display:flex;gap:6px;align-items:center">
-              <button class="miniBtn" type="button" onclick="dec('${r.m.id}')">−</button>
-              <button class="miniBtn" type="button" onclick="inc('${r.m.id}')">+</button>
-            </div>
-          </div>
-        `).join("");
+    function formatRupiah(n){
+      const s = Math.round(n).toString();
+      let out = "";
+      for(let i=0;i<s.length;i++){
+        const idx = s.length - 1 - i;
+        out = s[idx] + out;
+        if(i%3===2 && idx!==0) out = "." + out;
       }
-
-      const total = rows.reduce((a,b)=>a+b.sub,0);
-      totalEl.textContent = rupiah(total);
-      waBtn.disabled = rows.length === 0;
+      return "Rp " + out;
     }
 
-    window.inc = (id)=>{
-      cart.set(id, (cart.get(id)||0) + 1);
-      syncQty(id);
-      renderCart();
-    };
-    window.dec = (id)=>{
-      const v = (cart.get(id)||0) - 1;
-      cart.set(id, Math.max(0,v));
-      syncQty(id);
-      renderCart();
-    };
-    window.addOne = (id)=> window.inc(id);
-
-    function syncQty(id){
-      const el = document.getElementById("q_"+id);
-      if(el) el.textContent = cart.get(id)||0;
-    }
-
-    function buildMessagePlain(){
-      const rows = Array.from(cart.entries())
-        .filter(([,qty])=>qty>0)
-        .map(([id,qty])=>{
-          const m = MENU.find(x=>x.id===id);
-          const sub = m.price * qty;
-          return {name:m.name, qty, unit:m.price, sub};
-        });
-
-      const total = rows.reduce((a,b)=>a+b.sub,0);
-      const nama = (namaEl.value||"").trim();
-      const catatan = (catatanEl.value||"").trim();
-
-      let text = "Halo La Madre Coffee & Roastery,\n\nSaya ingin pesan:\n";
-      rows.forEach(r=>{
-        text += `- ${r.name} x${r.qty} (${rupiah(r.unit)}) = ${rupiah(r.sub)}\n`;
-      });
-      text += `\nTotal: ${rupiah(total)}\n`;
-      if(nama) text += `Nama: ${nama}\n`;
-      if(catatan) text += `Catatan: ${catatan}\n`;
-      text += "\nTerima kasih!";
-      return text;
-    }
-
-    waBtn.addEventListener("click", ()=>{
-      const text = buildMessagePlain();
-      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
-      window.open(url, "_blank");
-    });
-
-    copyBtn.addEventListener("click", async ()=>{
-      const text = buildMessagePlain();
+    function loadCart(){
       try{
-        await navigator.clipboard.writeText(text);
-        copyBtn.textContent = "Tercopy ✓";
-        setTimeout(()=>copyBtn.textContent="Copy Ringkasan", 1200);
+        const raw = localStorage.getItem(CART_KEY);
+        if(!raw) return {};
+        const obj = JSON.parse(raw);
+        if(typeof obj !== "object" || obj === null) return {};
+        return obj;
       }catch(e){
-        alert("Gagal copy. Coba manual ya.");
+        return {};
       }
-    });
+    }
+    function saveCart(){
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
 
-    clearBtn.addEventListener("click", ()=>{
-      cart.clear();
-      renderMenu();
-      renderCart();
-    });
+    function getItemById(id){
+      return MENU.find(m => m.id === id);
+    }
 
-    pills.forEach(p=>{
-      p.addEventListener("click", ()=>{
-        pills.forEach(x=>x.classList.remove("active"));
-        p.classList.add("active");
-        activeCat = p.dataset.cat;
+    function cartTotal(){
+      let total = 0;
+      for(const id in cart){
+        const item = getItemById(id);
+        if(!item) continue;
+        total += item.price * cart[id];
+      }
+      return total;
+    }
+
+    function cartCount(){
+      let c = 0;
+      for(const id in cart) c += cart[id];
+      return c;
+    }
+
+    // =========================
+    // RENDER MENU
+    // =========================
+    function renderMenu(){
+      const q = query.trim().toLowerCase();
+      const list = MENU.filter(m=>{
+        const okFilter = (filter === "all") || (m.cat === filter);
+        const okSearch = !q || m.name.toLowerCase().includes(q) || (m.tag||"").toLowerCase().includes(q);
+        return okFilter && okSearch;
+      });
+
+      elMenuList.innerHTML = "";
+      if(list.length === 0){
+        elMenuList.innerHTML = `<p class="muted">Menu tidak ditemukan. Coba kata kunci lain.</p>`;
+        return;
+      }
+
+      list.forEach(m=>{
+        const row = document.createElement("div");
+        row.className = "item";
+        row.innerHTML = `
+          <div class="thumb" aria-hidden="true">${m.thumb || "☕"}</div>
+          <div class="info">
+            <p class="name">${m.name}</p>
+            <p class="meta">${m.tag || ""}</p>
+            <div class="price">${formatRupiah(m.price)}</div>
+          </div>
+          <button class="addBtn" type="button">Tambah</button>
+        `;
+        row.querySelector(".addBtn").addEventListener("click", ()=>{
+          cart[m.id] = (cart[m.id] || 0) + 1;
+          saveCart();
+          renderCart();
+          renderTotals();
+          showToast("Ditambahkan ✅");
+        });
+        elMenuList.appendChild(row);
+      });
+    }
+
+    // =========================
+    // RENDER CART
+    // =========================
+    function renderCart(){
+      const ids = Object.keys(cart).filter(id => cart[id] > 0 && getItemById(id));
+      elCartList.innerHTML = "";
+
+      if(ids.length === 0){
+        elCartList.innerHTML = `<p class="muted">Belum ada pesanan. Tambahkan menu di sebelah kiri.</p>`;
+        return;
+      }
+
+      ids.forEach(id=>{
+        const item = getItemById(id);
+        const qty = cart[id];
+
+        const row = document.createElement("div");
+        row.className = "cartRow";
+        row.innerHTML = `
+          <div class="thumb" aria-hidden="true">${item.thumb || "☕"}</div>
+          <div class="info">
+            <p class="name">${item.name}</p>
+            <p class="meta">${formatRupiah(item.price)} / item</p>
+          </div>
+          <div class="qty">
+            <button class="qBtn" type="button" aria-label="Kurangi">−</button>
+            <div class="qNum">${qty}</div>
+            <button class="qBtn" type="button" aria-label="Tambah">+</button>
+          </div>
+          <div class="rowSum">${formatRupiah(item.price * qty)}</div>
+        `;
+
+        const [minusBtn, plusBtn] = row.querySelectorAll(".qBtn");
+        minusBtn.addEventListener("click", ()=>{
+          cart[id] = Math.max(0, (cart[id]||0) - 1);
+          if(cart[id] === 0) delete cart[id];
+          saveCart();
+          renderCart();
+          renderTotals();
+        });
+        plusBtn.addEventListener("click", ()=>{
+          cart[id] = (cart[id]||0) + 1;
+          saveCart();
+          renderCart();
+          renderTotals();
+        });
+
+        elCartList.appendChild(row);
+      });
+    }
+
+    function renderTotals(){
+      const count = cartCount();
+      const total = cartTotal();
+      elItems.textContent = count.toString();
+      elTotalSide.textContent = formatRupiah(total);
+      elTotal.textContent = formatRupiah(total);
+    }
+
+    // =========================
+    // FILTER & SEARCH
+    // =========================
+    document.querySelectorAll(".pill").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        document.querySelectorAll(".pill").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+        filter = btn.getAttribute("data-filter") || "all";
         renderMenu();
       });
     });
+    elSearch.addEventListener("input", ()=>{
+      query = elSearch.value || "";
+      renderMenu();
+    });
 
-    q.addEventListener("input", ()=>renderMenu());
+    // =========================
+    // RESET
+    // =========================
+    function resetAll(){
+      cart = {};
+      saveCart();
+      renderCart();
+      renderTotals();
+      showToast("Reset ✅");
+    }
+    document.getElementById("resetBtn").addEventListener("click", resetAll);
+    document.getElementById("resetBtnTop").addEventListener("click", resetAll);
 
+    // =========================
+    // SEND WA
+    // =========================
+    function buildOrderMessage(){
+      const name = (elName.value || "").trim();
+      const note = (elNote.value || "").trim();
+
+      const ids = Object.keys(cart).filter(id => cart[id] > 0 && getItemById(id));
+      const total = cartTotal();
+
+      const lines = [];
+      lines.push("Halo La Madre Coffee & Roastery, saya mau order:");
+      lines.push("");
+      lines.push(`Nama: ${name}`);
+      if(note) lines.push(`Catatan: ${note}`);
+      lines.push("");
+      lines.push("Detail Pesanan:");
+
+      ids.forEach((id, idx)=>{
+        const item = getItemById(id);
+        const qty = cart[id];
+        const sum = item.price * qty;
+        lines.push(`${idx+1}. ${item.name} x${qty} = ${formatRupiah(sum)}`);
+      });
+
+      lines.push("");
+      lines.push(`Total: ${formatRupiah(total)}`);
+      lines.push("");
+      lines.push("Terima kasih 🙏");
+
+      return lines.join("\n");
+    }
+
+    function sendWA(){
+      const name = (elName.value || "").trim();
+      const ids = Object.keys(cart).filter(id => cart[id] > 0 && getItemById(id));
+      const total = cartTotal();
+
+      if(!name){
+        showToast("Isi nama dulu ✍️");
+        elName.focus();
+        return;
+      }
+      if(ids.length === 0){
+        showToast("Pilih menu dulu 🍽️");
+        return;
+      }
+      if(total <= 0){
+        showToast("Total masih 0");
+        return;
+      }
+
+      const msg = buildOrderMessage();
+      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank", "noreferrer");
+    }
+
+    document.getElementById("sendBtn").addEventListener("click", sendWA);
+
+    // =========================
+    // INIT
+    // =========================
     renderMenu();
     renderCart();
+    renderTotals();
   </script>
 </body>
 </html>
