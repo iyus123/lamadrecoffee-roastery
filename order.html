@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Order • La Madre Coffee & Roastery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0c0f;
+      --card:#0f1117cc;
+      --text:#e9ecf1;
+      --muted:#aeb6c4;
+      --line:#1f2430;
+      --accent:#d6b26e;
+      --accent2:#7bd7c9;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --r: 18px;
+      --max: 1180px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:"Plus Jakarta Sans",system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+    .top{
+      position:sticky;top:0;z-index:10;
+      background:linear-gradient(to bottom, rgba(11,12,15,.92), rgba(11,12,15,.55));
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .topin{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{
+      width:34px;height:34px;border-radius:12px;
+      background: radial-gradient(circle at 30% 30%, rgba(214,178,110,.9), rgba(123,215,201,.25), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .brand h1{margin:0;font-size:14px;line-height:1.1}
+    .brand p{margin:2px 0 0 0;color:var(--muted);font-size:12px}
+    .btn{
+      padding:10px 14px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:700;
+      font-size:13px;
+      transition:.2s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.09)}
+    .btn.primary{
+      border-color:rgba(214,178,110,.55);
+      background:linear-gradient(135deg, rgba(214,178,110,.95), rgba(123,215,201,.55));
+      color:#0b0c0f;
+      box-shadow:0 16px 40px rgba(214,178,110,.18);
+    }
+    main{padding:18px 0 28px}
+    .head{
+      display:flex;flex-wrap:wrap;gap:10px;align-items:end;justify-content:space-between;margin:8px 0 14px
+    }
+    .head h2{margin:0;font-size:20px}
+    .head p{margin:0;color:var(--muted);font-size:13px;line-height:1.4}
+    .layout{
+      display:grid;
+      grid-template-columns: 1.4fr .6fr;
+      gap:12px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .layout{grid-template-columns:1fr}
+      .cart{position:static}
+    }
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .controls{padding:14px}
+    .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+    .search{
+      flex:1;
+      min-width:220px;
+      display:flex;gap:10px;align-items:center;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+      padding:10px 12px;border-radius:14px;
+    }
+    .search input{
+      width:100%;
+      border:0;outline:none;
+      background:transparent;color:var(--text);
+      font-size:13px;
+    }
+    .pill{
+      padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+      color:var(--muted);
+      font-size:12px;
+      cursor:pointer;
+      user-select:none;
+      transition:.15s ease;
+    }
+    .pill.active{color:var(--text);border-color:rgba(214,178,110,.55);background:rgba(214,178,110,.12)}
+    .grid{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:14px;
+    }
+    @media (max-width: 780px){.grid{grid-template-columns:1fr}}
+    .item{display:flex;gap:12px;padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.18)}
+    .thumb{
+      width:96px;height:96px;border-radius:16px;flex:0 0 96px;
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      background-size:cover;background-position:center;
+    }
+    .meta{flex:1;min-width:0}
+    .meta h3{margin:0;font-size:14px}
+    .meta p{margin:6px 0 0 0;color:var(--muted);font-size:12.5px;line-height:1.35}
+    .price{margin-top:8px;font-weight:800;font-size:13px}
+    .actions{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+    .qty{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+    }
+    .qty button{
+      width:26px;height:26px;border-radius:10px;border:0;cursor:pointer;
+      background:rgba(255,255,255,.10);color:var(--text);font-weight:800;
+    }
+    .qty span{min-width:18px;text-align:center;font-weight:800}
+    .miniBtn{
+      padding:8px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);cursor:pointer;font-weight:800;font-size:12px
+    }
+    .miniBtn:hover{background:rgba(255,255,255,.10)}
+    .tag{font-size:11px;color:var(--muted);padding:4px 8px;border:1px solid rgba(255,255,255,.10);border-radius:999px;background:rgba(0,0,0,.18)}
+    .cart{
+      position:sticky;top:74px;
+    }
+    .cartin{padding:14px}
+    .cart h3{margin:0 0 8px 0;font-size:15px}
+    .cartSmall{color:var(--muted);font-size:12.5px;line-height:1.5;margin:0 0 10px 0}
+    .cartList{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+    .cartRow{
+      display:flex;gap:10px;align-items:flex-start;justify-content:space-between;
+      padding:10px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.18)
+    }
+    .cartRow b{font-size:12.5px}
+    .cartRow span{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+    .totals{
+      margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08);
+      display:flex;align-items:center;justify-content:space-between;gap:10px
+    }
+    .totals b{font-size:13px}
+    .totals strong{font-size:16px}
+    .field{
+      margin-top:10px;
+      display:flex;flex-direction:column;gap:8px
+    }
+    .field input,.field textarea{
+      width:100%;
+      border-radius:14px;border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+      padding:10px 12px;
+      outline:none;
+      font-size:13px;
+    }
+    .field textarea{min-height:90px;resize:vertical}
+    .bar{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+    .note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.5}
+  </style>
+</head>
+
+<body>
+  <div class="top">
+    <div class="wrap topin">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Order • La Madre</h1>
+          <p>Tambah menu → total otomatis → kirim ke WhatsApp</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="btn" href="index.html">← Kembali</a>
+        <button class="btn" id="clearBtn" type="button">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <div class="head">
+      <div>
+        <h2>Pilih menu favoritmu</h2>
+        <p>Harga mengikuti menu (ribuan rupiah). Misal 45 = Rp45.000. :contentReference[oaicite:8]{index=8}</p>
+      </div>
+      <a class="btn primary" href="#checkout">Loncat ke Checkout</a>
+    </div>
+
+    <div class="layout">
+      <!-- LEFT -->
+      <section class="card">
+        <div class="controls">
+          <div class="row">
+            <div class="search" title="Cari menu">
+              🔎
+              <input id="q" placeholder="Cari: latte, fried rice, wings, matcha..." />
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+              <span class="pill active" data-cat="all">Semua</span>
+              <span class="pill" data-cat="Rice & Main">Rice & Main</span>
+              <span class="pill" data-cat="Noodle & Pasta">Noodle & Pasta</span>
+              <span class="pill" data-cat="Light Bites">Light Bites</span>
+              <span class="pill" data-cat="Coffee">Coffee</span>
+              <span class="pill" data-cat="Non Coffee">Non Coffee</span>
+              <span class="pill" data-cat="Signature">Signature</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid" id="grid"></div>
+      </section>
+
+      <!-- RIGHT (CART) -->
+      <aside class="card cart" id="checkout">
+        <div class="cartin">
+          <h3>Pesanan kamu</h3>
+          <p class="cartSmall">Tekan +/− untuk atur jumlah. Total dihitung otomatis.</p>
+
+          <div class="cartList" id="cartList"></div>
+
+          <div class="totals">
+            <b>Total</b>
+            <strong id="total">Rp0</strong>
+          </div>
+
+          <div class="field">
+            <input id="nama" placeholder="Nama (opsional)" />
+            <textarea id="catatan" placeholder="Catatan: level gula/ice, request meja, dll (opsional)"></textarea>
+          </div>
+
+          <div class="bar">
+            <button class="btn primary" id="waBtn" type="button" disabled>Buat Pesanan (WhatsApp)</button>
+            <button class="btn" id="copyBtn" type="button">Copy Ringkasan</button>
+          </div>
+
+          <div class="note">
+            Nomor WhatsApp tujuan bisa kamu ubah di variabel <b>WA_NUMBER</b> di bagian script.
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    // =========================
+    // CONFIG
+    // =========================
+    // GANTI NOMOR WA (format internasional tanpa +). Contoh 0813... => 62813...
+    const WA_NUMBER = "6281398686801";
+
+    // Helper: Rp format
+    const rupiah = (n) => "Rp" + n.toLocaleString("id-ID");
+
+    // =========================
+    // MENU DATA (ambil dari PDF)
+    // priceUnit = ribuan (45 => Rp45.000)
+    // GANTI FOTO:
+    // - upload gambar ke folder /assets
+    // - lalu ubah image: "assets/namafile.jpg"
+    // =========================
+    const MENU = [
+      // --- Rice & Main (:contentReference[oaicite:9]{index=9}) ---
+      {id:"kampoeng_fried_rice", name:"Kampoeng Fried Rice", priceK:40, cat:"Rice & Main", desc:"Indonesian traditional fried rice.", image:"https://images.unsplash.com/photo-1604909052743-94e838986d24?auto=format&fit=crop&w=800&q=80"},
+      {id:"nasgorbing_kebon_sirih", name:"Nasgorbing Kebon Sirih", priceK:45, cat:"Rice & Main", desc:"Fried rice with butter & garlic.", image:"https://images.unsplash.com/photo-1604908177061-38c1c35a3317?auto=format&fit=crop&w=800&q=80"},
+      {id:"kiddos_fried_rice", name:"Kiddos Fried Rice", priceK:40, cat:"Rice & Main", desc:"Recipe made for kids.", image:"https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=800&q=80"},
+      {id:"chicken_kemangi_fried_rice", name:"Chicken Kemangi Fried Rice", priceK:43, cat:"Rice & Main", desc:"Basil fried rice with shredded chicken.", image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80"},
+      {id:"teri_kecombrang_fried_rice", name:"Teri Kecombrang Fried Rice", priceK:43, cat:"Rice & Main", desc:"Kecombrang fried rice with anchovies.", image:"https://images.unsplash.com/photo-1604908177061-38c1c35a3317?auto=format&fit=crop&w=800&q=80"},
+      {id:"creamy_salted_egg_chicken", name:"Creamy Salted Egg Chicken", priceK:40, cat:"Rice & Main", desc:"Pop chicken with creamy salted egg sauce.", image:"https://images.unsplash.com/photo-1604908177061-38c1c35a3317?auto=format&fit=crop&w=800&q=80"},
+      {id:"shortplate_sambal_hijau", name:"Shortplate Sambal Hijau", priceK:40, cat:"Rice & Main", desc:"Beef shortplate + sambal hijau.", image:"https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80"},
+      {id:"truffle_gyudon", name:"Truffle Gyūdon", priceK:45, cat:"Rice & Main", desc:"Japanese tare + truffle oil.", image:"https://images.unsplash.com/photo-1604908177061-38c1c35a3317?auto=format&fit=crop&w=800&q=80"},
+      {id:"dads_sesame_chicken", name:"Dad’s Sesame Chicken", priceK:45, cat:"Rice & Main", desc:"Pan seared chicken thigh sesame.", image:"https://images.unsplash.com/photo-1604908177061-38c1c35a3317?auto=format&fit=crop&w=800&q=80"},
+      {id:"mentai_grilled_chicken", name:"Mentai Grilled Chicken", priceK:40, cat:"Rice & Main", desc:"Grilled chicken + mentai sauce & nori.", image:"https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=800&q=80"},
+      {id:"pop_chicken_sambal_matah", name:"Pop Chicken Sambal Matah", priceK:40, cat:"Rice & Main", desc:"Balinese sambal matah.", image:"https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=800&q=80"},
+
+      // --- Noodle & Pasta + Paratha (:contentReference[oaicite:10]{index=10}) ---
+      {id:"keraton_fried_noodle", name:"Keraton Fried Noodle", priceK:45, cat:"Noodle & Pasta", desc:"Fried noodle, sweet & savory.", image:"https://images.unsplash.com/photo-1604908554162-0cbd0b2a6bda?auto=format&fit=crop&w=800&q=80"},
+      {id:"mie_godog_jawa", name:"Mie Godog Jawa", priceK:45, cat:"Noodle & Pasta", desc:"Noodle soup, intense savory taste.", image:"https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&w=800&q=80"},
+      {id:"laksa_singapore", name:"Laksa Singapore", priceK:45, cat:"Noodle & Pasta", desc:"Coconut curry broth, shrimp & egg.", image:"https://images.unsplash.com/photo-1604908177061-38c1c35a3317?auto=format&fit=crop&w=800&q=80"},
+      {id:"char_kway_teow", name:"Char Kway Teow", priceK:45, cat:"Noodle & Pasta", desc:"Stir fried rice noodle, smoky taste.", image:"https://images.unsplash.com/photo-1627308595181-cc6d1f9c5c1c?auto=format&fit=crop&w=800&q=80"},
+      {id:"tuna_sambal_matah", name:"Tuna Sambal Matah (Pasta)", priceK:45, cat:"Noodle & Pasta", desc:"Spaghetti/fettuccine + sambal matah.", image:"https://images.unsplash.com/photo-1523986371872-9d3ba2e2f5d2?auto=format&fit=crop&w=800&q=80"},
+      {id:"beef_bolognese", name:"Beef Bolognese (Pasta)", priceK:45, cat:"Noodle & Pasta", desc:"Bolognese sauce + minced beef.", image:"https://images.unsplash.com/photo-1523986371872-9d3ba2e2f5d2?auto=format&fit=crop&w=800&q=80"},
+      {id:"smoked_beef_aglio_olio", name:"Smoked Beef Aglio e Olio", priceK:45, cat:"Noodle & Pasta", desc:"Garlic & olive oil + smoked beef.", image:"https://images.unsplash.com/photo-1523986371872-9d3ba2e2f5d2?auto=format&fit=crop&w=800&q=80"},
+      {id:"creamy_truffle_alfredo", name:"Creamy Truffle Alfredo", priceK:45, cat:"Noodle & Pasta", desc:"Creamy truffle sauce + mushroom.", image:"https://images.unsplash.com/photo-1523986371872-9d3ba2e2f5d2?auto=format&fit=crop&w=800&q=80"},
+      {id:"paratha_chicken_cheese", name:"Paratha Sandwich: Chicken & Cheese", priceK:38, cat:"Noodle & Pasta", desc:"Paratha sandwich.", image:"https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=800&q=80"},
+      {id:"paratha_chicken_bolognese", name:"Paratha Sandwich: Chicken Bolognese", priceK:38, cat:"Noodle & Pasta", desc:"Paratha sandwich.", image:"https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=800&q=80"},
+      {id:"paratha_beef_bulgogi", name:"Paratha Sandwich: Beef Bulgogi", priceK:40, cat:"Noodle & Pasta", desc:"Paratha sandwich.", image:"https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=800&q=80"},
+      {id:"paratha_extra_cheese", name:"Extra Cheese (add-on)", priceK:5, cat:"Noodle & Pasta", desc:"Add extra cheese.", image:"https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=800&q=80"},
+
+      // --- Light Bites (:contentReference[oaicite:11]{index=11}) ---
+      {id:"french_fries", name:"French Fries", priceK:25, cat:"Light Bites", desc:"Crispy fries.", image:"https://images.unsplash.com/photo-1518013431117-eb1465fa5752?auto=format&fit=crop&w=800&q=80"},
+      {id:"french_fries_bolognese", name:"French Fries Bolognese", priceK:30, cat:"Light Bites", desc:"Fries + bolognese topping.", image:"https://images.unsplash.com/photo-1518013431117-eb1465fa5752?auto=format&fit=crop&w=800&q=80"},
+      {id:"truffle_fries", name:"Truffle Fries", priceK:30, cat:"Light Bites", desc:"Fries + truffle.", image:"https://images.unsplash.com/photo-1518013431117-eb1465fa5752?auto=format&fit=crop&w=800&q=80"},
+      {id:"sistagor", name:"Sistagor", priceK:35, cat:"Light Bites", desc:"Snack.", image:"https://images.unsplash.com/photo-1604908554162-0cbd0b2a6bda?auto=format&fit=crop&w=800&q=80"},
+      {id:"cireng", name:"Cireng", priceK:30, cat:"Light Bites", desc:"Snack.", image:"https://images.unsplash.com/photo-1604908554162-0cbd0b2a6bda?auto=format&fit=crop&w=800&q=80"},
+      {id:"buffalo_wings", name:"Buffalo Wings", priceK:35, cat:"Light Bites", desc:"Wings.", image:"https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=800&q=80"},
+      {id:"beef_martabak", name:"Beef Martabak", priceK:40, cat:"Light Bites", desc:"Savory martabak.", image:"https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=800&q=80"},
+      {id:"bitterballen", name:"Bitterballen", priceK:40, cat:"Light Bites", desc:"Savory bites.", image:"https://images.unsplash.com/photo-1604908554162-0cbd0b2a6bda?auto=format&fit=crop&w=800&q=80"},
+      {id:"onion_rings", name:"Onion Rings", priceK:35, cat:"Light Bites", desc:"Crispy rings.", image:"https://images.unsplash.com/photo-1572449043416-55f4685c9bb7?auto=format&fit=crop&w=800&q=80"},
+      {id:"melted_choco_doughnut", name:"Melted Choco Doughnut", priceK:35, cat:"Light Bites", desc:"Sweet.", image:"https://images.unsplash.com/photo-1509440159598-8b9b17f4505a?auto=format&fit=crop&w=800&q=80"},
+      {id:"croffle", name:"Croffle", priceK:35, cat:"Light Bites", desc:"Sauce options.", image:"https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=800&q=80"},
+      {id:"bread_toast", name:"Bread Toast", priceK:30, cat:"Light Bites", desc:"Sauce options.", image:"https://images.unsplash.com/photo-1509440159598-8b9b17f4505a?auto=format&fit=crop&w=800&q=80"},
+      {id:"grilled_banana", name:"Grilled Banana", priceK:30, cat:"Light Bites", desc:"Sweet.", image:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80"},
+      {id:"lamadre_tiramisu", name:"La Madre’s Tiramisu", priceK:35, cat:"Light Bites", desc:"Dessert.", image:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"},
+      {id:"banana_fritter", name:"Banana Fritter", priceK:30, cat:"Light Bites", desc:"Sweet fritter.", image:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80"},
+      {id:"choco_brownie_icecream", name:"Chocolate Brownie with Ice Cream", priceK:30, cat:"Light Bites", desc:"Dessert.", image:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"},
+
+      // --- Coffee (:contentReference[oaicite:12]{index=12}) ---
+      {id:"espresso", name:"Espresso", priceK:25, cat:"Coffee", desc:"20ml.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"doppio", name:"Doppio", priceK:27, cat:"Coffee", desc:"40ml.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"on_the_rocks", name:"On The Rocks", priceK:27, cat:"Coffee", desc:"Doubled volume with ice cube.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"long_black_hot", name:"Long Black (Hot)", priceK:30, cat:"Coffee", desc:"Long black hot.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"long_black_cold", name:"Long Black (Cold)", priceK:32, cat:"Coffee", desc:"Long black cold.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"piccolo", name:"Piccolo", priceK:30, cat:"Coffee", desc:"Single ristretto + steamed milk.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"magic", name:"Magic", priceK:35, cat:"Coffee", desc:"Double ristretto + steamed milk.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"cappuccino", name:"Cappuccino", priceK:35, cat:"Coffee", desc:"Balanced.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"cafe_latte_hot", name:"Cafè Latte (Hot)", priceK:35, cat:"Coffee", desc:"Milk-based.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"cafe_latte_cold", name:"Cafè Latte (Cold)", priceK:37, cat:"Coffee", desc:"Milk-based.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"manual_tier1", name:"Manual Brew Tier 1", priceK:30, cat:"Coffee", desc:"Pour over / Aeropress.", image:"https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80"},
+      {id:"manual_tier2", name:"Manual Brew Tier 2", priceK:45, cat:"Coffee", desc:"Pour over / Aeropress.", image:"https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80"},
+      {id:"vietnam_drip", name:"Vietnam Drip", priceK:30, cat:"Coffee", desc:"Condensed milk.", image:"https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80"},
+      {id:"cold_black", name:"Cold Black (Bottle)", priceK:30, cat:"Coffee", desc:"250ml.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"cold_white", name:"Cold White (Bottle)", priceK:35, cat:"Coffee", desc:"250ml.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"cold_brew_floral", name:"Cold Brew Floral", priceK:30, cat:"Coffee", desc:"Floral.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"cold_brew_honey", name:"Cold Brew Honey", priceK:30, cat:"Coffee", desc:"Honey.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+
+      // --- Sweet Coffee + RTD (:contentReference[oaicite:13]{index=13}) ---
+      {id:"mochaccinno_hot", name:"Mochaccinno (Hot)", priceK:38, cat:"Coffee", desc:"Sweet coffee.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"mochaccinno_cold", name:"Mochaccinno (Cold)", priceK:40, cat:"Coffee", desc:"Sweet coffee.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"caramel_macchiato_hot", name:"Caramel Macchiato (Hot)", priceK:38, cat:"Coffee", desc:"Sweet coffee.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"caramel_macchiato_cold", name:"Caramel Macchiato (Cold)", priceK:40, cat:"Coffee", desc:"Sweet coffee.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"honey_lavender_hot", name:"Honey Lavender Latte (Hot)", priceK:38, cat:"Coffee", desc:"Sweet coffee.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"honey_lavender_cold", name:"Honey Lavender Latte (Cold)", priceK:40, cat:"Coffee", desc:"Sweet coffee.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"butterscotch_hot", name:"Butterscotch Latte (Hot)", priceK:35, cat:"Coffee", desc:"Sweet coffee.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"butterscotch_cold", name:"Butterscotch Latte (Cold)", priceK:37, cat:"Coffee", desc:"Sweet coffee.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"spanish_hot", name:"Spanish Latte (Hot)", priceK:35, cat:"Coffee", desc:"Sweet coffee.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"spanish_cold", name:"Spanish Latte (Cold)", priceK:37, cat:"Coffee", desc:"Sweet coffee.", image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"},
+      {id:"affogato", name:"Affogato", priceK:32, cat:"Coffee", desc:"Espresso + ice cream.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"oat_nut", name:"RTD: Oat Nut", priceK:40, cat:"Coffee", desc:"Hazelnut, espresso, oat milk (250ml can).", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"zest_latte", name:"RTD: Zest Latte", priceK:35, cat:"Coffee", desc:"Orange zest, espresso, fresh milk.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"bouquet_latte", name:"RTD: Bouquet Latte", priceK:35, cat:"Coffee", desc:"Floral, espresso, fresh milk.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"aren_latte", name:"RTD: Aren ? Latte", priceK:30, cat:"Coffee", desc:"Not so aren, espresso, fresh milk.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+
+      // --- Non Coffee + Add-on (:contentReference[oaicite:14]{index=14}) ---
+      {id:"honey_mint_milk_hot", name:"Honey Mint Milk (Hot)", priceK:30, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"honey_mint_milk_cold", name:"Honey Mint Milk (Cold)", priceK:32, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"charcoal_hot", name:"Charcoal (Hot)", priceK:35, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"charcoal_cold", name:"Charcoal (Cold)", priceK:37, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"klepon_hot", name:"Klepon (Hot)", priceK:35, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"klepon_cold", name:"Klepon (Cold)", priceK:37, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"chocolate_hot", name:"Chocolate (Hot)", priceK:30, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"chocolate_cold", name:"Chocolate (Cold)", priceK:32, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"babyccino", name:"Babyccino", priceK:30, cat:"Non Coffee", desc:"Kids drink.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"matcha_hot", name:"Matcha (Hot)", priceK:35, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1515825838458-f2b19e1c7d34?auto=format&fit=crop&w=800&q=80"},
+      {id:"matcha_cold", name:"Matcha (Cold)", priceK:37, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1515825838458-f2b19e1c7d34?auto=format&fit=crop&w=800&q=80"},
+      {id:"red_velvet_hot", name:"Red Velvet (Hot)", priceK:30, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"red_velvet_cold", name:"Red Velvet (Cold)", priceK:32, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"strawberry_hot", name:"Strawberry (Hot)", priceK:30, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80"},
+      {id:"strawberry_cold", name:"Strawberry (Cold)", priceK:32, cat:"Non Coffee", desc:"Non coffee.", image:"https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80"},
+      {id:"sunkist_squash", name:"Sunkist Squash", priceK:30, cat:"Non Coffee", desc:"Refreshing.", image:"https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80"},
+      {id:"guavaberry", name:"Guavaberry", priceK:30, cat:"Non Coffee", desc:"Refreshing.", image:"https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80"},
+      {id:"lemon_tea_hot", name:"Lemon Tea (Hot)", priceK:25, cat:"Non Coffee", desc:"Tea.", image:"https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80"},
+      {id:"lemon_tea_cold", name:"Lemon Tea (Cold)", priceK:27, cat:"Non Coffee", desc:"Tea.", image:"https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80"},
+      {id:"artisan_tea", name:"Artisan Tea by Havilla", priceK:30, cat:"Non Coffee", desc:"Tea.", image:"https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80"},
+      {id:"mineral_water", name:"Mineral Water", priceK:10, cat:"Non Coffee", desc:"Water.", image:"https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80"},
+
+      // Add-on (:contentReference[oaicite:15]{index=15})
+      {id:"addon_espresso_shot", name:"Add-on: Espresso Shot", priceK:10, cat:"Non Coffee", desc:"Extra 1 espresso shot.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"addon_flavoured_syrup", name:"Add-on: Flavoured Syrup", priceK:10, cat:"Non Coffee", desc:"Ask available syrups.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"addon_cream_macchiato", name:"Add-on: Cream Macchiato", priceK:8, cat:"Non Coffee", desc:"Extra cream macchiato.", image:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"},
+      {id:"addon_ice_cream", name:"Add-on: Ice Cream", priceK:8, cat:"Non Coffee", desc:"Extra vanilla ice cream scoop.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+      {id:"addon_alternative_milk", name:"Add-on: Alternative Milk", priceK:10, cat:"Non Coffee", desc:"Oat/coconut etc.", image:"https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"},
+
+      // --- Signature (:contentReference[oaicite:16]{index=16}) ---
+      {id:"sig_leonardo", name:"Signature: Leonardo da Vinci", priceK:40, cat:"Signature", desc:"Coffee mocktail, lime zest, spices, floral, cream.", image:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80"},
+      {id:"sig_marco_polo", name:"Signature: Marco Polo", priceK:40, cat:"Signature", desc:"Popcorn & almond, orange acidity, cream on top.", image:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80"},
+      {id:"sig_vespucci", name:"Signature: Vespucci", priceK:40, cat:"Signature", desc:"Charcoal + blood orange & pink grapefruit.", image:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80"},
+      {id:"sig_michelangelo", name:"Signature: Michelangelo", priceK:40, cat:"Signature", desc:"Hibiscus, raspberry sweetness, blood orange freshness.", image:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80"},
+      {id:"sig_galileo", name:"Signature: Galileo", priceK:40, cat:"Signature", desc:"Peppermint + elderflower, butterfly pea base, cream.", image:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80"},
+      {id:"sig_colombus", name:"Signature: Colombus", priceK:40, cat:"Signature", desc:"Earl grey, cinnamon, ginger — rich spices.", image:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80"},
+    ];
+
+    // =========================
+    // STATE
+    // =========================
+    const cart = new Map(); // id -> qty
+    let activeCat = "all";
+
+    // =========================
+    // DOM
+    // =========================
+    const grid = document.getElementById("grid");
+    const q = document.getElementById("q");
+    const pills = Array.from(document.querySelectorAll(".pill"));
+    const cartList = document.getElementById("cartList");
+    const totalEl = document.getElementById("total");
+    const waBtn = document.getElementById("waBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const namaEl = document.getElementById("nama");
+    const catatanEl = document.getElementById("catatan");
+
+    // =========================
+    // RENDER
+    // =========================
+    function getFiltered(){
+      const term = (q.value || "").trim().toLowerCase();
+      return MENU.filter(m=>{
+        const okCat = (activeCat === "all") ? true : (m.cat === activeCat);
+        const okTerm = !term ? true : (m.name.toLowerCase().includes(term) || (m.desc||"").toLowerCase().includes(term));
+        return okCat && okTerm;
+      });
+    }
+
+    function renderMenu(){
+      const items = getFiltered();
+      grid.innerHTML = items.map(m=>{
+        const qty = cart.get(m.id) || 0;
+        const price = rupiah(m.priceK * 1000);
+        return `
+          <div class="item">
+            <div class="thumb" style="background-image:url('${m.image}')"></div>
+            <div class="meta">
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                <h3 title="${escapeHtml(m.name)}" style="flex:1;min-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(m.name)}</h3>
+                <span class="tag">${escapeHtml(m.cat)}</span>
+              </div>
+              <p>${escapeHtml(m.desc || "")}</p>
+              <div class="price">${price}</div>
+              <div class="actions">
+                <div class="qty" aria-label="Jumlah">
+                  <button type="button" onclick="dec('${m.id}')">−</button>
+                  <span id="q_${m.id}">${qty}</span>
+                  <button type="button" onclick="inc('${m.id}')">+</button>
+                </div>
+                <button class="miniBtn" type="button" onclick="addOne('${m.id}')">Masukkan</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderCart(){
+      const rows = Array.from(cart.entries())
+        .filter(([,qty])=>qty>0)
+        .map(([id,qty])=>{
+          const m = MENU.find(x=>x.id===id);
+          const sub = (m.priceK * 1000) * qty;
+          return {m,qty,sub};
+        });
+
+      if(rows.length===0){
+        cartList.innerHTML = `<div class="note">Belum ada item. Pilih menu di sebelah kiri.</div>`;
+      } else {
+        cartList.innerHTML = rows.map(r=>`
+          <div class="cartRow">
+            <div style="min-width:0">
+              <b style="display:block;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(r.m.name)}</b>
+              <span>${r.qty} x ${rupiah(r.m.priceK*1000)} = <b>${rupiah(r.sub)}</b></span>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <button class="miniBtn" type="button" onclick="dec('${r.m.id}')">−</button>
+              <button class="miniBtn" type="button" onclick="inc('${r.m.id}')">+</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      const total = rows.reduce((a,b)=>a+b.sub,0);
+      totalEl.textContent = rupiah(total);
+      waBtn.disabled = rows.length === 0;
+    }
+
+    // =========================
+    // ACTIONS
+    // =========================
+    window.inc = (id)=>{
+      cart.set(id, (cart.get(id)||0) + 1);
+      syncQty(id);
+      renderCart();
+    };
+    window.dec = (id)=>{
+      const v = (cart.get(id)||0) - 1;
+      cart.set(id, Math.max(0,v));
+      syncQty(id);
+      renderCart();
+    };
+    window.addOne = (id)=> window.inc(id);
+
+    function syncQty(id){
+      const el = document.getElementById("q_"+id);
+      if(el) el.textContent = cart.get(id)||0;
+    }
+
+    function buildSummary(){
+      const rows = Array.from(cart.entries())
+        .filter(([,qty])=>qty>0)
+        .map(([id,qty])=>{
+          const m = MENU.find(x=>x.id===id);
+          const sub = (m.priceK*1000)*qty;
+          return {name:m.name, qty, unit:m.priceK*1000, sub};
+        });
+
+      const total = rows.reduce((a,b)=>a+b.sub,0);
+      const nama = (namaEl.value||"").trim();
+      const catatan = (catatanEl.value||"").trim();
+
+      let msg = `Halo La Madre Coffee & Roastery,%0A%0ASaya ingin pesan:%0A`;
+      rows.forEach(r=>{
+        msg += `- ${encodeURIComponent(r.name)} x${r.qty} (${encodeURIComponent(rupiah(r.unit))}) = ${encodeURIComponent(rupiah(r.sub))}%0A`;
+      });
+      msg += `%0A*Total:* ${encodeURIComponent(rupiah(total))}%0A`;
+
+      if(nama) msg += `%0A*Nama:* ${encodeURIComponent(nama)}%0A`;
+      if(catatan) msg += `*Catatan:* ${encodeURIComponent(catatan)}%0A`;
+
+      msg += `%0A(Terima kasih!)`;
+      return { rows, total, textPlain: decodeURIComponent(msg.replace(/%0A/g,"\n")) , urlMsg: msg };
+    }
+
+    // WA button
+    waBtn.addEventListener("click", ()=>{
+      const { urlMsg } = buildSummary();
+      const url = `https://wa.me/${WA_NUMBER}?text=${urlMsg}`;
+      window.open(url, "_blank");
+    });
+
+    // Copy ringkasan
+    copyBtn.addEventListener("click", async ()=>{
+      const { textPlain } = buildSummary();
+      try{
+        await navigator.clipboard.writeText(textPlain);
+        copyBtn.textContent = "Tercopy ✓";
+        setTimeout(()=>copyBtn.textContent="Copy Ringkasan", 1200);
+      }catch(e){
+        alert("Gagal copy. Coba manual ya.");
+      }
+    });
+
+    // Reset
+    clearBtn.addEventListener("click", ()=>{
+      cart.clear();
+      renderMenu();
+      renderCart();
+    });
+
+    // Filter pills
+    pills.forEach(p=>{
+      p.addEventListener("click", ()=>{
+        pills.forEach(x=>x.classList.remove("active"));
+        p.classList.add("active");
+        activeCat = p.dataset.cat;
+        renderMenu();
+      });
+    });
+
+    // Search
+    q.addEventListener("input", ()=>renderMenu());
+
+    // Escape HTML
+    function escapeHtml(s){
+      return (s||"").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+    }
+
+    // Init
+    renderMenu();
+    renderCart();
+  </script>
+</body>
+</html>
