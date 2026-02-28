@@ -11,28 +11,28 @@
 
   <style>
     :root{
-      --bg:#0b0c0f;
+      --bg:#0b0c10;
       --bg2:#0f121a;
-      --card:rgba(255,255,255,.06);
-      --text:#e9ecf1;
-      --muted:#aeb6c4;
+      --text:#eef2f7;
+      --muted:#aab3c2;
       --line:rgba(255,255,255,.10);
-      --accent:#d6b26e;
+      --card:rgba(255,255,255,.06);
+      --glass:rgba(0,0,0,.25);
+      --accent:#d7b56f;
       --accent2:#7bd7c9;
-      --shadow: 0 22px 70px rgba(0,0,0,.45);
-      --r: 18px;
-      --max: 1080px;
+      --shadow: 0 26px 90px rgba(0,0,0,.50);
+      --r:22px;
+      --max: 1120px;
     }
-
-    /* LIGHT MODE */
     [data-theme="light"]{
       --bg:#f6f7fb;
       --bg2:#ffffff;
-      --card:rgba(0,0,0,.04);
-      --text:#131722;
-      --muted:#5b6576;
+      --text:#151a24;
+      --muted:#5d6778;
       --line:rgba(0,0,0,.10);
-      --shadow: 0 22px 70px rgba(15,18,26,.10);
+      --card:rgba(0,0,0,.04);
+      --glass:rgba(255,255,255,.65);
+      --shadow: 0 18px 70px rgba(16,20,30,.12);
     }
 
     *{box-sizing:border-box}
@@ -40,182 +40,282 @@
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
 
-    /* NAV */
+    /* ===== NAV ===== */
     .nav{
-      position:sticky;top:0;z-index:10;
-      backdrop-filter: blur(10px);
-      background:linear-gradient(to bottom, rgba(10,10,14,.80), rgba(10,10,14,.25));
+      position:sticky;top:0;z-index:50;
       border-bottom:1px solid var(--line);
+      backdrop-filter: blur(12px);
+      background:linear-gradient(to bottom, rgba(10,12,18,.82), rgba(10,12,18,.30));
     }
     [data-theme="light"] .nav{
-      background:linear-gradient(to bottom, rgba(255,255,255,.85), rgba(255,255,255,.55));
+      background:linear-gradient(to bottom, rgba(255,255,255,.88), rgba(255,255,255,.56));
     }
     .navin{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
-    .brand{display:flex;align-items:center;gap:10px;min-width:0}
+    .brand{display:flex;gap:10px;align-items:center;min-width:0}
     .logo{
-      width:36px;height:36px;border-radius:12px;
-      background: radial-gradient(circle at 30% 30%, rgba(214,178,110,.9), rgba(123,215,201,.25), rgba(255,255,255,.05));
+      width:38px;height:38px;border-radius:14px;
+      background: radial-gradient(circle at 30% 30%, rgba(215,181,111,.95), rgba(123,215,201,.25), rgba(255,255,255,.06));
       border:1px solid var(--line);
+      box-shadow:0 18px 45px rgba(215,181,111,.18);
     }
-    .brand h1{font-size:14px;line-height:1.1;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand h1{margin:0;font-size:14px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .brand p{margin:2px 0 0 0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-    .right{display:flex;gap:10px;align-items:center}
+    .right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
     .btn{
-      padding:10px 14px;border-radius:12px;
+      padding:10px 14px;border-radius:14px;
       border:1px solid var(--line);
-      background: var(--card);
+      background:var(--card);
       color:var(--text);
-      font-weight:700;
-      font-size:13px;
-      transition:.2s ease;
+      font-weight:800;font-size:13px;
       cursor:pointer;
+      transition:.18s ease;
       user-select:none;
     }
     .btn:hover{transform:translateY(-1px)}
     .btn.primary{
-      border-color:rgba(214,178,110,.55);
-      background:linear-gradient(135deg, rgba(214,178,110,.95), rgba(123,215,201,.55));
-      color:#0b0c0f;
-      box-shadow:0 16px 40px rgba(214,178,110,.20);
+      border-color:rgba(215,181,111,.55);
+      background:linear-gradient(135deg, rgba(215,181,111,.98), rgba(123,215,201,.55));
+      color:#0b0c10;
+      box-shadow:0 16px 40px rgba(215,181,111,.18);
     }
-    .btn.icon{
-      padding:10px 12px;
-      display:inline-flex;align-items:center;gap:8px;
-    }
+    .btn.icon{display:inline-flex;align-items:center;gap:8px;padding:10px 12px}
 
-    /* HERO (elegan, minimal) */
+    /* ===== HERO ===== */
     .hero{
-      padding:54px 0 22px;
       position:relative;
       overflow:hidden;
+      padding: 26px 0 26px;
     }
     .hero::before{
       content:"";
-      position:absolute;inset:-60px;
+      position:absolute;inset:-80px;
       background:
-        radial-gradient(900px 500px at 20% 10%, rgba(214,178,110,.18), transparent 55%),
-        radial-gradient(820px 560px at 85% 15%, rgba(123,215,201,.14), transparent 55%),
-        radial-gradient(900px 600px at 50% 80%, rgba(255,255,255,.06), transparent 60%);
+        radial-gradient(1000px 620px at 18% 12%, rgba(215,181,111,.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 10%, rgba(123,215,201,.14), transparent 60%),
+        radial-gradient(900px 650px at 50% 82%, rgba(255,255,255,.05), transparent 60%);
       pointer-events:none;
     }
-    .heroInner{position:relative}
+
+    .heroGrid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media(max-width: 980px){.heroGrid{grid-template-columns:1fr}}
+
     .kicker{
       display:inline-flex;gap:10px;align-items:center;
       color:var(--muted);font-size:13px;
       border:1px solid var(--line);
       background:var(--card);
       padding:8px 12px;border-radius:999px;
+      width:fit-content;
     }
-    .dot{width:7px;height:7px;border-radius:10px;background:var(--accent2);box-shadow:0 0 0 4px rgba(123,215,201,.14)}
+    .kdot{width:7px;height:7px;border-radius:99px;background:var(--accent2);box-shadow:0 0 0 4px rgba(123,215,201,.14)}
     .title{
-      margin:16px 0 10px;
+      margin:14px 0 10px;
       font-size:48px;line-height:1.04;letter-spacing:-.03em;
     }
     @media(max-width:720px){.title{font-size:36px}}
-    .title span{
-      background:linear-gradient(135deg, rgba(214,178,110,1), rgba(123,215,201,.9));
+    .grad{
+      background:linear-gradient(135deg, rgba(215,181,111,1), rgba(123,215,201,.9));
       -webkit-background-clip:text;background-clip:text;color:transparent;
     }
     .desc{
       margin:0;
       color:var(--muted);
-      font-size:14.8px;
-      line-height:1.7;
-      max-width:75ch;
+      font-size:14.7px;
+      line-height:1.75;
+      max-width: 72ch;
     }
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .miniRow{
+      display:flex;gap:10px;flex-wrap:wrap;
+      margin-top:16px;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.5;
+    }
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:9px 12px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+    }
+    [data-theme="light"] .chip{background:rgba(0,0,0,.03)}
+    .pin{width:7px;height:7px;border-radius:99px;background:var(--accent);box-shadow:0 0 0 4px rgba(215,181,111,.12)}
 
-    /* SLIDER */
+    /* ===== SLIDER (Premium) ===== */
     .sliderCard{
-      margin-top:18px;
       border:1px solid var(--line);
       background:var(--card);
       border-radius:var(--r);
       box-shadow:var(--shadow);
       overflow:hidden;
+      position:relative;
     }
+
     .slider{
       position:relative;
       width:100%;
-      aspect-ratio: 16 / 8;
-      min-height:260px;
+      min-height: 520px;
       overflow:hidden;
       background:#111;
+      isolation:isolate;
     }
-    @media(max-width:720px){
-      .slider{aspect-ratio: 16 / 11;}
-    }
+    @media(max-width:980px){.slider{min-height: 440px}}
+    @media(max-width:720px){.slider{min-height: 380px}}
 
-    .track{
-      display:flex;
-      width:100%;
-      height:100%;
-      transform:translateX(0);
-      transition: transform 900ms cubic-bezier(.22,.9,.12,1);
-      will-change: transform;
+    .slides{
+      position:absolute;inset:0;
     }
-    .slide{
-      flex:0 0 100%;
-      width:100%;
-      height:100%;
-      position:relative;
+    .s{
+      position:absolute;inset:0;
+      opacity:0;
+      transform: scale(1.04);
+      transition:
+        opacity 900ms ease,
+        transform 1200ms cubic-bezier(.2,.9,.15,1);
       background-size:cover;
       background-position:center;
-      transform: translateZ(0);
+      filter:saturate(1.05) contrast(1.04);
     }
-    .slide::after{
-      content:"";
-      position:absolute;inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.70));
+    .s.active{
+      opacity:1;
+      transform: scale(1.00);
+    }
+
+    /* cinematic overlays */
+    .overlay{
+      position:absolute;inset:0;z-index:2;
+      background:
+        radial-gradient(800px 500px at 30% 20%, rgba(0,0,0,.08), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.70));
+    }
+
+    .content{
+      position:absolute;left:16px;right:16px;bottom:16px;z-index:3;
+      display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;
     }
 
     .caption{
-      position:absolute;left:18px;right:18px;bottom:16px;
-      z-index:2;
-      display:flex;flex-direction:column;gap:6px;
-      transform: translateY(6px);
-      opacity:.95;
+      max-width: 560px;
+      padding:14px 14px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background: var(--glass);
+      backdrop-filter: blur(10px);
     }
+    [data-theme="light"] .caption{background:rgba(255,255,255,.70)}
     .caption h3{margin:0;font-size:15px}
-    .caption p{margin:0;color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.45;max-width:70ch}
+    .caption p{margin:6px 0 0 0;color:var(--muted);font-size:12.8px;line-height:1.5}
+    .caption .sub{margin-top:8px;color:var(--muted);font-size:12px}
+
+    .navBtns{display:flex;gap:8px;align-items:center}
+    .iconBtn{
+      width:44px;height:44px;border-radius:16px;
+      border:1px solid var(--line);
+      background: var(--glass);
+      color:var(--text);
+      cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;
+      backdrop-filter: blur(10px);
+      transition:.18s ease;
+    }
+    .iconBtn:hover{transform:translateY(-1px)}
+    [data-theme="light"] .iconBtn{background:rgba(255,255,255,.70)}
+    .iconBtn:active{transform:translateY(0px) scale(.98)}
 
     .dots{
-      position:absolute;right:14px;bottom:14px;
-      display:flex;gap:8px;
-      z-index:3;
+      position:absolute;top:16px;right:16px;z-index:4;
+      display:flex;gap:8px;align-items:center;
+      padding:10px 12px;border-radius:999px;
+      border:1px solid var(--line);
+      background: var(--glass);
+      backdrop-filter: blur(10px);
     }
-    .dots button{
-      width:9px;height:9px;border-radius:99px;border:0;
+    [data-theme="light"] .dots{background:rgba(255,255,255,.70)}
+    .dotBtn{
+      width:8px;height:8px;border-radius:99px;border:0;
       background:rgba(255,255,255,.35);
       cursor:pointer;
-      transition: transform .25s ease, background .25s ease, width .25s ease;
+      transition: width .25s ease, background .25s ease, transform .25s ease;
     }
-    .dots button:hover{transform:translateY(-1px)}
-    .dots button.active{
-      background:rgba(214,178,110,.98);
-      width:22px;
-    }
+    [data-theme="light"] .dotBtn{background:rgba(0,0,0,.22)}
+    .dotBtn:hover{transform:translateY(-1px)}
+    .dotBtn.active{width:22px;background:rgba(215,181,111,.96)}
 
-    /* Smooth anim on change */
-    .fadeIn{
-      animation: fadeInUp .45s ease both;
+    /* smooth caption entrance */
+    .capAnim{
+      animation: capIn .55s ease both;
     }
-    @keyframes fadeInUp{
-      from{opacity:.0; transform: translateY(10px)}
+    @keyframes capIn{
+      from{opacity:0; transform: translateY(10px)}
       to{opacity:1; transform: translateY(0)}
     }
 
-    /* INFO (minimal, no many columns) */
-    .info{
-      margin:18px 0 34px;
-      border-top:1px solid var(--line);
-      padding-top:16px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.6;
+    /* ===== SECTION: Highlights + Reviews ===== */
+    .section{padding:22px 0}
+    .panel{
+      border:1px solid var(--line);
+      background:var(--card);
+      border-radius:var(--r);
+      padding:16px;
     }
-    .info b{color:var(--text)}
+    .secTitle{margin:0 0 8px 0;font-size:16px}
+    .secText{margin:0;color:var(--muted);font-size:13.2px;line-height:1.7}
+
+    .highRow{
+      display:flex;gap:10px;flex-wrap:wrap;margin-top:12px
+    }
+    .badge{
+      display:inline-flex;gap:10px;align-items:flex-start;
+      padding:12px 14px;border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      min-width: 210px;
+      flex:1;
+    }
+    [data-theme="light"] .badge{background:rgba(0,0,0,.03)}
+    .bIcon{
+      width:34px;height:34px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(215,181,111,.95), rgba(123,215,201,.45));
+      display:flex;align-items:center;justify-content:center;
+      color:#0b0c10;font-weight:900;
+      flex:0 0 34px;
+    }
+    .badge b{display:block;font-size:13px}
+    .badge span{display:block;margin-top:4px;color:var(--muted);font-size:12.3px;line-height:1.45}
+
+    .review{
+      margin-top:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.12);
+      border-radius:18px;
+      padding:14px;
+      position:relative;
+      overflow:hidden;
+    }
+    [data-theme="light"] .review{background:rgba(0,0,0,.03)}
+    .review p{margin:0;color:var(--text);font-size:13px;line-height:1.7}
+    .review small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
+
+    .locRow{
+      display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:stretch
+    }
+    .locCard{
+      flex:1;min-width:260px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:14px;
+    }
+    [data-theme="light"] .locCard{background:rgba(0,0,0,.03)}
+    .locCard b{display:block;margin-bottom:6px}
+    .locCard div{color:var(--muted);font-size:12.8px;line-height:1.6}
+
     .footer{
       border-top:1px solid var(--line);
       padding:18px 0 30px;
@@ -226,79 +326,161 @@
 </head>
 
 <body>
+  <!-- NAV -->
   <div class="nav">
     <div class="wrap navin">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <div style="min-width:0">
           <h1>La Madre Coffee &amp; Roastery</h1>
-          <p>Karawang • Specialty coffee & comfort food</p>
+          <p>Hidden gem • Cozy • Specialty coffee &amp; comfort food</p>
         </div>
       </div>
 
       <div class="right">
-        <button class="btn icon" id="themeBtn" type="button" aria-label="Mode Gelap/Terang">🌓 <span style="font-weight:700">Mode</span></button>
+        <button class="btn icon" id="themeBtn" type="button">🌓 <span style="font-weight:900">Mode</span></button>
         <a class="btn" href="order.html">Order</a>
         <a class="btn primary" href="https://wa.me/6281398686801" target="_blank" rel="noreferrer">Chat WhatsApp</a>
       </div>
     </div>
   </div>
 
+  <!-- HERO -->
   <header class="hero">
-    <div class="wrap heroInner">
-      <div class="kicker"><span class="dot"></span> Coffee &amp; Roastery • Cozy • Hidden gem</div>
-      <h2 class="title">Create a pleasure <span>in a cup</span>.</h2>
-      <p class="desc">
-        La Madre Coffee &amp; Roastery. Here we create a pleasure in a cup of coffee, based on specialty grade coffee we serve a good cup for you.
-        We also provide comfort food, snacks, dessert to accompany your coffee. We dedicated to provide friendly and humble service to maximize your comfort.
-        Please come and take your time here. Enjoy !
-      </p>
+    <div class="wrap">
+      <div class="heroGrid">
+        <!-- LEFT: Text -->
+        <div>
+          <div class="kicker"><span class="kdot"></span> Coffee &amp; Roastery • Karawang</div>
+          <h2 class="title">Create a pleasure <span class="grad">in a cup</span>.</h2>
+          <p class="desc">
+            La Madre Coffee &amp; Roastery. Here we create a pleasure in a cup of coffee, based on specialty grade coffee we serve a good cup for you.
+            We also provide comfort food, snacks, dessert to accompany your coffee. We dedicated to provide friendly and humble service to maximize your comfort.
+            Please come and take your time here. Enjoy !
+          </p>
 
-      <div class="actions">
-        <a class="btn primary" href="order.html">Buat Pesanan</a>
-        <a class="btn" href="#lokasi">Lokasi & Jam</a>
+          <div class="cta">
+            <a class="btn primary" href="order.html">Buat Pesanan</a>
+            <a class="btn" href="#info">Lokasi & Jam</a>
+          </div>
+
+          <div class="miniRow">
+            <span class="chip"><span class="pin"></span> Cozy, tenang, tidak berisik</span>
+            <span class="chip"><span class="pin"></span> Indoor AC & outdoor</span>
+            <span class="chip"><span class="pin"></span> Cocok meetup & WFC</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: Premium Slider -->
+        <div class="sliderCard" aria-label="Galeri foto La Madre">
+          <div class="slider">
+            <div class="slides" id="slides">
+              <!-- FOTO PILIHAN BARU (lebih premium & relevan coffee shop) -->
+              <!-- Tip: Kalau kamu punya foto asli cafe, nanti tinggal ganti URL di sini -->
+              <div class="s active" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2000&q=80')"></div>
+              <div class="s" style="background-image:url('https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=2000&q=80')"></div>
+              <div class="s" style="background-image:url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=2000&q=80')"></div>
+              <div class="s" style="background-image:url('https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=2000&q=80')"></div>
+              <div class="s" style="background-image:url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=2000&q=80')"></div>
+            </div>
+
+            <div class="overlay"></div>
+
+            <div class="dots" id="dots" aria-label="Navigasi slide"></div>
+
+            <div class="content">
+              <div class="caption capAnim" id="caption">
+                <h3 id="capTitle">Cozy & classy ambience</h3>
+                <p id="capText">Hidden gem di Karawang—tenang, nyaman, cocok untuk quality time atau kerja santai.</p>
+                <div class="sub" id="capSub">Swipe / klik tombol untuk lihat foto lainnya.</div>
+              </div>
+
+              <div class="navBtns">
+                <button class="iconBtn" id="prev" type="button" aria-label="Sebelumnya">←</button>
+                <button class="iconBtn" id="next" type="button" aria-label="Berikutnya">→</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="sliderCard">
-        <div class="slider" aria-label="Galeri foto">
-          <div class="track" id="track">
-            <!-- NOTE: 1 slide = 100% width. Ini yang bikin tidak error/ngaco -->
-            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1600&q=80')">
-              <div class="caption fadeIn" id="cap0">
-                <h3>Cozy & classy ambience</h3>
-                <p>Tempat nyaman untuk kerja, ngobrol, atau quality time.</p>
+      <!-- HIGHLIGHTS -->
+      <section class="section" id="highlights">
+        <div class="panel">
+          <h3 class="secTitle">Kenapa orang suka La Madre?</h3>
+          <p class="secText">
+            Banyak review bilang tempatnya luas, cozy, indoor & outdoor, tenang, cocok untuk meetup / nugas / WFC.
+            Kopi enak, makanan lengkap, pelayanan ramah, dan parkiran luas.
+          </p>
+
+          <div class="highRow">
+            <div class="badge">
+              <div class="bIcon">☕</div>
+              <div>
+                <b>Specialty coffee & roastery</b>
+                <span>Rasa kopi “worth it” dan konsisten untuk coffee lovers.</span>
               </div>
             </div>
-            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80')">
-              <div class="caption" id="cap1">
-                <h3>Specialty coffee</h3>
-                <p>Roastery untuk rasa yang konsisten, cocok untuk coffee lovers.</p>
+            <div class="badge">
+              <div class="bIcon">🏡</div>
+              <div>
+                <b>Cozy + tenang</b>
+                <span>Indoor adem, area luas, tidak bising. Nyaman untuk santai.</span>
               </div>
             </div>
-            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1600&q=80')">
-              <div class="caption" id="cap2">
-                <h3>Comfort food</h3>
-                <p>Menu lengkap: main course, snack, dessert untuk menemani kopi.</p>
-              </div>
-            </div>
-            <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=80')">
-              <div class="caption" id="cap3">
-                <h3>Meetup friendly</h3>
-                <p>Tenang, luas, cocok untuk meetup dan WFC.</p>
+            <div class="badge">
+              <div class="bIcon">🚗</div>
+              <div>
+                <b>Parkir luas</b>
+                <span>Motor/mobil aman. Banyak review memuji parkiran yang lega.</span>
               </div>
             </div>
           </div>
 
-          <div class="dots" id="dots" aria-label="Navigasi slide"></div>
+          <!-- REVIEWS (ringkas, tapi terasa “hidup”) -->
+          <div class="review">
+            <p>“Tempatnya cozzyy, ada outdoor dan indoor, luas, lengkap… enak untuk meetup, ngerjain tugas, atau nongki2 cantik. Recommended!”</p>
+            <small>— Dwiana Yulianita (Local Guide)</small>
+          </div>
+          <div class="review">
+            <p>“Cari kopi enak? Disini aja… fasilitas juga bagus, AC dingin, gak berisik. Worth to buy.”</p>
+            <small>— Indra Bayu Permana (Local Guide)</small>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <section class="info" id="lokasi">
-        <p style="margin:0">
-          <b>Alamat:</b> Jl. Jati Baru No.85, RT.001 RW004/RW.004, Sukaharja, Telukjambe Timur, Karawang, Jawa Barat 41361<br>
-          <b>Telepon/WA:</b> 0813-9868-6801<br>
-          <b>Jam:</b> Sabtu 11.00–23.00 • Minggu 11.00–22.00 • Senin–Jumat 11.00–22.00
-        </p>
+      <!-- LOCATION -->
+      <section class="section" id="info">
+        <div class="panel">
+          <h3 class="secTitle">Lokasi & Jam Operasional</h3>
+          <p class="secText">Datang santai, ambil waktu kamu—kami siap menyambut dengan service yang ramah & humble.</p>
+
+          <div class="locRow">
+            <div class="locCard">
+              <b>Alamat</b>
+              <div>
+                Jl. Jati Baru No.85, RT.001 RW004/RW.004, Sukaharja, Telukjambe Timur, Karawang, Jawa Barat 41361
+              </div>
+            </div>
+
+            <div class="locCard">
+              <b>Jam</b>
+              <div>
+                Sabtu 11.00–23.00<br/>
+                Minggu 11.00–22.00<br/>
+                Senin–Jumat 11.00–22.00
+              </div>
+            </div>
+
+            <div class="locCard">
+              <b>Kontak</b>
+              <div>
+                WhatsApp: 0813-9868-6801<br/>
+                Klik tombol “Chat WhatsApp” di atas untuk tanya-tanya / reservasi.
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <div class="footer">
@@ -330,69 +512,128 @@
       });
     })();
 
-    // ===== Slider FIX + smoother animation + dots animation
+    // ===== Premium Slider (fade + zoom + caption anim + dots + prev/next)
     (function(){
-      const track = document.getElementById("track");
+      const slidesWrap = document.getElementById("slides");
+      const slides = Array.from(slidesWrap.querySelectorAll(".s"));
       const dotsWrap = document.getElementById("dots");
-      if(!track || !dotsWrap) return;
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
 
-      const slides = Array.from(track.children);
-      const total = slides.length;
+      const cap = document.getElementById("caption");
+      const capTitle = document.getElementById("capTitle");
+      const capText  = document.getElementById("capText");
+      const capSub   = document.getElementById("capSub");
+
+      const data = [
+        {
+          t:"Cozy & classy ambience",
+          d:"Hidden gem di Karawang—tenang, nyaman, cocok untuk quality time atau kerja santai.",
+          s:"Indoor adem & suasana cozy."
+        },
+        {
+          t:"Perfect for meetup & WFC",
+          d:"Area luas, vibe calm, cocok buat meetup, nugas, atau kerja remote.",
+          s:"Banyak pengunjung bilang tempatnya nyaman."
+        },
+        {
+          t:"Comfort food, snacks, dessert",
+          d:"Makanan lengkap untuk nemenin kopi: dari main course, snack sampai dessert.",
+          s:"Cocok buat makan siang / malam."
+        },
+        {
+          t:"Specialty grade coffee",
+          d:"Roastery + kopi yang serius. Rasa enak, nggak berlebihan, worth it.",
+          s:"Favorit coffee lovers."
+        },
+        {
+          t:"A good cup for you",
+          d:"Friendly & humble service untuk memaksimalkan kenyamanan kamu.",
+          s:"Come & take your time. Enjoy!"
+        }
+      ];
+
       let i = 0;
       let timer;
 
-      // build dots
-      dotsWrap.innerHTML = "";
-      slides.forEach((_,idx)=>{
-        const b = document.createElement("button");
-        if(idx===0) b.classList.add("active");
-        b.addEventListener("click", ()=>goTo(idx,true));
-        dotsWrap.appendChild(b);
-      });
-
-      function setActiveDot(idx){
-        dotsWrap.querySelectorAll("button").forEach((el,n)=>{
-          el.classList.toggle("active", n===idx);
+      function buildDots(){
+        dotsWrap.innerHTML = "";
+        slides.forEach((_, idx)=>{
+          const b = document.createElement("button");
+          b.className = "dotBtn" + (idx===0 ? " active" : "");
+          b.addEventListener("click", ()=>goTo(idx, true));
+          dotsWrap.appendChild(b);
         });
       }
 
-      function animateCaption(idx){
-        // remove fade from all captions
-        slides.forEach((s,si)=>{
-          const cap = s.querySelector(".caption");
-          if(!cap) return;
-          cap.classList.remove("fadeIn");
+      function setDots(idx){
+        dotsWrap.querySelectorAll(".dotBtn").forEach((b, n)=>{
+          b.classList.toggle("active", n===idx);
         });
-        // add to active
-        const cap = slides[idx].querySelector(".caption");
-        if(cap){
-          // reflow trick to restart animation
-          void cap.offsetWidth;
-          cap.classList.add("fadeIn");
-        }
+      }
+
+      function setCaption(idx){
+        capTitle.textContent = data[idx].t;
+        capText.textContent  = data[idx].d;
+        capSub.textContent   = data[idx].s;
+
+        cap.classList.remove("capAnim");
+        void cap.offsetWidth; // restart animation
+        cap.classList.add("capAnim");
       }
 
       function goTo(idx, manual){
+        slides[i].classList.remove("active");
         i = idx;
-        track.style.transform = "translateX(-" + (i * 100) + "%)";
-        setActiveDot(i);
-        animateCaption(i);
+        slides[i].classList.add("active");
+        setDots(i);
+        setCaption(i);
 
         if(manual){
           clearInterval(timer);
-          timer = setInterval(next, 4200);
+          timer = setInterval(()=>nextSlide(false), 4200);
         }
       }
 
-      function next(){
-        i = (i+1) % total;
-        goTo(i,false);
+      function nextSlide(manual){
+        const idx = (i + 1) % slides.length;
+        goTo(idx, manual);
+      }
+      function prevSlide(){
+        const idx = (i - 1 + slides.length) % slides.length;
+        goTo(idx, true);
       }
 
-      // safety: ensure each slide is 100% width (no wrong width)
-      track.style.width = (total * 100) + "%";
+      // subtle parallax on mouse move
+      const slider = slidesWrap.parentElement;
+      slider.addEventListener("mousemove", (e)=>{
+        const rect = slider.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        slides[i].style.backgroundPosition = `${50 + x*6}% ${50 + y*6}%`;
+      });
+      slider.addEventListener("mouseleave", ()=>{
+        slides[i].style.backgroundPosition = "center";
+      });
 
-      timer = setInterval(next, 4200);
+      prev.addEventListener("click", prevSlide);
+      next.addEventListener("click", ()=>nextSlide(true));
+
+      // swipe mobile
+      let startX = 0;
+      slider.addEventListener("touchstart", (e)=>{ startX = e.touches[0].clientX; }, {passive:true});
+      slider.addEventListener("touchend", (e)=>{
+        const endX = e.changedTouches[0].clientX;
+        const diff = endX - startX;
+        if(Math.abs(diff) > 40){
+          if(diff < 0) nextSlide(true);
+          else prevSlide();
+        }
+      });
+
+      buildDots();
+      setCaption(0);
+      timer = setInterval(()=>nextSlide(false), 4200);
     })();
   </script>
 </body>
