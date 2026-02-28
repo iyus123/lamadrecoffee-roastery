@@ -387,6 +387,52 @@
       </div>
     </div>
   </section>
+  <section id="pesan">
+  <div class="container">
+    <div class="sectionTitle">
+      <h2>Pesan Sekarang</h2>
+      <p>Pilih menu yang kamu inginkan, lalu kirim langsung ke WhatsApp kami.</p>
+    </div>
+
+    <div class="card">
+      <div class="menuList">
+
+        <label class="menuItem">
+          <span><input type="checkbox" value="Espresso - 20K"> Espresso</span>
+          <span class="price">20K</span>
+        </label>
+
+        <label class="menuItem">
+          <span><input type="checkbox" value="Aren Latte - 32K"> Aren Latte</span>
+          <span class="price">32K</span>
+        </label>
+
+        <label class="menuItem">
+          <span><input type="checkbox" value="Matcha Latte - 30K"> Matcha Latte</span>
+          <span class="price">30K</span>
+        </label>
+
+        <label class="menuItem">
+          <span><input type="checkbox" value="Nasi Goreng - 35K"> Nasi Goreng</span>
+          <span class="price">35K</span>
+        </label>
+
+      </div>
+
+      <div style="margin-top:20px;">
+        <input type="text" id="nama" placeholder="Nama Anda"
+          style="width:100%;padding:10px;border-radius:10px;border:1px solid #ccc;margin-bottom:10px;">
+
+        <textarea id="catatan" placeholder="Catatan tambahan..."
+          style="width:100%;padding:10px;border-radius:10px;border:1px solid #ccc;"></textarea>
+
+        <button onclick="kirimPesanan()" class="btn" style="margin-top:15px;">
+          Kirim ke WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- GALERI SLIDER -->
   <section id="galeri">
@@ -550,5 +596,32 @@
       timer = setInterval(next, 3500);
     })();
   </script>
+
+  <script>
+function kirimPesanan() {
+  const nama = document.getElementById("nama").value;
+  const catatan = document.getElementById("catatan").value;
+  const checked = document.querySelectorAll('#pesan input[type="checkbox"]:checked');
+
+  if (checked.length === 0) {
+    alert("Silakan pilih minimal 1 menu.");
+    return;
+  }
+
+  let pesan = "Halo Sawah Senja Coffee,%0A%0ASaya ingin memesan:%0A";
+
+  checked.forEach(item => {
+    pesan += "- " + item.value + "%0A";
+  });
+
+  pesan += "%0ANama: " + nama + "%0A";
+  pesan += "Catatan: " + catatan;
+
+  const nomor = "6283894403505";
+  const url = "https://wa.me/" + nomor + "?text=" + pesan;
+
+  window.open(url, "_blank");
+}
+</script>
 </body>
 </html>
