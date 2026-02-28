@@ -3,121 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kopi Senja</title>
+<title>Sawah Senja Coffee</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f8f5f2;
-    color: #333;
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f5f2ec;
+    color:#333;
+    scroll-behavior:smooth;
 }
-header {
-    background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') center/cover;
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
+
+header{
+    height:100vh;
+    background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
+    url('https://images.unsplash.com/photo-1509042239860-f550ce710b93');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    padding:20px;
 }
-header h1 {
-    font-size: 50px;
-    margin: 0;
+
+header h1{
+    font-size:55px;
+    letter-spacing:2px;
 }
-section {
-    padding: 60px 20px;
-    text-align: center;
+
+header p{
+    margin:20px 0;
+    font-size:18px;
+    max-width:700px;
 }
-.menu-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
+
+.btn{
+    display:inline-block;
+    padding:14px 28px;
+    background:#8b5e3c;
+    color:white;
+    border-radius:50px;
+    text-decoration:none;
+    margin-top:10px;
+    transition:0.3s;
 }
-.menu-item {
-    background: white;
-    padding: 20px;
-    width: 250px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+.btn:hover{
+    background:#5e3d25;
 }
-button {
-    background-color: #6b4f4f;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+
+section{
+    padding:80px 10%;
+    text-align:center;
 }
-footer {
-    background: #333;
-    color: white;
-    padding: 20px;
+
+h2{
+    font-size:32px;
+    margin-bottom:30px;
+    color:#5e3d25;
 }
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.gallery img{
+    width:100%;
+    border-radius:15px;
+}
+
+.info{
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+footer{
+    background:#2f2f2f;
+    color:white;
+    padding:40px 10%;
+    text-align:center;
+}
+
+.small{
+    font-size:14px;
+    opacity:0.8;
+}
+
+@media(max-width:768px){
+    header h1{font-size:38px;}
+}
+
 </style>
 </head>
+
 <body>
 
 <header>
-    <div>
-        <h1>Kopi Senja</h1>
-        <p>Tempat Nongkrong Paling Nyaman di Kota</p>
-        <button onclick="window.location.href='https://wa.me/6281234567890'">Order Sekarang</button>
-    </div>
+<div>
+<h1>SAWAH SENJA COFFEE</h1>
+<p>Rustic Modern Tropical Coffee Shop dengan view sawah terbuka yang hangat, estetik, dan nyaman untuk nongkrong, kerja, dan berkumpul.</p>
+<a href="https://wa.me/6283894403505" class="btn">Reservasi Sekarang</a>
+</div>
 </header>
 
 <section>
-    <h2>Tentang Kami</h2>
-    <p>Kopi Senja hadir dengan biji kopi pilihan dan suasana hangat untuk menemani hari Anda.</p>
+<h2>Tentang Kami</h2>
+<p>Sawah Senja Coffee adalah coffee shop dengan konsep rustic modern tropical yang menghadirkan suasana hangat dan instagramable. Berdiri sejak 2023, kami menjadi tempat favorit mahasiswa, freelancer, keluarga, hingga komunitas lokal.</p>
 </section>
 
 <section>
-    <h2>Menu Unggulan</h2>
-    <div class="menu-container">
-        <div class="menu-item">
-            <h3>Es Kopi Susu</h3>
-            <p>Rp18.000</p>
-        </div>
-        <div class="menu-item">
-            <h3>Cappuccino</h3>
-            <p>Rp22.000</p>
-        </div>
-        <div class="menu-item">
-            <h3>Matcha Latte</h3>
-            <p>Rp20.000</p>
-        </div>
-    </div>
+<h2>Menu Andalan</h2>
+<div class="grid">
+
+<div class="card">
+<h3>☕ Coffee Based</h3>
+<p>Espresso – 20K</p>
+<p>Americano – 22K</p>
+<p>Cappuccino – 28K</p>
+<p>Latte – 30K</p>
+<p><strong>Aren Latte – 32K (Best Seller)</strong></p>
+</div>
+
+<div class="card">
+<h3>🧋 Non Coffee</h3>
+<p>Matcha Latte – 30K</p>
+<p>Chocolate Signature – 28K</p>
+<p>Red Velvet – 30K</p>
+<p>Thai Tea – 25K</p>
+</div>
+
+<div class="card">
+<h3>🍝 Makanan</h3>
+<p>Nasi Goreng – 35K</p>
+<p>Chicken Katsu – 32K</p>
+<p>Spaghetti – 34K</p>
+<p>Mix Platter – 45K</p>
+</div>
+
+</div>
+<p style="margin-top:20px;"><strong>Range harga:</strong> Rp 25.000 – Rp 75.000</p>
 </section>
 
 <section>
-    <h2>Lokasi & Informasi</h2>
+<h2>Galeri</h2>
+<div class="grid gallery">
+<img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24">
+<img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+<img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085">
+<img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0">
+</div>
+</section>
 
-    <p><strong>Alamat:</strong><br>
-    Ruko Gajah Mada Jl. Grand Taruma No.01 02, <br>
-    Sukamakmur, Kec. Karawang Bar., <br>
-    Karawang, Jawa Barat 41361</p>
+<section>
+<h2>Fasilitas & Keunggulan</h2>
+<div class="grid">
+<div class="card">WiFi 100 Mbps & Banyak Colokan</div>
+<div class="card">Indoor AC & Outdoor View Sawah</div>
+<div class="card">Meeting Room 15 Orang</div>
+<div class="card">Live Acoustic Setiap Sabtu</div>
+<div class="card">Harga Ramah Mahasiswa</div>
+<div class="card">Kopi dari Petani Lokal Indonesia</div>
+</div>
+</section>
 
-    <p><strong>Telepon:</strong> 
-    <a href="tel:087770808734">0877-7080-8734</a></p>
+<section>
+<h2>Jam Operasional</h2>
+<div class="info">
+<p>Senin – Jumat : 10.00 – 23.00</p>
+<p>Sabtu – Minggu : 09.00 – 23.30</p>
+</div>
+</section>
 
-    <p><strong>Tarif per Orang:</strong><br>
-    Rp 1–25.000<br>
-    Rp 25.000–50.000<br>
-    Rp 50.000–75.000<br>
-    Rp 75.000–100.000<br>
-    Rp 100.000–125.000<br>
-    <em>(Dilaporkan oleh 100 orang)</em>
-    </p>
+<section>
+<h2>Lokasi & Kontak</h2>
+<div class="info">
+<p><strong>Alamat:</strong><br>
+Jl. Raya Sukamakmur No. 88, Karawang Barat, Jawa Barat 41361</p>
+<p><strong>WhatsApp:</strong> 083894403505</p>
+<p><strong>Email:</strong> hello@sawahsenjacoffee.id</p>
+<p><strong>Instagram:</strong> @sawahsenja.coffee</p>
+</div>
+</section>
 
-    <h3>Jam Operasional</h3>
-    <table style="margin: auto; border-collapse: collapse;">
-        <tr><td>Senin – Jumat</td><td style="padding-left:20px;">10.00–23.00</td></tr>
-        <tr><td>Sabtu – Minggu</td><td style="padding-left:20px;">09.00–24.00</td></tr>
-    </table>
+<section>
+<h2>Testimoni</h2>
+<div class="grid">
+<div class="card">“Tempatnya nyaman banget buat kerja, wifi kenceng dan kopinya enak!” – Dimas</div>
+<div class="card">“View sawahnya bikin betah, cocok buat nongkrong sore.” – Rina</div>
+</div>
 </section>
 
 <footer>
-    <p>© 2026 Kopi Senja | Instagram: @kopisenja</p>
+<h3>Sawah Senja Coffee</h3>
+<p class="small">© 2026 Sawah Senja Coffee. All Rights Reserved.</p>
 </footer>
 
 </body>
