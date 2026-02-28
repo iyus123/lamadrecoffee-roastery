@@ -1,269 +1,554 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sawah Senja Coffee</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sawah Senja Coffee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-    font-family:'Poppins',sans-serif;
-    background:#f5f2ec;
-    color:#333;
-    scroll-behavior:smooth;
-}
+  <style>
+    :root{
+      --bg:#f6f2ea;
+      --card:#ffffff;
+      --text:#1f1f1f;
+      --muted:#6b6b6b;
+      --brand:#8b5e3c;
+      --brand2:#2f6f5e;
+      --shadow: 0 14px 40px rgba(0,0,0,.08);
+      --radius: 18px;
+    }
 
-header{
-    height:100vh;
-    background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
-    url('https://images.unsplash.com/photo-1509042239860-f550ce710b93');
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    color:white;
-    padding:20px;
-}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      scroll-behavior:smooth;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
 
-header h1{
-    font-size:55px;
-    letter-spacing:2px;
-}
+    .container{max-width:1100px;margin:0 auto;padding:0 18px}
+    .chip{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:8px 12px;border-radius:999px;
+      background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.25);
+      backdrop-filter: blur(6px);
+      color:#fff;
+      font-size:13px;
+    }
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 18px;border-radius:999px;
+      background:var(--brand);color:#fff;font-weight:600;
+      transition:.25s; box-shadow: 0 10px 24px rgba(139,94,60,.22);
+    }
+    .btn:hover{transform:translateY(-2px);filter:brightness(.98)}
+    .btn.secondary{
+      background:#ffffff; color:var(--text);
+      box-shadow: 0 10px 24px rgba(0,0,0,.10);
+    }
+    .btn.small{padding:10px 14px;font-size:14px}
 
-header p{
-    margin:20px 0;
-    font-size:18px;
-    max-width:700px;
-}
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      background:rgba(246,242,234,.78);
+      border-bottom:1px solid rgba(0,0,0,.06);
+      backdrop-filter: blur(10px);
+    }
+    .nav .row{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;
+      font-weight:800; letter-spacing:.3px;
+    }
+    .logo{
+      width:34px;height:34px;border-radius:12px;
+      background: linear-gradient(135deg,var(--brand),var(--brand2));
+      box-shadow: 0 12px 26px rgba(0,0,0,.12);
+    }
+    .nav ul{list-style:none;display:flex;gap:18px;align-items:center}
+    .nav a.link{color:var(--muted);font-weight:600;font-size:14px}
+    .nav a.link:hover{color:var(--text)}
+    .menuBtn{display:none}
 
-.btn{
-    display:inline-block;
-    padding:14px 28px;
-    background:#8b5e3c;
-    color:white;
-    border-radius:50px;
-    text-decoration:none;
-    margin-top:10px;
-    transition:0.3s;
-}
+    /* HERO */
+    .hero{
+      position:relative; overflow:hidden;
+      padding:72px 0 34px;
+      background:
+        radial-gradient(900px 380px at 10% 10%, rgba(47,111,94,.22), transparent 55%),
+        radial-gradient(900px 380px at 90% 0%, rgba(139,94,60,.22), transparent 55%),
+        linear-gradient(180deg, #fff0, rgba(0,0,0,0.02));
+    }
+    .heroGrid{
+      display:grid; grid-template-columns: 1.1fr .9fr;
+      gap:22px; align-items:center;
+    }
+    .hero h1{
+      font-size:44px; line-height:1.15; letter-spacing:-.6px;
+      margin-top:14px;
+    }
+    .hero p{color:var(--muted); margin:14px 0 18px; max-width:56ch}
+    .heroActions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .heroCard{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .heroPhoto{
+      height:320px;
+      background:
+        linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.10)),
+        url("https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=80");
+      background-size:cover;background-position:center;
+    }
+    .heroMeta{
+      padding:16px 16px 18px;
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .metaBox{
+      padding:12px;border-radius:14px;
+      background: rgba(139,94,60,.08);
+      border:1px solid rgba(139,94,60,.12);
+    }
+    .metaBox b{display:block;font-size:14px}
+    .metaBox span{color:var(--muted);font-size:13px}
 
-.btn:hover{
-    background:#5e3d25;
-}
+    /* SECTIONS */
+    section{padding:54px 0}
+    .sectionTitle{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:18px}
+    .sectionTitle h2{font-size:28px;letter-spacing:-.2px}
+    .sectionTitle p{color:var(--muted);max-width:62ch}
 
-section{
-    padding:80px 10%;
-    text-align:center;
-}
+    .grid{display:grid;gap:14px}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    .grid2{grid-template-columns:repeat(2,1fr)}
 
-h2{
-    font-size:32px;
-    margin-bottom:30px;
-    color:#5e3d25;
-}
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      border:1px solid rgba(0,0,0,.06);
+      padding:16px;
+    }
+    .card h3{font-size:16px;margin-bottom:10px}
+    .muted{color:var(--muted)}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      background:rgba(47,111,94,.10);
+      border:1px solid rgba(47,111,94,.14);
+      font-weight:600;font-size:13px;
+    }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
-}
+    /* MENU LIST */
+    .menuList{display:grid;gap:10px}
+    .menuItem{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:12px 12px;border-radius:14px;
+      background: rgba(0,0,0,.03);
+      border:1px solid rgba(0,0,0,.05);
+    }
+    .menuItem b{font-size:14px}
+    .menuItem span{color:var(--muted);font-size:13px}
+    .price{font-weight:700}
 
-.card{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    transition:0.3s;
-}
+    /* SLIDER */
+    .slider{
+      width:100%;
+      max-width:1100px;
+      margin: 0 auto;
+      border-radius: var(--radius);
+      overflow:hidden;
+      position:relative;
+      background:#ddd;
+      height: 360px;
+      border:1px solid rgba(0,0,0,.06);
+      box-shadow:var(--shadow);
+    }
+    .slides{
+      height:100%;
+      display:flex;
+      transform: translateX(0);
+      transition: transform .8s ease;
+    }
+    .slides img{
+      flex: 0 0 100%;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .dots{
+      position:absolute;left:50%;bottom:12px;transform:translateX(-50%);
+      display:flex;gap:8px;
+      padding:8px 10px;border-radius:999px;
+      background:rgba(255,255,255,.65);
+      border:1px solid rgba(0,0,0,.08);
+      backdrop-filter: blur(8px);
+    }
+    .dot{
+      width:8px;height:8px;border-radius:99px;
+      background:rgba(0,0,0,.25);
+      cursor:pointer;
+    }
+    .dot.active{background:rgba(0,0,0,.70); width:18px}
 
-.card:hover{
-    transform:translateY(-5px);
-}
+    /* FOOTER + FLOAT WA */
+    footer{
+      padding:34px 0 46px;
+      border-top:1px solid rgba(0,0,0,.06);
+      color:var(--muted);
+    }
+    .footRow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .waFloat{
+      position:fixed; right:18px; bottom:18px; z-index:60;
+      background:#25D366;
+      color:#fff; font-weight:700;
+      border-radius:999px;
+      padding:12px 14px;
+      box-shadow: 0 14px 34px rgba(0,0,0,.20);
+    }
 
-.gallery img{
-    width:100%;
-    border-radius:15px;
-}
-
-.info{
-    background:#fff;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.05);
-}
-
-footer{
-    background:#2f2f2f;
-    color:white;
-    padding:40px 10%;
-    text-align:center;
-}
-
-.small{
-    font-size:14px;
-    opacity:0.8;
-}
-
-@media(max-width:768px){
-    header h1{font-size:38px;}
-}
-/* SLIDER (FIX HEIGHT) */
-.slider{
-  width:100%;
-  max-width:980px;
-  margin: 0 auto;
-  border-radius:20px;
-  overflow:hidden;
-  position:relative;
-  background:#ddd;
-
-  height: 420px;        /* kunci tinggi */
-}
-
-@media (max-width: 768px){
-  .slider{ height: 260px; } /* di HP lebih pendek */
-}
-
-.slides{
-  height:100%;
-  display:flex;
-  transform: translateX(0);
-  transition: transform .8s ease;
-}
-
-.slides img{
-  flex: 0 0 100%;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-    
-</style>
+    /* RESPONSIVE */
+    @media (max-width: 900px){
+      .heroGrid{grid-template-columns:1fr; }
+      .hero h1{font-size:36px}
+      .grid3{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+      .slider{height: 260px;}
+      .nav ul{display:none}
+      .menuBtn{display:inline-flex}
+      .mobileMenu{
+        display:none;
+        padding:10px 0 16px;
+      }
+      .mobileMenu a{
+        display:block; padding:10px 0; color:var(--muted); font-weight:600;
+        border-top:1px solid rgba(0,0,0,.06);
+      }
+      .mobileMenu a:hover{color:var(--text)}
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-<div>
-<h1>SAWAH SENJA COFFEE</h1>
-<p>Rustic Modern Tropical Coffee Shop dengan view sawah terbuka yang hangat, estetik, dan nyaman untuk nongkrong, kerja, dan berkumpul.</p>
-<a href="https://wa.me/6283894403505" class="btn">Reservasi Sekarang</a>
-</div>
-</header>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container">
+      <div class="row">
+        <div class="brand">
+          <div class="logo"></div>
+          <div>
+            <div>Sawah Senja Coffee</div>
+            <div class="muted" style="font-size:12px;font-weight:600;">Rustic • Tropical • Karawang</div>
+          </div>
+        </div>
 
-<section>
-<h2>Tentang Kami</h2>
-<p>Sawah Senja Coffee adalah coffee shop dengan konsep rustic modern tropical yang menghadirkan suasana hangat dan instagramable. Berdiri sejak 2023, kami menjadi tempat favorit mahasiswa, freelancer, keluarga, hingga komunitas lokal.</p>
-</section>
+        <ul>
+          <li><a class="link" href="#tentang">Tentang</a></li>
+          <li><a class="link" href="#menu">Menu</a></li>
+          <li><a class="link" href="#fasilitas">Fasilitas</a></li>
+          <li><a class="link" href="#lokasi">Lokasi</a></li>
+        </ul>
 
-<section>
-<h2>Menu Andalan</h2>
-<div class="grid">
+        <a class="btn small menuBtn" href="#!" id="menuBtn">Menu</a>
+      </div>
 
-<div class="card">
-<h3>☕ Coffee Based</h3>
-<p>Espresso – 20K</p>
-<p>Americano – 22K</p>
-<p>Cappuccino – 28K</p>
-<p>Latte – 30K</p>
-<p><strong>Aren Latte – 32K (Best Seller)</strong></p>
-</div>
-
-<div class="card">
-<h3>🧋 Non Coffee</h3>
-<p>Matcha Latte – 30K</p>
-<p>Chocolate Signature – 28K</p>
-<p>Red Velvet – 30K</p>
-<p>Thai Tea – 25K</p>
-</div>
-
-<div class="card">
-<h3>🍝 Makanan</h3>
-<p>Nasi Goreng – 35K</p>
-<p>Chicken Katsu – 32K</p>
-<p>Spaghetti – 34K</p>
-<p>Mix Platter – 45K</p>
-</div>
-
-</div>
-<p style="margin-top:20px;"><strong>Range harga:</strong> Rp 25.000 – Rp 75.000</p>
-</section>
-
-<section>
-  <h2>Galeri</h2>
-
-  <div class="slider" aria-label="Galeri foto">
-    <div class="slides" id="slides">
-      <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=80" alt="Suasana cafe">
-      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1600&q=80" alt="Kopi">
-      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80" alt="Bar & interior">
-      <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1600&q=80" alt="Makanan">
+      <div class="mobileMenu" id="mobileMenu">
+        <a href="#tentang">Tentang</a>
+        <a href="#menu">Menu</a>
+        <a href="#galeri">Galeri</a>
+        <a href="#fasilitas">Fasilitas</a>
+        <a href="#lokasi">Lokasi</a>
+      </div>
     </div>
   </div>
-</section>
 
-<section>
-<h2>Fasilitas & Keunggulan</h2>
-<div class="grid">
-<div class="card">WiFi 100 Mbps & Banyak Colokan</div>
-<div class="card">Indoor AC & Outdoor View Sawah</div>
-<div class="card">Meeting Room 15 Orang</div>
-<div class="card">Live Acoustic Setiap Sabtu</div>
-<div class="card">Harga Ramah Mahasiswa</div>
-<div class="card">Kopi dari Petani Lokal Indonesia</div>
-</div>
-</section>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container heroGrid">
+      <div>
+        <span class="chip">🌾 View sawah • ☕ Kopi lokal • 💻 Nyaman untuk WFC</span>
+        <h1>Ngopi santai, kerja fokus, dan menikmati senja — di satu tempat.</h1>
+        <p>
+          Coffee shop konsep <b>rustic modern tropical</b> dengan suasana hangat, estetik, dan nyaman.
+          Cocok untuk nongkrong, meeting kecil, hingga konten kreator.
+        </p>
 
-<section>
-<h2>Jam Operasional</h2>
-<div class="info">
-<p>Senin – Jumat : 10.00 – 23.00</p>
-<p>Sabtu – Minggu : 09.00 – 23.30</p>
-</div>
-</section>
+        <div class="heroActions">
+          <a class="btn" href="https://wa.me/6283894403505" target="_blank" rel="noopener">WhatsApp / Reservasi</a>
+          <a class="btn secondary" href="#menu">Lihat Menu</a>
+        </div>
+      </div>
 
-<section>
-<h2>Lokasi & Kontak</h2>
-<div class="info">
-<p><strong>Alamat:</strong><br>
-Jl. Raya Sukamakmur No. 88, Karawang Barat, Jawa Barat 41361</p>
-<p><strong>WhatsApp:</strong> 083894403505</p>
-<p><strong>Email:</strong> hello@sawahsenjacoffee.id</p>
-<p><strong>Instagram:</strong> @sawahsenja.coffee</p>
-</div>
-</section>
+      <div class="heroCard">
+        <div class="heroPhoto"></div>
+        <div class="heroMeta">
+          <div class="metaBox">
+            <b>Jam Buka</b>
+            <span>Sen–Jum 10.00–23.00<br>Sab–Min 09.00–23.30</span>
+          </div>
+          <div class="metaBox">
+            <b>Range Harga</b>
+            <span>Rp 25.000 – Rp 75.000 / orang</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<section>
-<h2>Testimoni</h2>
-<div class="grid">
-<div class="card">“Tempatnya nyaman banget buat kerja, wifi kenceng dan kopinya enak!” – Dimas</div>
-<div class="card">“View sawahnya bikin betah, cocok buat nongkrong sore.” – Rina</div>
-</div>
-</section>
+  <!-- TENTANG -->
+  <section id="tentang">
+    <div class="container">
+      <div class="sectionTitle">
+        <h2>Tentang Kami</h2>
+        <p>
+          Berdiri sejak 2023, Sawah Senja Coffee menghadirkan perpaduan kopi berkualitas,
+          makanan lezat, dan suasana instagramable dengan pemandangan alam terbuka.
+        </p>
+      </div>
 
-<footer>
-<h3>Sawah Senja Coffee</h3>
-<p class="small">© 2026 Sawah Senja Coffee. All Rights Reserved.</p>
-</footer>
-<script>
-(function(){
-  const track = document.getElementById('slides');
-  if(!track) return;
+      <div class="grid grid3">
+        <div class="card">
+          <h3>✨ Konsep</h3>
+          <p class="muted">Rustic modern tropical, hangat, nyaman, dan estetik untuk semua kalangan.</p>
+        </div>
+        <div class="card">
+          <h3>☕ Kualitas</h3>
+          <p class="muted">Biji kopi pilihan dari petani lokal Indonesia — diracik dengan sepenuh hati.</p>
+        </div>
+        <div class="card">
+          <h3>💻 WFC Friendly</h3>
+          <p class="muted">WiFi kencang, banyak colokan, dan spot duduk nyaman untuk kerja fokus.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  const total = track.children.length;
-  let i = 0;
+  <!-- MENU -->
+  <section id="menu">
+    <div class="container">
+      <div class="sectionTitle">
+        <h2>Menu Andalan</h2>
+        <p>Pilihan best seller dan favorit pelanggan. (Bisa kamu tambah lagi nanti dengan mudah.)</p>
+      </div>
 
-  setInterval(function(){
-    i = (i + 1) % total;
-    track.style.transform = 'translateX(-' + (i * 100) + '%)';
-  }, 3500);
-})();
-</script>
-    
+      <div class="grid grid3">
+        <div class="card">
+          <h3>☕ Coffee Based</h3>
+          <div class="menuList">
+            <div class="menuItem"><b>Espresso</b><span class="price">20K</span></div>
+            <div class="menuItem"><b>Americano</b><span class="price">22K</span></div>
+            <div class="menuItem"><b>Cappuccino</b><span class="price">28K</span></div>
+            <div class="menuItem"><b>Cafe Latte</b><span class="price">30K</span></div>
+            <div class="menuItem"><b>Caramel Latte</b><span class="price">33K</span></div>
+            <div class="menuItem"><b>Aren Latte (Best Seller)</b><span class="price">32K</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🧋 Non Coffee</h3>
+          <div class="menuList">
+            <div class="menuItem"><b>Matcha Latte</b><span class="price">30K</span></div>
+            <div class="menuItem"><b>Chocolate Signature</b><span class="price">28K</span></div>
+            <div class="menuItem"><b>Red Velvet Latte</b><span class="price">30K</span></div>
+            <div class="menuItem"><b>Thai Tea</b><span class="price">25K</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🍝 Makanan</h3>
+          <div class="menuList">
+            <div class="menuItem"><b>Nasi Goreng Sawah Senja</b><span class="price">35K</span></div>
+            <div class="menuItem"><b>Chicken Katsu Rice Bowl</b><span class="price">32K</span></div>
+            <div class="menuItem"><b>Spaghetti Aglio Olio</b><span class="price">34K</span></div>
+            <div class="menuItem"><b>French Fries</b><span class="price">22K</span></div>
+            <div class="menuItem"><b>Mix Platter</b><span class="price">45K</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+        <span class="pill">🎓 Student Day: Diskon 20% setiap Senin</span>
+        <span class="pill">🎉 Buy 1 Get 1 setiap tanggal cantik</span>
+        <span class="pill">📣 Paket meeting mulai 75K/orang</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERI SLIDER -->
+  <section id="galeri">
+    <div class="container">
+      <div class="sectionTitle">
+        <h2>Galeri</h2>
+        <p>Suasana yang estetik & instagramable — indoor AC, outdoor view sawah, hingga semi rooftop.</p>
+      </div>
+
+      <div class="slider">
+        <div class="slides" id="slides">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=80" alt="Suasana cafe">
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1600&q=80" alt="Kopi">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80" alt="Interior">
+          <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1600&q=80" alt="Makanan">
+        </div>
+
+        <div class="dots" id="dots" aria-label="indikator slider"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FASILITAS -->
+  <section id="fasilitas">
+    <div class="container">
+      <div class="sectionTitle">
+        <h2>Fasilitas & Keunggulan</h2>
+        <p>Semua yang kamu butuhkan untuk nyaman — dari WFC sampai kumpul keluarga.</p>
+      </div>
+
+      <div class="grid grid3">
+        <div class="card"><h3>⚡ WiFi 100 Mbps</h3><p class="muted">Stabil untuk kerja & meeting online.</p></div>
+        <div class="card"><h3>🔌 Banyak Colokan</h3><p class="muted">Nyaman untuk laptop & device.</p></div>
+        <div class="card"><h3>🕌 Musholla</h3><p class="muted">Fasilitas ibadah tersedia.</p></div>
+        <div class="card"><h3>🅿️ Parkir Luas</h3><p class="muted">Aman dan nyaman.</p></div>
+        <div class="card"><h3>🏢 Meeting Room (15)</h3><p class="muted">Projector & screen by request.</p></div>
+        <div class="card"><h3>🎶 Live Acoustic</h3><p class="muted">Setiap Sabtu 19.30 WIB.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONI + VISI MISI -->
+  <section>
+    <div class="container">
+      <div class="grid grid2">
+        <div class="card">
+          <h3>⭐ Testimoni</h3>
+          <p class="muted">“Tempatnya nyaman banget buat kerja, wifi kenceng dan kopinya enak!” — <b>Dimas</b></p>
+          <p class="muted" style="margin-top:10px;">“View sawahnya bikin betah, cocok buat nongkrong sore.” — <b>Rina</b></p>
+        </div>
+        <div class="card">
+          <h3>🎯 Visi & Misi</h3>
+          <p class="muted"><b>Visi:</b> Menjadi coffee shop pilihan utama di Karawang dengan pengalaman ngopi terbaik.</p>
+          <p class="muted" style="margin-top:10px;"><b>Misi:</b> Kopi berkualitas • Pelayanan terbaik • Ruang kreatif komunitas lokal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOKASI -->
+  <section id="lokasi">
+    <div class="container">
+      <div class="sectionTitle">
+        <h2>Lokasi & Kontak</h2>
+        <p>Mudah ditemukan. Klik WhatsApp untuk reservasi atau tanya-tanya.</p>
+      </div>
+
+      <div class="grid grid2">
+        <div class="card">
+          <h3>📍 Informasi</h3>
+          <p class="muted"><b>Alamat:</b><br>Jl. Raya Sukamakmur No. 88, Karawang Barat, Jawa Barat 41361</p>
+          <p class="muted" style="margin-top:10px;"><b>WhatsApp:</b> <a href="https://wa.me/6283894403505" target="_blank" rel="noopener">083894403505</a></p>
+          <p class="muted"><b>Email:</b> hello@sawahsenjacoffee.id</p>
+          <p class="muted"><b>Instagram:</b> @sawahsenja.coffee</p>
+          <p class="muted" style="margin-top:10px;"><b>Jam:</b><br>Sen–Jum 10.00–23.00<br>Sab–Min 09.00–23.30</p>
+
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+            <a class="btn small" href="https://wa.me/6283894403505" target="_blank" rel="noopener">Chat WhatsApp</a>
+            <a class="btn small secondary" href="#galeri">Lihat Galeri</a>
+          </div>
+        </div>
+
+        <div class="card" style="padding:0;overflow:hidden;">
+          <iframe
+            title="Maps Sawah Senja Coffee"
+            src="https://www.google.com/maps?q=Jl.%20Raya%20Sukamakmur%20No.%2088%20Karawang%20Barat%20Jawa%20Barat%2041361&output=embed"
+            width="100%" height="360" style="border:0" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footRow">
+      <div>
+        <div style="font-weight:800">Sawah Senja Coffee</div>
+        <div class="muted" style="font-size:13px;">© 2026 • Karawang, Jawa Barat</div>
+      </div>
+      <div class="muted" style="font-size:13px;">
+        Dibuat untuk web profil sederhana — siap jual paket UMKM.
+      </div>
+    </div>
+  </footer>
+
+  <a class="waFloat" href="https://wa.me/6283894403505" target="_blank" rel="noopener">WhatsApp</a>
+
+  <script>
+    // mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if(menuBtn && mobileMenu){
+      menuBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        mobileMenu.style.display = (mobileMenu.style.display === 'block') ? 'none' : 'block';
+      });
+      mobileMenu.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', ()=> mobileMenu.style.display='none');
+      });
+    }
+
+    // slider
+    (function(){
+      const track = document.getElementById('slides');
+      const dotsWrap = document.getElementById('dots');
+      if(!track || !dotsWrap) return;
+
+      const total = track.children.length;
+      let i = 0;
+      let timer;
+
+      function renderDots(){
+        dotsWrap.innerHTML = '';
+        for(let d=0; d<total; d++){
+          const dot = document.createElement('div');
+          dot.className = 'dot' + (d===0 ? ' active' : '');
+          dot.addEventListener('click', ()=> goTo(d, true));
+          dotsWrap.appendChild(dot);
+        }
+      }
+      function setActiveDot(idx){
+        dotsWrap.querySelectorAll('.dot').forEach((el, n)=>{
+          el.classList.toggle('active', n===idx);
+        });
+      }
+      function goTo(idx, manual){
+        i = idx;
+        track.style.transform = 'translateX(-' + (i * 100) + '%)';
+        setActiveDot(i);
+        if(manual){
+          clearInterval(timer);
+          timer = setInterval(next, 3500);
+        }
+      }
+      function next(){
+        i = (i + 1) % total;
+        goTo(i, false);
+      }
+
+      renderDots();
+      timer = setInterval(next, 3500);
+    })();
+  </script>
 </body>
 </html>
