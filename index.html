@@ -51,15 +51,29 @@
       background:linear-gradient(to bottom, rgba(255,255,255,.88), rgba(255,255,255,.56));
     }
     .navin{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
-    .brand{display:flex;gap:10px;align-items:center;min-width:0}
+    .brand{display:flex;gap:12px;align-items:center;min-width:0}
     .logo{
-      width:38px;height:38px;border-radius:14px;
+      width:40px;height:40px;border-radius:14px;
       background: radial-gradient(circle at 30% 30%, rgba(215,181,111,.95), rgba(123,215,201,.25), rgba(255,255,255,.06));
       border:1px solid var(--line);
       box-shadow:0 18px 45px rgba(215,181,111,.18);
+      flex:0 0 40px;
     }
-    .brand h1{margin:0;font-size:14px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .brand p{margin:2px 0 0 0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+    /* Nama usaha dibuat lebih besar & jelas */
+    .brand h1{
+      margin:0;
+      font-size:16px;
+      line-height:1.12;
+      letter-spacing:-.02em;
+      font-weight:900;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .brand p{
+      margin:2px 0 0 0;color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
     .right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
     .btn{
       padding:10px 14px;border-radius:14px;
@@ -114,11 +128,25 @@
       width:fit-content;
     }
     .kdot{width:7px;height:7px;border-radius:99px;background:var(--accent2);box-shadow:0 0 0 4px rgba(123,215,201,.14)}
-    .title{
-      margin:14px 0 10px;
-      font-size:48px;line-height:1.04;letter-spacing:-.03em;
+
+    /* Nama usaha dibuat besar di hero (lebih jelas website usaha apa) */
+    .bizName{
+      margin:12px 0 8px;
+      font-size:44px;
+      line-height:1.02;
+      letter-spacing:-.03em;
+      font-weight:900;
     }
-    @media(max-width:720px){.title{font-size:36px}}
+    @media(max-width:720px){.bizName{font-size:34px}}
+
+    .title{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.25;
+      color:var(--muted);
+      font-weight:700;
+    }
+
     .grad{
       background:linear-gradient(135deg, rgba(215,181,111,1), rgba(123,215,201,.9));
       -webkit-background-clip:text;background-clip:text;color:transparent;
@@ -168,9 +196,7 @@
     @media(max-width:980px){.slider{min-height: 440px}}
     @media(max-width:720px){.slider{min-height: 380px}}
 
-    .slides{
-      position:absolute;inset:0;
-    }
+    .slides{position:absolute;inset:0}
     .s{
       position:absolute;inset:0;
       opacity:0;
@@ -182,12 +208,8 @@
       background-position:center;
       filter:saturate(1.05) contrast(1.04);
     }
-    .s.active{
-      opacity:1;
-      transform: scale(1.00);
-    }
+    .s.active{opacity:1;transform: scale(1.00)}
 
-    /* cinematic overlays */
     .overlay{
       position:absolute;inset:0;z-index:2;
       background:
@@ -247,16 +269,13 @@
     .dotBtn:hover{transform:translateY(-1px)}
     .dotBtn.active{width:22px;background:rgba(215,181,111,.96)}
 
-    /* smooth caption entrance */
-    .capAnim{
-      animation: capIn .55s ease both;
-    }
+    .capAnim{animation: capIn .55s ease both;}
     @keyframes capIn{
       from{opacity:0; transform: translateY(10px)}
       to{opacity:1; transform: translateY(0)}
     }
 
-    /* ===== SECTION: Highlights + Reviews ===== */
+    /* ===== SECTION ===== */
     .section{padding:22px 0}
     .panel{
       border:1px solid var(--line);
@@ -267,9 +286,7 @@
     .secTitle{margin:0 0 8px 0;font-size:16px}
     .secText{margin:0;color:var(--muted);font-size:13.2px;line-height:1.7}
 
-    .highRow{
-      display:flex;gap:10px;flex-wrap:wrap;margin-top:12px
-    }
+    .highRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     .badge{
       display:inline-flex;gap:10px;align-items:flex-start;
       padding:12px 14px;border-radius:18px;
@@ -295,16 +312,12 @@
       background:rgba(0,0,0,.12);
       border-radius:18px;
       padding:14px;
-      position:relative;
-      overflow:hidden;
     }
     [data-theme="light"] .review{background:rgba(0,0,0,.03)}
     .review p{margin:0;color:var(--text);font-size:13px;line-height:1.7}
     .review small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
 
-    .locRow{
-      display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:stretch
-    }
+    .locRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:stretch}
     .locCard{
       flex:1;min-width:260px;
       border:1px solid var(--line);
@@ -326,33 +339,40 @@
 </head>
 
 <body>
-  <!-- NAV -->
   <div class="nav">
     <div class="wrap navin">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <div style="min-width:0">
-          <h1>La Madre Coffee &amp; Roastery</h1>
-          <p>Hidden gem • Cozy • Specialty coffee &amp; comfort food</p>
+          <h1>LA MADRE COFFEE &amp; ROASTERY</h1>
+          <p>Specialty coffee • Comfort food • Karawang</p>
         </div>
       </div>
 
       <div class="right">
         <button class="btn icon" id="themeBtn" type="button">🌓 <span style="font-weight:900">Mode</span></button>
-        <a class="btn" href="order.html">Order</a>
+
+        <!-- Order -> Order/Menu -->
+        <a class="btn" href="order.html">Order/Menu</a>
+
+        <!-- Tambah Reservasi (auto pesan WA) -->
+        <a class="btn" id="reserveBtn" target="_blank" rel="noreferrer">Reservasi</a>
+
         <a class="btn primary" href="https://wa.me/6281398686801" target="_blank" rel="noreferrer">Chat WhatsApp</a>
       </div>
     </div>
   </div>
 
-  <!-- HERO -->
   <header class="hero">
     <div class="wrap">
       <div class="heroGrid">
-        <!-- LEFT: Text -->
         <div>
           <div class="kicker"><span class="kdot"></span> Coffee &amp; Roastery • Karawang</div>
-          <h2 class="title">Create a pleasure <span class="grad">in a cup</span>.</h2>
+
+          <!-- Nama usaha dibuat lebih besar & jelas -->
+          <div class="bizName">La Madre <span class="grad">Coffee</span> &amp; <span class="grad">Roastery</span></div>
+          <div class="title">Create a pleasure in a cup of coffee.</div>
+
           <p class="desc">
             La Madre Coffee &amp; Roastery. Here we create a pleasure in a cup of coffee, based on specialty grade coffee we serve a good cup for you.
             We also provide comfort food, snacks, dessert to accompany your coffee. We dedicated to provide friendly and humble service to maximize your comfort.
@@ -360,7 +380,8 @@
           </p>
 
           <div class="cta">
-            <a class="btn primary" href="order.html">Buat Pesanan</a>
+            <!-- Bagian pesan juga disamakan: Order/Menu -->
+            <a class="btn primary" href="order.html">Order/Menu</a>
             <a class="btn" href="#info">Lokasi & Jam</a>
           </div>
 
@@ -371,12 +392,9 @@
           </div>
         </div>
 
-        <!-- RIGHT: Premium Slider -->
         <div class="sliderCard" aria-label="Galeri foto La Madre">
           <div class="slider">
             <div class="slides" id="slides">
-              <!-- FOTO PILIHAN BARU (lebih premium & relevan coffee shop) -->
-              <!-- Tip: Kalau kamu punya foto asli cafe, nanti tinggal ganti URL di sini -->
               <div class="s active" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2000&q=80')"></div>
               <div class="s" style="background-image:url('https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=2000&q=80')"></div>
               <div class="s" style="background-image:url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=2000&q=80')"></div>
@@ -404,7 +422,6 @@
         </div>
       </div>
 
-      <!-- HIGHLIGHTS -->
       <section class="section" id="highlights">
         <div class="panel">
           <h3 class="secTitle">Kenapa orang suka La Madre?</h3>
@@ -437,7 +454,6 @@
             </div>
           </div>
 
-          <!-- REVIEWS (ringkas, tapi terasa “hidup”) -->
           <div class="review">
             <p>“Tempatnya cozzyy, ada outdoor dan indoor, luas, lengkap… enak untuk meetup, ngerjain tugas, atau nongki2 cantik. Recommended!”</p>
             <small>— Dwiana Yulianita (Local Guide)</small>
@@ -449,7 +465,6 @@
         </div>
       </section>
 
-      <!-- LOCATION -->
       <section class="section" id="info">
         <div class="panel">
           <h3 class="secTitle">Lokasi & Jam Operasional</h3>
@@ -476,7 +491,7 @@
               <b>Kontak</b>
               <div>
                 WhatsApp: 0813-9868-6801<br/>
-                Klik tombol “Chat WhatsApp” di atas untuk tanya-tanya / reservasi.
+                Klik “Reservasi” untuk booking tempat.
               </div>
             </div>
           </div>
@@ -512,7 +527,15 @@
       });
     })();
 
-    // ===== Premium Slider (fade + zoom + caption anim + dots + prev/next)
+    // ===== Reservasi button (WA auto message)
+    (function(){
+      const WA_NUMBER = "6281398686801"; // ganti jika perlu
+      const btn = document.getElementById("reserveBtn");
+      const msg = "Halo La Madre Coffee & Roastery, saya ingin reservasi. Mohon info ketersediaan tempat ya. Terima kasih.";
+      btn.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+    })();
+
+    // ===== Premium Slider
     (function(){
       const slidesWrap = document.getElementById("slides");
       const slides = Array.from(slidesWrap.querySelectorAll(".s"));
@@ -526,31 +549,11 @@
       const capSub   = document.getElementById("capSub");
 
       const data = [
-        {
-          t:"Cozy & classy ambience",
-          d:"Hidden gem di Karawang—tenang, nyaman, cocok untuk quality time atau kerja santai.",
-          s:"Indoor adem & suasana cozy."
-        },
-        {
-          t:"Perfect for meetup & WFC",
-          d:"Area luas, vibe calm, cocok buat meetup, nugas, atau kerja remote.",
-          s:"Banyak pengunjung bilang tempatnya nyaman."
-        },
-        {
-          t:"Comfort food, snacks, dessert",
-          d:"Makanan lengkap untuk nemenin kopi: dari main course, snack sampai dessert.",
-          s:"Cocok buat makan siang / malam."
-        },
-        {
-          t:"Specialty grade coffee",
-          d:"Roastery + kopi yang serius. Rasa enak, nggak berlebihan, worth it.",
-          s:"Favorit coffee lovers."
-        },
-        {
-          t:"A good cup for you",
-          d:"Friendly & humble service untuk memaksimalkan kenyamanan kamu.",
-          s:"Come & take your time. Enjoy!"
-        }
+        { t:"Cozy & classy ambience", d:"Hidden gem di Karawang—tenang, nyaman, cocok untuk quality time atau kerja santai.", s:"Indoor adem & suasana cozy." },
+        { t:"Perfect for meetup & WFC", d:"Area luas, vibe calm, cocok buat meetup, nugas, atau kerja remote.", s:"Banyak pengunjung bilang tempatnya nyaman." },
+        { t:"Comfort food, snacks, dessert", d:"Makanan lengkap untuk nemenin kopi: dari main course, snack sampai dessert.", s:"Cocok buat makan siang / malam." },
+        { t:"Specialty grade coffee", d:"Roastery + kopi yang serius. Rasa enak, nggak berlebihan, worth it.", s:"Favorit coffee lovers." },
+        { t:"Friendly & humble service", d:"Kami berusaha memberi service terbaik agar kamu nyaman berlama-lama.", s:"Come & take your time. Enjoy!" }
       ];
 
       let i = 0;
@@ -565,20 +568,18 @@
           dotsWrap.appendChild(b);
         });
       }
-
       function setDots(idx){
         dotsWrap.querySelectorAll(".dotBtn").forEach((b, n)=>{
           b.classList.toggle("active", n===idx);
         });
       }
-
       function setCaption(idx){
         capTitle.textContent = data[idx].t;
         capText.textContent  = data[idx].d;
         capSub.textContent   = data[idx].s;
 
         cap.classList.remove("capAnim");
-        void cap.offsetWidth; // restart animation
+        void cap.offsetWidth;
         cap.classList.add("capAnim");
       }
 
@@ -594,17 +595,14 @@
           timer = setInterval(()=>nextSlide(false), 4200);
         }
       }
-
       function nextSlide(manual){
-        const idx = (i + 1) % slides.length;
-        goTo(idx, manual);
+        goTo((i+1) % slides.length, manual);
       }
       function prevSlide(){
-        const idx = (i - 1 + slides.length) % slides.length;
-        goTo(idx, true);
+        goTo((i-1+slides.length) % slides.length, true);
       }
 
-      // subtle parallax on mouse move
+      // Parallax subtle
       const slider = slidesWrap.parentElement;
       slider.addEventListener("mousemove", (e)=>{
         const rect = slider.getBoundingClientRect();
@@ -619,7 +617,7 @@
       prev.addEventListener("click", prevSlide);
       next.addEventListener("click", ()=>nextSlide(true));
 
-      // swipe mobile
+      // Swipe mobile
       let startX = 0;
       slider.addEventListener("touchstart", (e)=>{ startX = e.touches[0].clientX; }, {passive:true});
       slider.addEventListener("touchend", (e)=>{
