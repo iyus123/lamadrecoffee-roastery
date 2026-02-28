@@ -335,18 +335,30 @@
     .locText{color:var(--muted);font-size:13px;line-height:1.7;margin-top:6px}
     .locHint{color:var(--muted);font-size:12px;line-height:1.5;margin-top:10px;opacity:.9}
 
-    .hours{
-      width:100%;
-      margin-top:10px;
-      border-collapse:collapse;
-      font-size:12.8px;
-      color:var(--muted);
-    }
-    .hours td{
-      padding:8px 0;
-      border-bottom:1px solid var(--line);
-    }
-    .hours td:last-child{text-align:right;color:var(--text);font-weight:800}
+    .hoursMini{
+  margin-top:10px;
+  display:grid;
+  gap:8px;
+}
+.hRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  font-size:12.8px;
+  color:var(--muted);
+}
+[data-theme="light"] .hRow{background:rgba(0,0,0,.03)}
+.hRow b{
+  color:var(--text);
+  font-weight:900;
+  font-size:12.8px;
+  white-space:nowrap;
+}
 
     /* ===== REVIEWS SLIDER (bottom) ===== */
     .revWrap{
@@ -567,23 +579,20 @@
               </div>
             </div>
 
-            <div class="locSmall">
-              <div class="locIcon">🕒</div>
-              <div>
-                <b>Jam Operasional</b>
-                <table class="hours">
-                  <tr><td>Senin</td><td>11.00 – 22.00</td></tr>
-                  <tr><td>Selasa</td><td>11.00 – 22.00</td></tr>
-                  <tr><td>Rabu</td><td>11.00 – 22.00</td></tr>
-                  <tr><td>Kamis</td><td>11.00 – 22.00</td></tr>
-                  <tr><td>Jumat</td><td>11.00 – 22.00</td></tr>
-                  <tr><td>Sabtu</td><td>11.00 – 23.00</td></tr>
-                  <tr><td>Minggu</td><td>11.00 – 22.00</td></tr>
-                </table>
-                <div class="locHint">Tips: Sabtu malam biasanya lebih ramai, cocok reservasi dulu.</div>
-              </div>
-            </div>
+           <div class="locSmall">
+  <div class="locIcon">🕒</div>
+  <div>
+    <b>Jam Operasional</b>
 
+    <div class="hoursMini">
+      <div class="hRow"><span>Senin–Jumat</span><b>11.00 – 22.00</b></div>
+      <div class="hRow"><span>Sabtu</span><b>11.00 – 23.00</b></div>
+      <div class="hRow"><span>Minggu</span><b>11.00 – 22.00</b></div>
+    </div>
+
+    <div class="locHint">Tips: Sabtu malam biasanya lebih ramai, cocok reservasi dulu.</div>
+  </div>
+</div>
             <div class="locSmall">
               <div class="locIcon">☎️</div>
               <div>
