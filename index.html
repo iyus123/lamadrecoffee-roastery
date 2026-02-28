@@ -111,34 +111,31 @@ footer{
 @media(max-width:768px){
     header h1{font-size:38px;}
 }
-/* SLIDER */
-
+/* SLIDER (FIXED) */
 .slider{
-    position:relative;
-    width:100%;
-    overflow:hidden;
-    border-radius:20px;
-    max-width:900px;
-    margin:auto;
+  width:100%;
+  max-width:980px;
+  margin: 0 auto;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  aspect-ratio: 16 / 9;   /* ini yang bikin tidak “kebesaran” */
+  background:#ddd;
 }
 
 .slides{
-    display:flex;
-    width:400%;
-    animation:slide 16s infinite;
+  height:100%;
+  display:flex;
+  transform: translateX(0);
+  transition: transform .8s ease;
 }
 
 .slides img{
-    width:100%;
-    object-fit:cover;
-}
-
-@keyframes slide{
-    0%{transform:translateX(0);}
-    25%{transform:translateX(-100%);}
-    50%{transform:translateX(-200%);}
-    75%{transform:translateX(-300%);}
-    100%{transform:translateX(0);}
+  flex: 0 0 100%;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
     
 </style>
@@ -193,17 +190,16 @@ footer{
 </section>
 
 <section>
-<h2>Galeri</h2>
+  <h2>Galeri</h2>
 
-<div class="slider">
-    <div class="slides">
-        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24">
-        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
-        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085">
-        <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0">
+  <div class="slider" aria-label="Galeri foto">
+    <div class="slides" id="slides">
+      <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=80" alt="Suasana cafe">
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1600&q=80" alt="Kopi">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80" alt="Bar & interior">
+      <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1600&q=80" alt="Makanan">
     </div>
-</div>
-
+  </div>
 </section>
 
 <section>
@@ -249,6 +245,20 @@ Jl. Raya Sukamakmur No. 88, Karawang Barat, Jawa Barat 41361</p>
 <h3>Sawah Senja Coffee</h3>
 <p class="small">© 2026 Sawah Senja Coffee. All Rights Reserved.</p>
 </footer>
+<script>
+  (function(){
+    const slides = document.getElementById('slides');
+    if(!slides) return;
 
+    const total = slides.children.length;
+    let i = 0;
+
+    setInterval(() => {
+      i = (i + 1) % total;
+      slides.style.transform = `translateX(-${i * 100}%)`;
+    }, 3500);
+  })();
+</script>
+    
 </body>
 </html>
