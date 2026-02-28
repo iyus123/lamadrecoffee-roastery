@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -36,7 +36,12 @@
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:"Plus Jakarta Sans",system-ui,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text)}
+    html,body{
+      margin:0;padding:0;
+      font-family:"Plus Jakarta Sans",system-ui,Segoe UI,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg),var(--bg2));
+      color:var(--text);
+    }
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
 
@@ -52,15 +57,15 @@
     }
     .navin{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
     .brand{display:flex;gap:12px;align-items:center;min-width:0}
-    .logo{
-      width:40px;height:40px;border-radius:14px;
-      background: radial-gradient(circle at 30% 30%, rgba(215,181,111,.95), rgba(123,215,201,.25), rgba(255,255,255,.06));
+    .logoImg{
+      width:46px;height:46px;
+      border-radius:18px;
+      object-fit:cover;
       border:1px solid var(--line);
       box-shadow:0 18px 45px rgba(215,181,111,.18);
-      flex:0 0 40px;
+      flex:0 0 46px;
+      background:#000;
     }
-
-    /* Nama usaha dibuat lebih besar & jelas */
     .brand h1{
       margin:0;
       font-size:16px;
@@ -68,6 +73,7 @@
       letter-spacing:-.02em;
       font-weight:900;
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      text-transform:uppercase;
     }
     .brand p{
       margin:2px 0 0 0;color:var(--muted);
@@ -84,6 +90,7 @@
       cursor:pointer;
       transition:.18s ease;
       user-select:none;
+      display:inline-flex;align-items:center;gap:8px;
     }
     .btn:hover{transform:translateY(-1px)}
     .btn.primary{
@@ -92,14 +99,10 @@
       color:#0b0c10;
       box-shadow:0 16px 40px rgba(215,181,111,.18);
     }
-    .btn.icon{display:inline-flex;align-items:center;gap:8px;padding:10px 12px}
+    .btn:active{transform:translateY(0px) scale(.98)}
 
     /* ===== HERO ===== */
-    .hero{
-      position:relative;
-      overflow:hidden;
-      padding: 26px 0 26px;
-    }
+    .hero{position:relative;overflow:hidden;padding:26px 0 26px}
     .hero::before{
       content:"";
       position:absolute;inset:-80px;
@@ -129,34 +132,32 @@
     }
     .kdot{width:7px;height:7px;border-radius:99px;background:var(--accent2);box-shadow:0 0 0 4px rgba(123,215,201,.14)}
 
-    /* Nama usaha dibuat besar di hero (lebih jelas website usaha apa) */
     .bizName{
       margin:12px 0 8px;
-      font-size:44px;
+      font-size:46px;
       line-height:1.02;
       letter-spacing:-.03em;
       font-weight:900;
     }
     @media(max-width:720px){.bizName{font-size:34px}}
-
-    .title{
-      margin:0 0 10px;
-      font-size:22px;
-      line-height:1.25;
-      color:var(--muted);
-      font-weight:700;
-    }
-
     .grad{
       background:linear-gradient(135deg, rgba(215,181,111,1), rgba(123,215,201,.9));
       -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .title{
+      margin:0 0 10px;
+      font-size:16px;
+      line-height:1.6;
+      color:var(--muted);
+      font-weight:700;
+      max-width:72ch;
     }
     .desc{
       margin:0;
       color:var(--muted);
       font-size:14.7px;
       line-height:1.75;
-      max-width: 72ch;
+      max-width: 78ch;
     }
     .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
     .miniRow{
@@ -184,10 +185,8 @@
       overflow:hidden;
       position:relative;
     }
-
     .slider{
-      position:relative;
-      width:100%;
+      position:relative;width:100%;
       min-height: 520px;
       overflow:hidden;
       background:#111;
@@ -214,7 +213,7 @@
       position:absolute;inset:0;z-index:2;
       background:
         radial-gradient(800px 500px at 30% 20%, rgba(0,0,0,.08), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.70));
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.72));
     }
 
     .content{
@@ -268,14 +267,13 @@
     [data-theme="light"] .dotBtn{background:rgba(0,0,0,.22)}
     .dotBtn:hover{transform:translateY(-1px)}
     .dotBtn.active{width:22px;background:rgba(215,181,111,.96)}
-
     .capAnim{animation: capIn .55s ease both;}
     @keyframes capIn{
       from{opacity:0; transform: translateY(10px)}
       to{opacity:1; transform: translateY(0)}
     }
 
-    /* ===== SECTION ===== */
+    /* ===== SECTIONS ===== */
     .section{padding:22px 0}
     .panel{
       border:1px solid var(--line);
@@ -306,28 +304,103 @@
     .badge b{display:block;font-size:13px}
     .badge span{display:block;margin-top:4px;color:var(--muted);font-size:12.3px;line-height:1.45}
 
-    .review{
-      margin-top:12px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.12);
-      border-radius:18px;
-      padding:14px;
+    /* ===== LOCATION (upgraded) ===== */
+    .locPanel{padding:18px}
+    .locTop{
+      display:flex;gap:12px;align-items:flex-end;justify-content:space-between;
+      flex-wrap:wrap;margin-bottom:14px
     }
-    [data-theme="light"] .review{background:rgba(0,0,0,.03)}
-    .review p{margin:0;color:var(--text);font-size:13px;line-height:1.7}
-    .review small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
+    .locActions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 
-    .locRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:stretch}
-    .locCard{
-      flex:1;min-width:260px;
+    .locGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr .8fr;
+      gap:12px;
+    }
+    @media(max-width:980px){.locGrid{grid-template-columns:1fr}}
+    .locBig,.locSmall{
       border:1px solid var(--line);
       background:rgba(255,255,255,.04);
       border-radius:18px;
       padding:14px;
+      display:flex;gap:12px;align-items:flex-start;
     }
-    [data-theme="light"] .locCard{background:rgba(0,0,0,.03)}
-    .locCard b{display:block;margin-bottom:6px}
-    .locCard div{color:var(--muted);font-size:12.8px;line-height:1.6}
+    [data-theme="light"] .locBig,[data-theme="light"] .locSmall{background:rgba(0,0,0,.03)}
+    .locIcon{
+      width:40px;height:40px;border-radius:16px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg, rgba(215,181,111,.95), rgba(123,215,201,.45));
+      color:#0b0c10;font-weight:900;flex:0 0 40px;
+    }
+    .locText{color:var(--muted);font-size:13px;line-height:1.7;margin-top:6px}
+    .locHint{color:var(--muted);font-size:12px;line-height:1.5;margin-top:10px;opacity:.9}
+
+    .hours{
+      width:100%;
+      margin-top:10px;
+      border-collapse:collapse;
+      font-size:12.8px;
+      color:var(--muted);
+    }
+    .hours td{
+      padding:8px 0;
+      border-bottom:1px solid var(--line);
+    }
+    .hours td:last-child{text-align:right;color:var(--text);font-weight:800}
+
+    /* ===== REVIEWS SLIDER (bottom) ===== */
+    .revWrap{
+      position:relative;
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      background:rgba(0,0,0,.10);
+    }
+    [data-theme="light"] .revWrap{background:rgba(0,0,0,.03)}
+    .revTrack{
+      display:flex;
+      transform:translateX(0);
+      transition:transform 700ms cubic-bezier(.22,.9,.12,1);
+      will-change:transform;
+    }
+    .revCard{
+      flex:0 0 100%;
+      padding:16px 16px 50px;
+    }
+    .revCard p{
+      margin:0;
+      font-size:13.4px;
+      line-height:1.85;
+      color:var(--text);
+    }
+    .revCard small{
+      display:block;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .revDots{
+      position:absolute;left:14px;bottom:14px;
+      display:flex;gap:8px;align-items:center;
+      padding:10px 12px;border-radius:999px;
+      border:1px solid var(--line);
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+    }
+    [data-theme="light"] .revDots{background:rgba(255,255,255,.70)}
+    .revDots button{
+      width:8px;height:8px;border-radius:99px;border:0;
+      background:rgba(255,255,255,.35);
+      cursor:pointer;
+      transition: width .25s ease, background .25s ease;
+    }
+    [data-theme="light"] .revDots button{background:rgba(0,0,0,.22)}
+    .revDots button.active{width:22px;background:rgba(215,181,111,.96)}
+    .revBtns{
+      position:absolute;right:14px;bottom:14px;
+      display:flex;gap:8px;
+    }
 
     .footer{
       border-top:1px solid var(--line);
@@ -339,10 +412,11 @@
 </head>
 
 <body>
+  <!-- NAV -->
   <div class="nav">
     <div class="wrap navin">
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
+        <img class="logoImg" src="logo-lamadre.png" alt="La Madre Logo">
         <div style="min-width:0">
           <h1>LA MADRE COFFEE &amp; ROASTERY</h1>
           <p>Specialty coffee • Comfort food • Karawang</p>
@@ -350,37 +424,37 @@
       </div>
 
       <div class="right">
-        <button class="btn icon" id="themeBtn" type="button">🌓 <span style="font-weight:900">Mode</span></button>
+        <button class="btn" id="themeBtn" type="button">🌓 Mode</button>
 
-        <!-- Order -> Order/Menu -->
-        <a class="btn" href="order.html">Order/Menu</a>
+        <a class="btn" href="order.html">🍽️ Order/Menu</a>
 
-        <!-- Tambah Reservasi (auto pesan WA) -->
-        <a class="btn" id="reserveBtn" target="_blank" rel="noreferrer">Reservasi</a>
+        <a class="btn" id="reserveBtn" target="_blank" rel="noreferrer">📅 Reservasi</a>
 
-        <a class="btn primary" href="https://wa.me/6281398686801" target="_blank" rel="noreferrer">Chat WhatsApp</a>
+        <a class="btn primary" href="https://wa.me/6281398686801" target="_blank" rel="noreferrer">💬 Chat WhatsApp</a>
       </div>
     </div>
   </div>
 
+  <!-- HERO -->
   <header class="hero">
     <div class="wrap">
       <div class="heroGrid">
+        <!-- LEFT -->
         <div>
           <div class="kicker"><span class="kdot"></span> Coffee &amp; Roastery • Karawang</div>
 
-          <!-- Nama usaha dibuat lebih besar & jelas -->
           <div class="bizName">La Madre <span class="grad">Coffee</span> &amp; <span class="grad">Roastery</span></div>
-          <div class="title">Create a pleasure in a cup of coffee.</div>
+
+          <p class="title">
+            Here we create a pleasure in a cup of coffee — based on specialty grade coffee we serve a good cup for you.
+          </p>
 
           <p class="desc">
-            La Madre Coffee &amp; Roastery. Here we create a pleasure in a cup of coffee, based on specialty grade coffee we serve a good cup for you.
-            We also provide comfort food, snacks, dessert to accompany your coffee. We dedicated to provide friendly and humble service to maximize your comfort.
-            Please come and take your time here. Enjoy !
+            We also provide comfort food, snacks, dessert to accompany your coffee. We dedicated to provide friendly and humble service
+            to maximize your comfort. Please come and take your time here. Enjoy!
           </p>
 
           <div class="cta">
-            <!-- Bagian pesan juga disamakan: Order/Menu -->
             <a class="btn primary" href="order.html">Order/Menu</a>
             <a class="btn" href="#info">Lokasi & Jam</a>
           </div>
@@ -392,9 +466,11 @@
           </div>
         </div>
 
+        <!-- RIGHT: Slider -->
         <div class="sliderCard" aria-label="Galeri foto La Madre">
           <div class="slider">
             <div class="slides" id="slides">
+              <!-- FOTO PILIHAN (lebih premium). Kalau ada foto asli cafe, tinggal ganti URL di sini -->
               <div class="s active" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2000&q=80')"></div>
               <div class="s" style="background-image:url('https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=2000&q=80')"></div>
               <div class="s" style="background-image:url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=2000&q=80')"></div>
@@ -403,7 +479,6 @@
             </div>
 
             <div class="overlay"></div>
-
             <div class="dots" id="dots" aria-label="Navigasi slide"></div>
 
             <div class="content">
@@ -422,6 +497,7 @@
         </div>
       </div>
 
+      <!-- HIGHLIGHTS -->
       <section class="section" id="highlights">
         <div class="panel">
           <h3 class="secTitle">Kenapa orang suka La Madre?</h3>
@@ -453,46 +529,112 @@
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div class="review">
-            <p>“Tempatnya cozzyy, ada outdoor dan indoor, luas, lengkap… enak untuk meetup, ngerjain tugas, atau nongki2 cantik. Recommended!”</p>
-            <small>— Dwiana Yulianita (Local Guide)</small>
+      <!-- LOCATION (new) -->
+      <section class="section" id="info">
+        <div class="panel locPanel">
+          <div class="locTop">
+            <div>
+              <h3 class="secTitle" style="margin-bottom:6px">Lokasi & Jam Operasional</h3>
+              <p class="secText" style="margin:0">
+                Datang santai, ambil waktu kamu — kami siap menyambut dengan service yang ramah & humble.
+              </p>
+            </div>
+
+            <div class="locActions">
+              <a class="btn" target="_blank" rel="noreferrer"
+                 href="https://www.google.com/maps/search/?api=1&query=Jl.+Jati+Baru+No.85,+Telukjambe+Timur,+Karawang">
+                📍 Buka Google Maps
+              </a>
+              <a class="btn primary" target="_blank" rel="noreferrer"
+                 href="https://wa.me/6281398686801?text=Halo%20La%20Madre%20Coffee%20%26%20Roastery,%20saya%20ingin%20tanya%20lokasi%20dan%20jam%20operasional.">
+                💬 Tanya via WhatsApp
+              </a>
+            </div>
           </div>
-          <div class="review">
-            <p>“Cari kopi enak? Disini aja… fasilitas juga bagus, AC dingin, gak berisik. Worth to buy.”</p>
-            <small>— Indra Bayu Permana (Local Guide)</small>
+
+          <div class="locGrid">
+            <div class="locBig">
+              <div class="locIcon">📌</div>
+              <div>
+                <b>Alamat</b>
+                <div class="locText">
+                  Jl. Jati Baru No.85, RT.001 RW004/RW.004, Sukaharja, Telukjambe Timur, Karawang, Jawa Barat 41361
+                </div>
+                <div class="locHint">Hidden gem — agak masuk sedikit, tapi parkiran luas dan aman.</div>
+              </div>
+            </div>
+
+            <div class="locSmall">
+              <div class="locIcon">🕒</div>
+              <div>
+                <b>Jam Operasional</b>
+                <table class="hours">
+                  <tr><td>Senin</td><td>11.00 – 22.00</td></tr>
+                  <tr><td>Selasa</td><td>11.00 – 22.00</td></tr>
+                  <tr><td>Rabu</td><td>11.00 – 22.00</td></tr>
+                  <tr><td>Kamis</td><td>11.00 – 22.00</td></tr>
+                  <tr><td>Jumat</td><td>11.00 – 22.00</td></tr>
+                  <tr><td>Sabtu</td><td>11.00 – 23.00</td></tr>
+                  <tr><td>Minggu</td><td>11.00 – 22.00</td></tr>
+                </table>
+                <div class="locHint">Tips: Sabtu malam biasanya lebih ramai, cocok reservasi dulu.</div>
+              </div>
+            </div>
+
+            <div class="locSmall">
+              <div class="locIcon">☎️</div>
+              <div>
+                <b>Kontak</b>
+                <div class="locText">WhatsApp: 0813-9868-6801</div>
+                <div class="locHint">Klik tombol “Reservasi” di navbar untuk booking tempat.</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section" id="info">
+      <!-- REVIEWS (bottom slider) -->
+      <section class="section" id="ulasan">
         <div class="panel">
-          <h3 class="secTitle">Lokasi & Jam Operasional</h3>
-          <p class="secText">Datang santai, ambil waktu kamu—kami siap menyambut dengan service yang ramah & humble.</p>
+          <h3 class="secTitle">Ulasan Pelanggan</h3>
+          <p class="secText">Beberapa pengalaman pelanggan yang sering disebut: cozy, luas, tenang, kopi enak, cocok meetup & WFC.</p>
 
-          <div class="locRow">
-            <div class="locCard">
-              <b>Alamat</b>
-              <div>
-                Jl. Jati Baru No.85, RT.001 RW004/RW.004, Sukaharja, Telukjambe Timur, Karawang, Jawa Barat 41361
+          <div class="revWrap">
+            <div class="revTrack" id="revTrack">
+              <div class="revCard">
+                <p>“Tempatnya cozzyy, ada outdoor dan indoor, luas, lengkap… enak untuk meetup, ngerjain tugas, atau nongki2 cantik. Recommended!”</p>
+                <small>— Dwiana Yulianita (Local Guide)</small>
+              </div>
+
+              <div class="revCard">
+                <p>“Cari kopi enak? Disini aja… fasilitas bagus, ada musholla, parkir luas, AC dingin, gak berisik. Worth to buy.”</p>
+                <small>— Indra Bayu Permana (Local Guide)</small>
+              </div>
+
+              <div class="revCard">
+                <p>“Tempatnya nyaman. Area luas, indoor adem, outdoor enak sore–sore. Gampang pilih suasana yang cocok.”</p>
+                <small>— BMA (Local Guide)</small>
+              </div>
+
+              <div class="revCard">
+                <p>“Ambience nice, cozy, not noisy. Comfy for WFC. Staff were very nice during my visits.”</p>
+                <small>— Metha (Local Guide)</small>
+              </div>
+
+              <div class="revCard">
+                <p>“It’s a truly hidden gem. Good foods, good places. Perfect!”</p>
+                <small>— Ellysabeth Simanjuntak (Local Guide)</small>
               </div>
             </div>
 
-            <div class="locCard">
-              <b>Jam</b>
-              <div>
-                Sabtu 11.00–23.00<br/>
-                Minggu 11.00–22.00<br/>
-                Senin–Jumat 11.00–22.00
-              </div>
-            </div>
+            <div class="revDots" id="revDots" aria-label="Navigasi ulasan"></div>
 
-            <div class="locCard">
-              <b>Kontak</b>
-              <div>
-                WhatsApp: 0813-9868-6801<br/>
-                Klik “Reservasi” untuk booking tempat.
-              </div>
+            <div class="revBtns">
+              <button class="iconBtn" type="button" id="revPrev" aria-label="Ulasan sebelumnya">←</button>
+              <button class="iconBtn" type="button" id="revNext" aria-label="Ulasan berikutnya">→</button>
             </div>
           </div>
         </div>
@@ -508,7 +650,7 @@
     // ===== Year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // ===== Theme (dark/light) with localStorage
+    // ===== Theme (dark/light)
     (function(){
       const key = "theme_lamadre";
       const btn = document.getElementById("themeBtn");
@@ -527,15 +669,15 @@
       });
     })();
 
-    // ===== Reservasi button (WA auto message)
+    // ===== Reservasi WA
     (function(){
-      const WA_NUMBER = "6281398686801"; // ganti jika perlu
+      const WA_NUMBER = "6281398686801";
       const btn = document.getElementById("reserveBtn");
       const msg = "Halo La Madre Coffee & Roastery, saya ingin reservasi. Mohon info ketersediaan tempat ya. Terima kasih.";
       btn.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
     })();
 
-    // ===== Premium Slider
+    // ===== Premium Slider (hero)
     (function(){
       const slidesWrap = document.getElementById("slides");
       const slides = Array.from(slidesWrap.querySelectorAll(".s"));
@@ -582,7 +724,6 @@
         void cap.offsetWidth;
         cap.classList.add("capAnim");
       }
-
       function goTo(idx, manual){
         slides[i].classList.remove("active");
         i = idx;
@@ -595,15 +736,11 @@
           timer = setInterval(()=>nextSlide(false), 4200);
         }
       }
-      function nextSlide(manual){
-        goTo((i+1) % slides.length, manual);
-      }
-      function prevSlide(){
-        goTo((i-1+slides.length) % slides.length, true);
-      }
+      function nextSlide(manual){ goTo((i+1) % slides.length, manual); }
+      function prevSlide(){ goTo((i-1+slides.length) % slides.length, true); }
 
-      // Parallax subtle
       const slider = slidesWrap.parentElement;
+
       slider.addEventListener("mousemove", (e)=>{
         const rect = slider.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
@@ -617,7 +754,7 @@
       prev.addEventListener("click", prevSlide);
       next.addEventListener("click", ()=>nextSlide(true));
 
-      // Swipe mobile
+      // swipe
       let startX = 0;
       slider.addEventListener("touchstart", (e)=>{ startX = e.touches[0].clientX; }, {passive:true});
       slider.addEventListener("touchend", (e)=>{
@@ -632,6 +769,60 @@
       buildDots();
       setCaption(0);
       timer = setInterval(()=>nextSlide(false), 4200);
+    })();
+
+    // ===== Reviews Slider (bottom)
+    (function(){
+      const track = document.getElementById("revTrack");
+      const dotsWrap = document.getElementById("revDots");
+      const prev = document.getElementById("revPrev");
+      const next = document.getElementById("revNext");
+      if(!track || !dotsWrap || !prev || !next) return;
+
+      const cards = Array.from(track.children);
+      const total = cards.length;
+      let i = 0;
+      let timer;
+
+      dotsWrap.innerHTML = "";
+      cards.forEach((_, idx)=>{
+        const b = document.createElement("button");
+        if(idx===0) b.classList.add("active");
+        b.addEventListener("click", ()=>goTo(idx,true));
+        dotsWrap.appendChild(b);
+      });
+
+      function setDots(idx){
+        dotsWrap.querySelectorAll("button").forEach((b,n)=>b.classList.toggle("active", n===idx));
+      }
+      function goTo(idx, manual){
+        i = idx;
+        track.style.transform = `translateX(-${i*100}%)`;
+        setDots(i);
+        if(manual){
+          clearInterval(timer);
+          timer = setInterval(nextSlide, 5200);
+        }
+      }
+      function nextSlide(){ goTo((i+1)%total, false); }
+      function prevSlide(){ goTo((i-1+total)%total, true); }
+
+      next.addEventListener("click", ()=>goTo((i+1)%total, true));
+      prev.addEventListener("click", prevSlide);
+
+      // swipe review
+      let sx=0;
+      track.parentElement.addEventListener("touchstart", (e)=>{sx=e.touches[0].clientX;},{passive:true});
+      track.parentElement.addEventListener("touchend", (e)=>{
+        const ex=e.changedTouches[0].clientX;
+        const diff=ex-sx;
+        if(Math.abs(diff)>40){
+          if(diff<0) goTo((i+1)%total,true);
+          else goTo((i-1+total)%total,true);
+        }
+      });
+
+      timer = setInterval(nextSlide, 5200);
     })();
   </script>
 </body>
