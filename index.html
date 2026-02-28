@@ -57,6 +57,7 @@
     }
     .navin{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
     .brand{display:flex;gap:12px;align-items:center;min-width:0}
+    .brandTxt{min-width:0}
     .logoImg{
       width:46px;height:46px;
       border-radius:18px;
@@ -100,6 +101,48 @@
       box-shadow:0 16px 40px rgba(215,181,111,.18);
     }
     .btn:active{transform:translateY(0px) scale(.98)}
+    .desktopOnly{display:flex}
+
+    .hamb{
+      display:none;
+      width:44px;height:44px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:var(--card);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:900;
+      font-size:18px;
+      transition:.18s ease;
+    }
+    .hamb:hover{transform:translateY(-1px)}
+    .hamb:active{transform:translateY(0) scale(.98)}
+
+    .mobileMenu{
+      display:none;
+      border-top:1px solid var(--line);
+      background:linear-gradient(to bottom, rgba(10,12,18,.82), rgba(10,12,18,.50));
+      backdrop-filter: blur(12px);
+    }
+    [data-theme="light"] .mobileMenu{
+      background:linear-gradient(to bottom, rgba(255,255,255,.88), rgba(255,255,255,.70));
+    }
+    .mobileMenu .btn{justify-content:flex-start}
+    .mobileMenu .full{
+      width:100%;
+      border-radius:0;
+      border-left:0;border-right:0;
+      border-top:0;
+      padding:14px 18px;
+    }
+
+    @media (max-width: 720px){
+      .brand p{display:none;}
+      .brand h1{font-size:14px;}
+      .desktopOnly{display:none;}
+      .hamb{display:inline-flex;align-items:center;justify-content:center;}
+      .mobileMenu.open{display:block;}
+    }
 
     /* ===== HERO ===== */
     .hero{position:relative;overflow:hidden;padding:26px 0 26px}
@@ -176,7 +219,7 @@
     [data-theme="light"] .chip{background:rgba(0,0,0,.03)}
     .pin{width:7px;height:7px;border-radius:99px;background:var(--accent);box-shadow:0 0 0 4px rgba(215,181,111,.12)}
 
-    /* ===== SLIDER (Premium) ===== */
+    /* ===== SLIDER (Hero) ===== */
     .sliderCard{
       border:1px solid var(--line);
       background:var(--card);
@@ -304,14 +347,13 @@
     .badge b{display:block;font-size:13px}
     .badge span{display:block;margin-top:4px;color:var(--muted);font-size:12.3px;line-height:1.45}
 
-    /* ===== LOCATION (upgraded) ===== */
+    /* ===== LOCATION (simple hours) ===== */
     .locPanel{padding:18px}
     .locTop{
       display:flex;gap:12px;align-items:flex-end;justify-content:space-between;
       flex-wrap:wrap;margin-bottom:14px
     }
     .locActions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-
     .locGrid{
       display:grid;
       grid-template-columns: 1.2fr .8fr .8fr;
@@ -336,29 +378,29 @@
     .locHint{color:var(--muted);font-size:12px;line-height:1.5;margin-top:10px;opacity:.9}
 
     .hoursMini{
-  margin-top:10px;
-  display:grid;
-  gap:8px;
-}
-.hRow{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:10px 12px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.03);
-  font-size:12.8px;
-  color:var(--muted);
-}
-[data-theme="light"] .hRow{background:rgba(0,0,0,.03)}
-.hRow b{
-  color:var(--text);
-  font-weight:900;
-  font-size:12.8px;
-  white-space:nowrap;
-}
+      margin-top:10px;
+      display:grid;
+      gap:8px;
+    }
+    .hRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:12.8px;
+      color:var(--muted);
+    }
+    [data-theme="light"] .hRow{background:rgba(0,0,0,.03)}
+    .hRow b{
+      color:var(--text);
+      font-weight:900;
+      font-size:12.8px;
+      white-space:nowrap;
+    }
 
     /* ===== REVIEWS SLIDER (bottom) ===== */
     .revWrap{
@@ -429,21 +471,30 @@
     <div class="wrap navin">
       <div class="brand">
         <img class="logoImg" src="logo-lamadre.png" alt="La Madre Logo">
-        <div style="min-width:0">
+        <div class="brandTxt">
           <h1>LA MADRE COFFEE &amp; ROASTERY</h1>
           <p>Specialty coffee • Comfort food • Karawang</p>
         </div>
       </div>
 
-      <div class="right">
+      <!-- Desktop actions -->
+      <div class="right desktopOnly">
         <button class="btn" id="themeBtn" type="button">🌓 Mode</button>
-
         <a class="btn" href="order.html">🍽️ Order/Menu</a>
-
         <a class="btn" id="reserveBtn" target="_blank" rel="noreferrer">📅 Reservasi</a>
-
         <a class="btn primary" href="https://wa.me/6281398686801" target="_blank" rel="noreferrer">💬 Chat WhatsApp</a>
       </div>
+
+      <!-- Mobile: hamburger -->
+      <button class="hamb" id="hambBtn" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
+    </div>
+
+    <!-- Mobile dropdown menu -->
+    <div class="mobileMenu" id="mobileMenu">
+      <button class="btn full" id="themeBtnM" type="button">🌓 Mode Gelap/Terang</button>
+      <a class="btn full" href="order.html">🍽️ Order/Menu</a>
+      <a class="btn full" id="reserveBtnM" target="_blank" rel="noreferrer">📅 Reservasi</a>
+      <a class="btn primary full" href="https://wa.me/6281398686801" target="_blank" rel="noreferrer">💬 Chat WhatsApp</a>
     </div>
   </div>
 
@@ -467,8 +518,8 @@
           </p>
 
           <div class="cta">
-            <a class="btn primary" href="order.html">Order/Menu</a>
-            <a class="btn" href="#info">Lokasi & Jam</a>
+            <a class="btn primary" href="order.html">🍽️ Order/Menu</a>
+            <a class="btn" href="#info">📍 Lokasi & Jam</a>
           </div>
 
           <div class="miniRow">
@@ -482,7 +533,6 @@
         <div class="sliderCard" aria-label="Galeri foto La Madre">
           <div class="slider">
             <div class="slides" id="slides">
-              <!-- FOTO PILIHAN (lebih premium). Kalau ada foto asli cafe, tinggal ganti URL di sini -->
               <div class="s active" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2000&q=80')"></div>
               <div class="s" style="background-image:url('https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=2000&q=80')"></div>
               <div class="s" style="background-image:url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=2000&q=80')"></div>
@@ -544,7 +594,7 @@
         </div>
       </section>
 
-      <!-- LOCATION (new) -->
+      <!-- LOCATION -->
       <section class="section" id="info">
         <div class="panel locPanel">
           <div class="locTop">
@@ -579,32 +629,31 @@
               </div>
             </div>
 
-           <div class="locSmall">
-  <div class="locIcon">🕒</div>
-  <div>
-    <b>Jam Operasional</b>
+            <div class="locSmall">
+              <div class="locIcon">🕒</div>
+              <div>
+                <b>Jam Operasional</b>
+                <div class="hoursMini">
+                  <div class="hRow"><span>Senin–Jumat</span><b>13.00 – 22.00</b></div>
+                  <div class="hRow"><span>Sabtu-Minggu</span><b>11.00 – 23.00</b></div>
+                </div>
+                <div class="locHint">Tips: Sabtu malam biasanya lebih ramai, cocok reservasi dulu.</div>
+              </div>
+            </div>
 
-    <div class="hoursMini">
-      <div class="hRow"><span>Senin–Jumat</span><b>13.00 – 22.00</b></div>
-      <div class="hRow"><span>Sabtu-Minggu</span><b>11.00 – 23.00</b></div>
-    </div>
-
-    <div class="locHint">Tips: Sabtu malam biasanya lebih ramai, cocok reservasi dulu.</div>
-  </div>
-</div>
             <div class="locSmall">
               <div class="locIcon">☎️</div>
               <div>
                 <b>Kontak</b>
                 <div class="locText">WhatsApp: 0813-9868-6801</div>
-                <div class="locHint">Klik tombol “Reservasi” di navbar untuk booking tempat.</div>
+                <div class="locHint">Klik tombol “Reservasi” untuk booking tempat.</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- REVIEWS (bottom slider) -->
+      <!-- REVIEWS -->
       <section class="section" id="ulasan">
         <div class="panel">
           <h3 class="secTitle">Ulasan Pelanggan</h3>
@@ -658,14 +707,40 @@
     // ===== Year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // ===== Theme (dark/light)
+    // ===== Mobile Menu Toggle
+    (function(){
+      const hambBtn = document.getElementById("hambBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      if(!hambBtn || !mobileMenu) return;
+
+      hambBtn.addEventListener("click", ()=>{
+        const open = mobileMenu.classList.toggle("open");
+        hambBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        hambBtn.textContent = open ? "✕" : "☰";
+      });
+
+      // close menu when click a link
+      mobileMenu.addEventListener("click", (e)=>{
+        if(e.target.tagName === "A"){
+          mobileMenu.classList.remove("open");
+          hambBtn.setAttribute("aria-expanded","false");
+          hambBtn.textContent = "☰";
+        }
+      });
+    })();
+
+    // ===== Theme (dark/light) sync Desktop & Mobile
     (function(){
       const key = "theme_lamadre";
-      const btn = document.getElementById("themeBtn");
-      const saved = localStorage.getItem(key);
-      if(saved === "light") document.documentElement.setAttribute("data-theme","light");
+      const btnD = document.getElementById("themeBtn");
+      const btnM = document.getElementById("themeBtnM");
 
-      btn.addEventListener("click", ()=>{
+      function applySaved(){
+        const saved = localStorage.getItem(key);
+        if(saved === "light") document.documentElement.setAttribute("data-theme","light");
+        else document.documentElement.removeAttribute("data-theme");
+      }
+      function toggle(){
         const isLight = document.documentElement.getAttribute("data-theme")==="light";
         if(isLight){
           document.documentElement.removeAttribute("data-theme");
@@ -674,15 +749,22 @@
           document.documentElement.setAttribute("data-theme","light");
           localStorage.setItem(key,"light");
         }
-      });
+      }
+      applySaved();
+      if(btnD) btnD.addEventListener("click", toggle);
+      if(btnM) btnM.addEventListener("click", toggle);
     })();
 
-    // ===== Reservasi WA
+    // ===== Reservasi link for desktop & mobile
     (function(){
       const WA_NUMBER = "6281398686801";
-      const btn = document.getElementById("reserveBtn");
       const msg = "Halo La Madre Coffee & Roastery, saya ingin reservasi. Mohon info ketersediaan tempat ya. Terima kasih.";
-      btn.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+      const d = document.getElementById("reserveBtn");
+      const m = document.getElementById("reserveBtnM");
+      if(d) d.href = url;
+      if(m) m.href = url;
     })();
 
     // ===== Premium Slider (hero)
@@ -818,7 +900,7 @@
       next.addEventListener("click", ()=>goTo((i+1)%total, true));
       prev.addEventListener("click", prevSlide);
 
-      // swipe review
+      // swipe reviews
       let sx=0;
       track.parentElement.addEventListener("touchstart", (e)=>{sx=e.touches[0].clientX;},{passive:true});
       track.parentElement.addEventListener("touchend", (e)=>{
