@@ -111,7 +111,7 @@ footer{
 @media(max-width:768px){
     header h1{font-size:38px;}
 }
-/* SLIDER (FIXED) */
+/* SLIDER (FIX HEIGHT) */
 .slider{
   width:100%;
   max-width:980px;
@@ -119,8 +119,13 @@ footer{
   border-radius:20px;
   overflow:hidden;
   position:relative;
-  aspect-ratio: 16 / 9;   /* ini yang bikin tidak “kebesaran” */
   background:#ddd;
+
+  height: 420px;        /* kunci tinggi */
+}
+
+@media (max-width: 768px){
+  .slider{ height: 260px; } /* di HP lebih pendek */
 }
 
 .slides{
@@ -246,18 +251,18 @@ Jl. Raya Sukamakmur No. 88, Karawang Barat, Jawa Barat 41361</p>
 <p class="small">© 2026 Sawah Senja Coffee. All Rights Reserved.</p>
 </footer>
 <script>
-  (function(){
-    const slides = document.getElementById('slides');
-    if(!slides) return;
+(function(){
+  const track = document.getElementById('slides');
+  if(!track) return;
 
-    const total = slides.children.length;
-    let i = 0;
+  const total = track.children.length;
+  let i = 0;
 
-    setInterval(() => {
-      i = (i + 1) % total;
-      slides.style.transform = `translateX(-${i * 100}%)`;
-    }, 3500);
-  })();
+  setInterval(function(){
+    i = (i + 1) % total;
+    track.style.transform = 'translateX(-' + (i * 100) + '%)';
+  }, 3500);
+})();
 </script>
     
 </body>
