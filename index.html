@@ -6,7 +6,7 @@
   <title>Sawah Senja Coffee</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -18,8 +18,8 @@
       --brand2:#2f6f5e;
       --shadow: 0 14px 40px rgba(0,0,0,.08);
       --radius: 18px;
+      --line: rgba(0,0,0,.06);
     }
-
     *{box-sizing:border-box;margin:0;padding:0}
     body{
       font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -30,8 +30,27 @@
     }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
-
-    .container{max-width:1100px;margin:0 auto;padding:0 18px}
+    .container{max-width:1120px;margin:0 auto;padding:0 18px}
+    .muted{color:var(--muted)}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 18px;border-radius:999px;
+      background:var(--brand);color:#fff;font-weight:700;
+      transition:.25s; box-shadow: 0 10px 24px rgba(139,94,60,.22);
+      border:0; cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-2px);filter:brightness(.98)}
+    .btn.secondary{
+      background:#fff;color:var(--text);
+      box-shadow: 0 10px 24px rgba(0,0,0,.10);
+      border:1px solid rgba(0,0,0,.10);
+    }
+    .btn.ghost{
+      background:transparent;color:var(--text);
+      border:1px solid rgba(0,0,0,.14);
+      box-shadow:none;
+    }
+    .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
     .chip{
       display:inline-flex;gap:8px;align-items:center;
       padding:8px 12px;border-radius:999px;
@@ -41,24 +60,12 @@
       color:#fff;
       font-size:13px;
     }
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 18px;border-radius:999px;
-      background:var(--brand);color:#fff;font-weight:600;
-      transition:.25s; box-shadow: 0 10px 24px rgba(139,94,60,.22);
-    }
-    .btn:hover{transform:translateY(-2px);filter:brightness(.98)}
-    .btn.secondary{
-      background:#ffffff; color:var(--text);
-      box-shadow: 0 10px 24px rgba(0,0,0,.10);
-    }
-    .btn.small{padding:10px 14px;font-size:14px}
 
     /* NAV */
     .nav{
       position:sticky; top:0; z-index:50;
       background:rgba(246,242,234,.78);
-      border-bottom:1px solid rgba(0,0,0,.06);
+      border-bottom:1px solid var(--line);
       backdrop-filter: blur(10px);
     }
     .nav .row{
@@ -75,9 +82,14 @@
       box-shadow: 0 12px 26px rgba(0,0,0,.12);
     }
     .nav ul{list-style:none;display:flex;gap:18px;align-items:center}
-    .nav a.link{color:var(--muted);font-weight:600;font-size:14px}
+    .nav a.link{color:var(--muted);font-weight:700;font-size:14px}
     .nav a.link:hover{color:var(--text)}
     .menuBtn{display:none}
+    .mobileMenu{display:none;padding:10px 0 16px}
+    .mobileMenu a{
+      display:block; padding:10px 0; color:var(--muted); font-weight:700;
+      border-top:1px solid var(--line);
+    }
 
     /* HERO */
     .hero{
@@ -96,14 +108,14 @@
       font-size:44px; line-height:1.15; letter-spacing:-.6px;
       margin-top:14px;
     }
-    .hero p{color:var(--muted); margin:14px 0 18px; max-width:56ch}
+    .hero p{color:var(--muted); margin:14px 0 18px; max-width:60ch}
     .heroActions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
     .heroCard{
       background:var(--card);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       overflow:hidden;
-      border:1px solid rgba(0,0,0,.06);
+      border:1px solid var(--line);
     }
     .heroPhoto{
       height:320px;
@@ -129,7 +141,7 @@
     section{padding:54px 0}
     .sectionTitle{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:18px}
     .sectionTitle h2{font-size:28px;letter-spacing:-.2px}
-    .sectionTitle p{color:var(--muted);max-width:62ch}
+    .sectionTitle p{color:var(--muted);max-width:70ch}
 
     .grid{display:grid;gap:14px}
     .grid3{grid-template-columns:repeat(3,1fr)}
@@ -139,42 +151,42 @@
       background:var(--card);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      border:1px solid rgba(0,0,0,.06);
+      border:1px solid var(--line);
       padding:16px;
     }
     .card h3{font-size:16px;margin-bottom:10px}
-    .muted{color:var(--muted)}
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       padding:8px 12px;border-radius:999px;
       background:rgba(47,111,94,.10);
       border:1px solid rgba(47,111,94,.14);
-      font-weight:600;font-size:13px;
+      font-weight:700;font-size:13px;
     }
 
-    /* MENU LIST */
+    /* MENU */
     .menuList{display:grid;gap:10px}
     .menuItem{
       display:flex;align-items:center;justify-content:space-between;gap:12px;
       padding:12px 12px;border-radius:14px;
       background: rgba(0,0,0,.03);
       border:1px solid rgba(0,0,0,.05);
+      cursor:pointer;
+      transition:.15s;
     }
+    .menuItem:hover{transform:translateY(-1px)}
     .menuItem b{font-size:14px}
-    .menuItem span{color:var(--muted);font-size:13px}
-    .price{font-weight:700}
+    .menuItem .tag{font-size:12px;color:var(--muted);font-weight:700}
+    .price{font-weight:800}
 
     /* SLIDER */
     .slider{
       width:100%;
-      max-width:1100px;
-      margin: 0 auto;
       border-radius: var(--radius);
       overflow:hidden;
       position:relative;
       background:#ddd;
       height: 360px;
-      border:1px solid rgba(0,0,0,.06);
+      border:1px solid var(--line);
       box-shadow:var(--shadow);
     }
     .slides{
@@ -201,20 +213,64 @@
       width:8px;height:8px;border-radius:99px;
       background:rgba(0,0,0,.25);
       cursor:pointer;
+      transition:.2s;
     }
     .dot.active{background:rgba(0,0,0,.70); width:18px}
+
+    /* CART */
+    .cartRow{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:12px;border-radius:14px;
+      background: rgba(0,0,0,.03);
+      border:1px solid rgba(0,0,0,.05);
+    }
+    .qty{display:flex;align-items:center;gap:10px}
+    .qbtn{
+      width:32px;height:32px;border-radius:10px;
+      border:1px solid rgba(0,0,0,.12);
+      background:#fff; cursor:pointer;
+      font-weight:900;
+    }
+    .qnum{min-width:22px;text-align:center;font-weight:900}
+    .subtotal{font-weight:900}
+    .lineRow{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:10px 0;border-top:1px dashed rgba(0,0,0,.12);
+      margin-top:10px;
+    }
+    .field{
+      width:100%;
+      padding:10px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.15);
+      background:#fff;
+      font-family:inherit;
+    }
+    .optRow{display:flex;gap:10px;flex-wrap:wrap}
+    .opt{
+      display:flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:14px;
+      border:1px solid rgba(0,0,0,.10);
+      background:#fff;
+      cursor:pointer;
+      user-select:none;
+      font-weight:800;
+      font-size:13px;
+    }
+    .opt input{accent-color: var(--brand)}
+    .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 
     /* FOOTER + FLOAT WA */
     footer{
       padding:34px 0 46px;
-      border-top:1px solid rgba(0,0,0,.06);
+      border-top:1px solid var(--line);
       color:var(--muted);
     }
     .footRow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     .waFloat{
       position:fixed; right:18px; bottom:18px; z-index:60;
       background:#25D366;
-      color:#fff; font-weight:700;
+      color:#fff; font-weight:900;
       border-radius:999px;
       padding:12px 14px;
       box-shadow: 0 14px 34px rgba(0,0,0,.20);
@@ -229,15 +285,6 @@
       .slider{height: 260px;}
       .nav ul{display:none}
       .menuBtn{display:inline-flex}
-      .mobileMenu{
-        display:none;
-        padding:10px 0 16px;
-      }
-      .mobileMenu a{
-        display:block; padding:10px 0; color:var(--muted); font-weight:600;
-        border-top:1px solid rgba(0,0,0,.06);
-      }
-      .mobileMenu a:hover{color:var(--text)}
     }
   </style>
 </head>
@@ -252,23 +299,23 @@
           <div class="logo"></div>
           <div>
             <div>Sawah Senja Coffee</div>
-            <div class="muted" style="font-size:12px;font-weight:600;">Rustic • Tropical • Karawang</div>
+            <div class="muted" style="font-size:12px;font-weight:700;">Rustic • Tropical • Karawang</div>
           </div>
         </div>
 
         <ul>
           <li><a class="link" href="#tentang">Tentang</a></li>
-          <li><a class="link" href="#menu">Menu</a></li>
-          <li><a class="link" href="#fasilitas">Fasilitas</a></li>
+          <li><a class="link" href="#order">Pesan</a></li>
+          <li><a class="link" href="#galeri">Galeri</a></li>
           <li><a class="link" href="#lokasi">Lokasi</a></li>
         </ul>
 
-        <a class="btn small menuBtn" href="#!" id="menuBtn">Menu</a>
+        <a class="btn secondary menuBtn" href="#!" id="menuBtn">Menu</a>
       </div>
 
       <div class="mobileMenu" id="mobileMenu">
         <a href="#tentang">Tentang</a>
-        <a href="#menu">Menu</a>
+        <a href="#order">Pesan</a>
         <a href="#galeri">Galeri</a>
         <a href="#fasilitas">Fasilitas</a>
         <a href="#lokasi">Lokasi</a>
@@ -288,8 +335,8 @@
         </p>
 
         <div class="heroActions">
-          <a class="btn" href="https://wa.me/6283894403505" target="_blank" rel="noopener">WhatsApp / Reservasi</a>
-          <a class="btn secondary" href="#menu">Lihat Menu</a>
+          <a class="btn" href="#order">Buat Pesanan</a>
+          <a class="btn secondary" href="https://wa.me/6283894403505" target="_blank" rel="noopener">Chat WhatsApp</a>
         </div>
       </div>
 
@@ -337,104 +384,143 @@
     </div>
   </section>
 
-  <!-- MENU -->
-  <section id="menu">
+  <!-- ORDER -->
+  <section id="order">
     <div class="container">
       <div class="sectionTitle">
-        <h2>Menu Andalan</h2>
-        <p>Pilihan best seller dan favorit pelanggan. (Bisa kamu tambah lagi nanti dengan mudah.)</p>
+        <h2>Menu & Pesanan</h2>
+        <p>Klik menu untuk menambahkan. Atur jumlah, pilih tipe pesanan, lalu kirim ke WhatsApp.</p>
       </div>
 
-      <div class="grid grid3">
+      <div class="grid grid2">
+        <!-- MENU -->
         <div class="card">
-          <h3>☕ Coffee Based</h3>
-          <div class="menuList">
-            <div class="menuItem"><b>Espresso</b><span class="price">20K</span></div>
-            <div class="menuItem"><b>Americano</b><span class="price">22K</span></div>
-            <div class="menuItem"><b>Cappuccino</b><span class="price">28K</span></div>
-            <div class="menuItem"><b>Cafe Latte</b><span class="price">30K</span></div>
-            <div class="menuItem"><b>Caramel Latte</b><span class="price">33K</span></div>
-            <div class="menuItem"><b>Aren Latte (Best Seller)</b><span class="price">32K</span></div>
+          <h3>Daftar Menu</h3>
+          <p class="muted" style="margin-top:-6px;margin-bottom:12px;">Klik item untuk tambah ke pesanan.</p>
+
+          <div class="menuList" id="menuList">
+            <!-- Coffee Based -->
+            <div class="menuItem" data-cat="drink" data-name="Espresso" data-price="20000">
+              <div><b>Espresso</b><div class="tag">Coffee Based</div></div><span class="price">20K</span>
+            </div>
+            <div class="menuItem" data-cat="drink" data-name="Americano" data-price="22000">
+              <div><b>Americano</b><div class="tag">Coffee Based</div></div><span class="price">22K</span>
+            </div>
+            <div class="menuItem" data-cat="drink" data-name="Cappuccino" data-price="28000">
+              <div><b>Cappuccino</b><div class="tag">Coffee Based</div></div><span class="price">28K</span>
+            </div>
+            <div class="menuItem" data-cat="drink" data-name="Cafe Latte" data-price="30000">
+              <div><b>Cafe Latte</b><div class="tag">Coffee Based</div></div><span class="price">30K</span>
+            </div>
+            <div class="menuItem" data-cat="drink" data-name="Caramel Latte" data-price="33000">
+              <div><b>Caramel Latte</b><div class="tag">Coffee Based</div></div><span class="price">33K</span>
+            </div>
+            <div class="menuItem" data-cat="drink" data-name="Aren Latte (Best Seller)" data-price="32000">
+              <div><b>Aren Latte (Best Seller)</b><div class="tag">Coffee Based</div></div><span class="price">32K</span>
+            </div>
+
+            <!-- Non Coffee -->
+            <div class="menuItem" data-cat="drink" data-name="Matcha Latte" data-price="30000">
+              <div><b>Matcha Latte</b><div class="tag">Non Coffee</div></div><span class="price">30K</span>
+            </div>
+            <div class="menuItem" data-cat="drink" data-name="Chocolate Signature" data-price="28000">
+              <div><b>Chocolate Signature</b><div class="tag">Non Coffee</div></div><span class="price">28K</span>
+            </div>
+            <div class="menuItem" data-cat="drink" data-name="Red Velvet Latte" data-price="30000">
+              <div><b>Red Velvet Latte</b><div class="tag">Non Coffee</div></div><span class="price">30K</span>
+            </div>
+            <div class="menuItem" data-cat="drink" data-name="Thai Tea" data-price="25000">
+              <div><b>Thai Tea</b><div class="tag">Non Coffee</div></div><span class="price">25K</span>
+            </div>
+
+            <!-- Food -->
+            <div class="menuItem" data-cat="food" data-name="Nasi Goreng Sawah Senja" data-price="35000">
+              <div><b>Nasi Goreng Sawah Senja</b><div class="tag">Makanan</div></div><span class="price">35K</span>
+            </div>
+            <div class="menuItem" data-cat="food" data-name="Chicken Katsu Rice Bowl" data-price="32000">
+              <div><b>Chicken Katsu Rice Bowl</b><div class="tag">Makanan</div></div><span class="price">32K</span>
+            </div>
+            <div class="menuItem" data-cat="food" data-name="Spaghetti Aglio Olio" data-price="34000">
+              <div><b>Spaghetti Aglio Olio</b><div class="tag">Makanan</div></div><span class="price">34K</span>
+            </div>
+            <div class="menuItem" data-cat="food" data-name="French Fries" data-price="22000">
+              <div><b>French Fries</b><div class="tag">Makanan</div></div><span class="price">22K</span>
+            </div>
+            <div class="menuItem" data-cat="food" data-name="Mix Platter" data-price="45000">
+              <div><b>Mix Platter</b><div class="tag">Makanan</div></div><span class="price">45K</span>
+            </div>
+          </div>
+
+          <div class="badges">
+            <span class="pill">🎓 Student Day: Diskon 20% setiap Senin</span>
+            <span class="pill">🎉 Buy 1 Get 1 setiap tanggal cantik</span>
+            <span class="pill">📣 Paket meeting mulai 75K/orang</span>
           </div>
         </div>
 
+        <!-- CART -->
         <div class="card">
-          <h3>🧋 Non Coffee</h3>
-          <div class="menuList">
-            <div class="menuItem"><b>Matcha Latte</b><span class="price">30K</span></div>
-            <div class="menuItem"><b>Chocolate Signature</b><span class="price">28K</span></div>
-            <div class="menuItem"><b>Red Velvet Latte</b><span class="price">30K</span></div>
-            <div class="menuItem"><b>Thai Tea</b><span class="price">25K</span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+            <h3>Pesanan Kamu</h3>
+            <button class="btn ghost" id="btnClear" disabled>Hapus Semua</button>
+          </div>
+          <p class="muted" style="margin-top:6px;margin-bottom:12px;">Klik + / − untuk ubah jumlah.</p>
+
+          <div id="cartEmpty" class="muted" style="padding:14px;border-radius:14px;background:rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.05);">
+            Belum ada pesanan. Klik menu untuk menambahkan.
+          </div>
+
+          <div id="cartList" class="menuList" style="display:none;"></div>
+
+          <div class="lineRow">
+            <div>
+              <div class="muted" style="font-size:12px;font-weight:800;">SUBTOTAL</div>
+              <div style="font-size:18px;font-weight:900;" id="subTotal">Rp 0</div>
+            </div>
+            <div style="text-align:right">
+              <div class="muted" style="font-size:12px;font-weight:800;">DISKON</div>
+              <div style="font-size:18px;font-weight:900;" id="discount">Rp 0</div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;">
+            <div>
+              <div class="muted" style="font-size:12px;font-weight:900;">TOTAL</div>
+              <div style="font-size:24px;font-weight:900;" id="grandTotal">Rp 0</div>
+            </div>
+            <button class="btn" id="btnOrder" disabled>Buat Pesanan</button>
+          </div>
+
+          <div style="margin-top:14px;">
+            <div class="optRow">
+              <label class="opt"><input type="radio" name="otype" value="Dine-in" checked> Dine-in</label>
+              <label class="opt"><input type="radio" name="otype" value="Take away"> Take away</label>
+            </div>
+
+            <div class="optRow" style="margin-top:10px;">
+              <label class="opt"><input type="checkbox" id="promoStudent"> Student Day (Diskon 20%)</label>
+              <label class="opt"><input type="checkbox" id="promoB1G1"> Tanggal Cantik (B1G1 Minuman)</label>
+            </div>
+
+            <div style="margin-top:12px;display:grid;gap:10px;">
+              <input id="custName" class="field" type="text" placeholder="Nama (opsional)">
+              <textarea id="custNote" class="field" placeholder="Catatan (opsional) - contoh: less sugar, no ice" style="min-height:88px;"></textarea>
+              <div class="grid grid2" style="gap:10px;">
+                <input id="pickupDate" class="field" type="date" />
+                <input id="pickupTime" class="field" type="time" />
+              </div>
+            </div>
+
+            <div class="muted" style="margin-top:10px;font-size:12px;">
+              * Promo B1G1 hanya menghitung <b>minuman</b>: gratis 1 minuman termurah dari jumlah minuman yang dipilih.
+            </div>
           </div>
         </div>
-
-        <div class="card">
-          <h3>🍝 Makanan</h3>
-          <div class="menuList">
-            <div class="menuItem"><b>Nasi Goreng Sawah Senja</b><span class="price">35K</span></div>
-            <div class="menuItem"><b>Chicken Katsu Rice Bowl</b><span class="price">32K</span></div>
-            <div class="menuItem"><b>Spaghetti Aglio Olio</b><span class="price">34K</span></div>
-            <div class="menuItem"><b>French Fries</b><span class="price">22K</span></div>
-            <div class="menuItem"><b>Mix Platter</b><span class="price">45K</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
-        <span class="pill">🎓 Student Day: Diskon 20% setiap Senin</span>
-        <span class="pill">🎉 Buy 1 Get 1 setiap tanggal cantik</span>
-        <span class="pill">📣 Paket meeting mulai 75K/orang</span>
       </div>
     </div>
   </section>
-  <section id="pesan">
-  <div class="container">
-    <div class="sectionTitle">
-      <h2>Pesan Sekarang</h2>
-      <p>Pilih menu yang kamu inginkan, lalu kirim langsung ke WhatsApp kami.</p>
-    </div>
 
-    <div class="card">
-      <div class="menuList">
-
-        <label class="menuItem">
-          <span><input type="checkbox" value="Espresso - 20K"> Espresso</span>
-          <span class="price">20K</span>
-        </label>
-
-        <label class="menuItem">
-          <span><input type="checkbox" value="Aren Latte - 32K"> Aren Latte</span>
-          <span class="price">32K</span>
-        </label>
-
-        <label class="menuItem">
-          <span><input type="checkbox" value="Matcha Latte - 30K"> Matcha Latte</span>
-          <span class="price">30K</span>
-        </label>
-
-        <label class="menuItem">
-          <span><input type="checkbox" value="Nasi Goreng - 35K"> Nasi Goreng</span>
-          <span class="price">35K</span>
-        </label>
-
-      </div>
-
-      <div style="margin-top:20px;">
-        <input type="text" id="nama" placeholder="Nama Anda"
-          style="width:100%;padding:10px;border-radius:10px;border:1px solid #ccc;margin-bottom:10px;">
-
-        <textarea id="catatan" placeholder="Catatan tambahan..."
-          style="width:100%;padding:10px;border-radius:10px;border:1px solid #ccc;"></textarea>
-
-        <button onclick="kirimPesanan()" class="btn" style="margin-top:15px;">
-          Kirim ke WhatsApp
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <!-- GALERI SLIDER -->
+  <!-- GALERI -->
   <section id="galeri">
     <div class="container">
       <div class="sectionTitle">
@@ -449,7 +535,6 @@
           <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80" alt="Interior">
           <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1600&q=80" alt="Makanan">
         </div>
-
         <div class="dots" id="dots" aria-label="indikator slider"></div>
       </div>
     </div>
@@ -510,8 +595,8 @@
           <p class="muted" style="margin-top:10px;"><b>Jam:</b><br>Sen–Jum 10.00–23.00<br>Sab–Min 09.00–23.30</p>
 
           <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
-            <a class="btn small" href="https://wa.me/6283894403505" target="_blank" rel="noopener">Chat WhatsApp</a>
-            <a class="btn small secondary" href="#galeri">Lihat Galeri</a>
+            <a class="btn" href="https://wa.me/6283894403505" target="_blank" rel="noopener">Chat WhatsApp</a>
+            <a class="btn secondary" href="#order">Buat Pesanan</a>
           </div>
         </div>
 
@@ -529,11 +614,11 @@
   <footer>
     <div class="container footRow">
       <div>
-        <div style="font-weight:800">Sawah Senja Coffee</div>
+        <div style="font-weight:900">Sawah Senja Coffee</div>
         <div class="muted" style="font-size:13px;">© 2026 • Karawang, Jawa Barat</div>
       </div>
       <div class="muted" style="font-size:13px;">
-        Dibuat untuk web profil sederhana — siap jual paket UMKM.
+        Website profil + order via WhatsApp.
       </div>
     </div>
   </footer>
@@ -541,7 +626,7 @@
   <a class="waFloat" href="https://wa.me/6283894403505" target="_blank" rel="noopener">WhatsApp</a>
 
   <script>
-    // mobile menu
+    // Mobile menu
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     if(menuBtn && mobileMenu){
@@ -554,7 +639,7 @@
       });
     }
 
-    // slider
+    // Slider
     (function(){
       const track = document.getElementById('slides');
       const dotsWrap = document.getElementById('dots');
@@ -595,33 +680,216 @@
       renderDots();
       timer = setInterval(next, 3500);
     })();
+
+    // Order System (Next Level)
+    (function(){
+      const WA_NUMBER = "6283894403505";
+
+      const menuList = document.getElementById('menuList');
+      const cartList = document.getElementById('cartList');
+      const cartEmpty = document.getElementById('cartEmpty');
+
+      const subTotalEl = document.getElementById('subTotal');
+      const discountEl = document.getElementById('discount');
+      const grandTotalEl = document.getElementById('grandTotal');
+
+      const btnOrder = document.getElementById('btnOrder');
+      const btnClear = document.getElementById('btnClear');
+
+      const promoStudent = document.getElementById('promoStudent');
+      const promoB1G1 = document.getElementById('promoB1G1');
+
+      const custName = document.getElementById('custName');
+      const custNote = document.getElementById('custNote');
+      const pickupDate = document.getElementById('pickupDate');
+      const pickupTime = document.getElementById('pickupTime');
+
+      if(!menuList || !cartList) return;
+
+      const cart = {}; // key -> {name, price, qty, cat}
+
+      function rupiah(n){
+        return "Rp " + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      }
+      function keyFrom(name, price, cat){
+        return name + "___" + price + "___" + cat;
+      }
+
+      function addItem(name, price, cat){
+        const k = keyFrom(name, price, cat);
+        if(!cart[k]) cart[k] = {name, price, qty:0, cat};
+        cart[k].qty += 1;
+        render();
+      }
+      function changeQty(k, delta){
+        if(!cart[k]) return;
+        cart[k].qty += delta;
+        if(cart[k].qty <= 0) delete cart[k];
+        render();
+      }
+      function clearCart(){
+        Object.keys(cart).forEach(k => delete cart[k]);
+        render();
+      }
+
+      function calcSubTotal(){
+        return Object.values(cart).reduce((sum, it)=> sum + (it.price * it.qty), 0);
+      }
+
+      // B1G1: free 1 cheapest drink if there are >=2 drinks (count qty)
+      function calcB1G1Discount(){
+        const drinks = [];
+        Object.values(cart).forEach(it=>{
+          if(it.cat === 'drink'){
+            for(let x=0; x<it.qty; x++) drinks.push(it.price);
+          }
+        });
+        if(drinks.length < 2) return 0;
+        drinks.sort((a,b)=>a-b);
+        return drinks[0]; // cheapest free
+      }
+
+      function calcDiscount(subtotal){
+        let discount = 0;
+
+        // Student 20%
+        if(promoStudent && promoStudent.checked){
+          discount += Math.round(subtotal * 0.20);
+        }
+
+        // B1G1 drinks
+        if(promoB1G1 && promoB1G1.checked){
+          discount += calcB1G1Discount();
+        }
+
+        // don't exceed subtotal
+        return Math.min(discount, subtotal);
+      }
+
+      function render(){
+        const items = Object.entries(cart);
+
+        if(items.length === 0){
+          cartEmpty.style.display = 'block';
+          cartList.style.display = 'none';
+          cartList.innerHTML = '';
+          btnOrder.disabled = true;
+          btnClear.disabled = true;
+          subTotalEl.textContent = rupiah(0);
+          discountEl.textContent = rupiah(0);
+          grandTotalEl.textContent = rupiah(0);
+          return;
+        }
+
+        cartEmpty.style.display = 'none';
+        cartList.style.display = 'grid';
+        cartList.innerHTML = '';
+
+        items.forEach(([k, it])=>{
+          const row = document.createElement('div');
+          row.className = 'cartRow';
+
+          const left = document.createElement('div');
+          left.innerHTML = `<b style="font-size:14px;">${it.name}</b>
+                            <div class="muted" style="font-size:12px;">${it.cat === 'drink' ? 'Minuman' : 'Makanan'} • ${rupiah(it.price)}</div>`;
+
+          const mid = document.createElement('div');
+          mid.className = 'qty';
+          mid.innerHTML = `
+            <button class="qbtn" aria-label="kurangi">−</button>
+            <div class="qnum">${it.qty}</div>
+            <button class="qbtn" aria-label="tambah">+</button>
+          `;
+
+          const right = document.createElement('div');
+          right.className = 'subtotal';
+          right.textContent = rupiah(it.price * it.qty);
+
+          const minus = mid.querySelectorAll('button')[0];
+          const plus  = mid.querySelectorAll('button')[1];
+          minus.addEventListener('click', ()=> changeQty(k, -1));
+          plus.addEventListener('click', ()=> changeQty(k, +1));
+
+          row.appendChild(left);
+          row.appendChild(mid);
+          row.appendChild(right);
+          cartList.appendChild(row);
+        });
+
+        const subtotal = calcSubTotal();
+        const discount = calcDiscount(subtotal);
+        const grand = subtotal - discount;
+
+        subTotalEl.textContent = rupiah(subtotal);
+        discountEl.textContent = rupiah(discount);
+        grandTotalEl.textContent = rupiah(grand);
+
+        btnOrder.disabled = false;
+        btnClear.disabled = false;
+      }
+
+      // Click menu item to add
+      menuList.querySelectorAll('.menuItem').forEach(el=>{
+        el.addEventListener('click', ()=>{
+          const name = el.getAttribute('data-name');
+          const cat = el.getAttribute('data-cat') || 'drink';
+          const price = parseInt(el.getAttribute('data-price') || "0", 10);
+          if(!name || !price) return;
+          addItem(name, price, cat);
+        });
+      });
+
+      // Recalc when promo toggled
+      [promoStudent, promoB1G1].forEach(x=>{
+        if(!x) return;
+        x.addEventListener('change', render);
+      });
+
+      btnClear.addEventListener('click', clearCart);
+
+      // Send to WhatsApp
+      btnOrder.addEventListener('click', ()=>{
+        const items = Object.values(cart);
+        if(items.length === 0) return;
+
+        const subtotal = calcSubTotal();
+        const discount = calcDiscount(subtotal);
+        const grand = subtotal - discount;
+
+        const orderType = (document.querySelector('input[name="otype"]:checked')?.value) || "Dine-in";
+        const name = (custName.value || "").trim();
+        const note = (custNote.value || "").trim();
+        const d = (pickupDate.value || "").trim();
+        const t = (pickupTime.value || "").trim();
+
+        let text = "Halo Sawah Senja Coffee,%0A%0ASaya ingin membuat pesanan:%0A";
+        items.forEach(it=>{
+          const line = `- ${it.name} x${it.qty} (${rupiah(it.price * it.qty)})`;
+          text += encodeURIComponent(line) + "%0A";
+        });
+
+        text += "%0A" + encodeURIComponent("Tipe: " + orderType) + "%0A";
+        if(d || t){
+          const when = (d ? d : "") + (t ? (" " + t) : "");
+          text += encodeURIComponent("Pickup: " + when) + "%0A";
+        }
+
+        if(promoStudent.checked) text += encodeURIComponent("Promo: Student Day 20%") + "%0A";
+        if(promoB1G1.checked) text += encodeURIComponent("Promo: Tanggal Cantik B1G1 (Minuman)") + "%0A";
+
+        text += "%0A" + encodeURIComponent("Subtotal: " + rupiah(subtotal)) + "%0A";
+        text += encodeURIComponent("Diskon: " + rupiah(discount)) + "%0A";
+        text += encodeURIComponent("Total: " + rupiah(grand)) + "%0A";
+
+        if(name) text += encodeURIComponent("Nama: " + name) + "%0A";
+        if(note) text += encodeURIComponent("Catatan: " + note) + "%0A";
+
+        const url = "https://wa.me/" + WA_NUMBER + "?text=" + text;
+        window.open(url, "_blank");
+      });
+
+      render();
+    })();
   </script>
-
-  <script>
-function kirimPesanan() {
-  const nama = document.getElementById("nama").value;
-  const catatan = document.getElementById("catatan").value;
-  const checked = document.querySelectorAll('#pesan input[type="checkbox"]:checked');
-
-  if (checked.length === 0) {
-    alert("Silakan pilih minimal 1 menu.");
-    return;
-  }
-
-  let pesan = "Halo Sawah Senja Coffee,%0A%0ASaya ingin memesan:%0A";
-
-  checked.forEach(item => {
-    pesan += "- " + item.value + "%0A";
-  });
-
-  pesan += "%0ANama: " + nama + "%0A";
-  pesan += "Catatan: " + catatan;
-
-  const nomor = "6283894403505";
-  const url = "https://wa.me/" + nomor + "?text=" + pesan;
-
-  window.open(url, "_blank");
-}
-</script>
 </body>
 </html>
